@@ -19,7 +19,8 @@ def print_menu():
     print(Fore.GREEN + "1 - Process All Images")
     print(Fore.GREEN + "2 - Run")
     print(Fore.GREEN + "3 - Bloodweb")
-    print(Fore.GREEN + "4 - Leave")
+    print(Fore.GREEN + "4 - Get Coords")
+    print(Fore.GREEN + "5 - Leave")
     print("\n")
     print()
 
@@ -27,5 +28,5 @@ def show_menu():
     clear_screen()
     print_header()
     print_menu()
-    choice = input(Fore.YELLOW + "Enter your choice (1-4): " + Style.RESET_ALL)
+    choice = input(Fore.YELLOW + "Enter your choice (1-5): " + Style.RESET_ALL)
     return choice

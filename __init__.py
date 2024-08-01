@@ -16,6 +16,7 @@ import sys
 
 import drawing_utils
 from menu import show_menu
+from drawing_coords import run_cursor_overlay
 
 
 config = configparser.ConfigParser()
@@ -671,6 +672,10 @@ class MenuActions:
         print("Leaving...")
         sys.exit()  
 
+    def getCoord(self):
+        print("look at your mouse cursor")
+        run_cursor_overlay()
+
     def perform_action(self, choice):
         if choice == '1':
             self.process_all_images()
@@ -679,6 +684,8 @@ class MenuActions:
         elif choice == '3':
             self.bloodweb()
         elif choice == '4':
+            self.getCoord()
+        elif choice == '5':
             self.leave()
         else:
             print("Invalid choice, please try again.")
@@ -690,7 +697,7 @@ def run():
 
     while True:
         choice = show_menu()
-        if choice == '4':
+        if choice == '5':
             actions.perform_action(choice)
             break
         actions.perform_action(choice)
