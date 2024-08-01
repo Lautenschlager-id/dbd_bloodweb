@@ -12,6 +12,7 @@ import datetime
 import logging
 import unicodedata
 import configparser
+import sys
 
 
 config = configparser.ConfigParser()
@@ -534,6 +535,7 @@ class Nodes:
 
 
 def process_all_images():
+    print("Processing images...")
     #TransformOffering("all").process_all_images()
     #TransformOffering("survivors").process_all_images()
     #TransformOffering("killers").process_all_images()
@@ -611,6 +613,34 @@ def main():
         sleep(5.5)
 
 
+def show_menu():
+    print("\nWhat you want to do here?")
+    print("1. Process all imanges")
+    print("2. Run")
+    print("3. Leave")
+
+    choice = input("Pick one (1-3): ")
+    return choice
+
+def run():
+    while True:
+        choice = show_menu()
+
+        if choice == '1':
+            process_all_images()
+        elif choice == '2':
+            main()
+        elif choice == '3':
+            print("Leaving...")
+            sys.exit()  
+        else:
+            print("Invalid option.")
+
 if __name__ == "__main__":
     #process_all_images()
-    main()
+    #main()
+    run()
+
+
+
+            
