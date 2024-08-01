@@ -14,6 +14,9 @@ import unicodedata
 import configparser
 import sys
 
+import drawing_utils
+from menu import show_menu
+
 
 config = configparser.ConfigParser()
 config.read('config.ini')
@@ -552,6 +555,42 @@ def process_all_images():
     pass
 
 
+
+def showBloodwebBoundries():
+    while True:
+        print("\n")
+        print("=" * 40)
+        print(" " * 12 + "Bloodweb" + " " * 12)
+        print( "=" * 40)
+        print("1. Draw Rectangle")
+        print("2. Leave")
+        print("\n")
+
+        choice = input("Pick option (1 ou 2): ")
+
+        if choice == "1":
+            try:
+                print("Rectangle coord:")
+                print("\n")
+                x1, y1 = map(int, input("Coord top Left (x1 y1): ").split())
+                print("\n")
+                x2, y2 = map(int, input("Coord bottom right (x2 y2): ").split())
+                
+                drawing_utils.draw_transparent_rectangle_on_screen((x1, y1), (x2, y2))
+                
+                
+                
+            except ValueError:
+                print("Invalid entry..")
+        
+        elif choice == "2":
+            print("Leaving...")
+            break
+        
+        else:
+            print("Try again.")
+    print("Pressione Enter para fechar o retângulo e retornar ao menu.")
+
 def main():
     main_result_folder = ImageResource.get_result_path('./results')
     setup_logger(main_result_folder)
@@ -614,36 +653,50 @@ def main():
         node_handler.click_all_nodes()
 
         sleep(5.5)
+        
+class MenuActions:
+    def process_all_images(self):
+        print("Processing all images...")
+        process_all_images()
 
+    def run(self):
+        print("Running the application...")
+        main()
 
-def show_menu():
-    print("\nWhat you want to do here?")
-    print("1. Process all imanges")
-    print("2. Run")
-    print("3. Leave")
+    def bloodweb(self):
+        print("Opening Bloodweb...")
+        showBloodwebBoundries()
 
-    choice = input("Pick one (1-3): ")
-    return choice
+    def leave(self):
+        print("Leaving...")
+        sys.exit()  
+
+    def perform_action(self, choice):
+        if choice == '1':
+            self.process_all_images()
+        elif choice == '2':
+            self.run()
+        elif choice == '3':
+            self.bloodweb()
+        elif choice == '4':
+            self.leave()
+        else:
+            print("Invalid choice, please try again.")
+
+            
 
 def run():
+    actions = MenuActions()
+
     while True:
         choice = show_menu()
-
-        if choice == '1':
-            process_all_images()
-        elif choice == '2':
-            main()
-        elif choice == '3':
-            print("Leaving...")
-            sys.exit()  
-        else:
-            print("Invalid option.")
+        if choice == '4':
+            actions.perform_action(choice)
+            break
+        actions.perform_action(choice)
 
 if __name__ == "__main__":
-    #process_all_images()
-    #main()
     run()
 
 
 
-            
