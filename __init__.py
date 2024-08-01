@@ -24,6 +24,9 @@ offering_size = config.get('Settings', 'offering_size')
 addon_size = config.get('Settings', 'addon_size')
 perk_size = config.get('Settings', 'perk_size')
 
+res_width = config.get('Resolution', 'res_width')
+res_heigth = config.get('Resolution', 'res_heigth')
+
 logger = logging.getLogger()
 
 def setup_logger(folder):
