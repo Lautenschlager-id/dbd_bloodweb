@@ -11,6 +11,17 @@ import fnmatch
 import datetime
 import logging
 import unicodedata
+import configparser
+
+
+config = configparser.ConfigParser()
+config.read('config.ini')
+
+
+item_size = config.getint('Settings', 'item_size')
+offering_size = config.get('Settings', 'offering_size')
+addon_size = config.get('Settings', 'addon_size')
+perk_size = config.get('Settings', 'perk_size')
 
 logger = logging.getLogger()
 
@@ -116,7 +127,7 @@ class TransformOffering(TransformImage):
     def __init__(self, type):
         self.path_bg_template = Path('./images/templates/offerings')
         self.icon_path = Path('./images/originals/offerings/').joinpath(type)
-        self.icon_width = 70
+        self.icon_width = offering_size
 
         #self.hide_bg = True
         #self.hide_additional = True
@@ -127,7 +138,7 @@ class TransformPerk(TransformImage):
         self.path_bg_template = Path('./images/templates/perks')
         self.path_additional_template = Path('./images/templates/perks/additional')
         self.icon_path = Path('./images/originals/perks/').joinpath(type)
-        self.icon_width = 70
+        self.icon_width = perk_size
         self.additional_position = 'center'
         self.additional_offset = '+0'
         self.additional_resize_first = False
@@ -140,7 +151,7 @@ class TransformItem(TransformImage):
     def __init__(self):
         self.path_bg_template = Path('./images/templates/items')
         self.icon_path = Path('./images/originals/items/survivors')
-        self.icon_width = 55
+        self.icon_width = item_size
 
         #self.hide_bg = True
         #self.hide_additional = True
@@ -155,7 +166,7 @@ class TransformAddon(TransformImage):
         if killer_name is not None:
             self.icon_path = self.icon_path.joinpath(killer_name)
 
-        self.icon_width = 58
+        self.icon_width = addon_size
         self.additional_position = 'northeast'
         self.additional_offset = '-5'
         self.additional_resize_first = True
