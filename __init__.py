@@ -599,6 +599,21 @@ presets = {
                 'brown offer: *',
                 'yellow offer: *',
             ]
+        },
+        "clown": {
+            "whitelist": [
+                'addon: cigar box',
+                'red addon: redhead',
+                'addon: flask of bleach',
+                'purple addon: gin bottle',
+                'offer: bloody party',
+                'offer: ward',
+                'purple offer: oak',
+            ],
+            "blacklist": [
+                'brown offer: *',
+                'yellow offer: *',
+            ]
         }
     }
 }
@@ -609,7 +624,7 @@ def main():
     setup_logger(main_result_folder)
 
     template_type = "killers"
-    template_killer_name = "hag"
+    template_killer_name = "clown"
 
     preset = presets.get(template_type)
     if template_killer_name is not None:
