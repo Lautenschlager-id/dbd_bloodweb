@@ -116,7 +116,7 @@ class TransformOffering(TransformImage):
     def __init__(self, type):
         self.path_bg_template = Path('./images/templates/offerings')
         self.icon_path = Path('./images/originals/offerings/').joinpath(type)
-        self.icon_width = 70
+        self.icon_width = 68
 
         #self.hide_bg = True
         #self.hide_additional = True
@@ -345,8 +345,8 @@ class ImageResource:
                 directory_paths.append(Path('./images/processed/addons/killers').joinpath(killer_name))
 
 
-        whitelist = TextProcessor.check_paths_list(whitelist)
-        blacklist = TextProcessor.check_paths_list(blacklist)
+        whitelist = whitelist and TextProcessor.check_paths_list(whitelist)
+        blacklist = blacklist and TextProcessor.check_paths_list(blacklist) or []
 
         templates = []
 
@@ -369,10 +369,7 @@ class ImageResource:
                     if priority is not None:
                         templates.append(Template(raw_path=raw_path, priority=priority))
 
-                    elif (
-                        blacklist is None
-                        or any(fnmatch.fnmatch(file, f'*{pattern}*') for pattern in blacklist)
-                    ):
+                    elif any(fnmatch.fnmatch(file, f'*{pattern}*') for pattern in blacklist):
                         templates.append(Template(raw_path=raw_path, priority=-1, ignore=True))
 
 
@@ -498,7 +495,7 @@ class Nodes:
         logger.info(f'\tClicking \'{node[4].path.name}\'')
         self.click(x, y)
 
-        node_delay_between_clicks = 1 + (
+        node_delay_between_clicks = 0 + (
             self.coordinate_offset.calculate_distance_from_center(x, y) / self.avg_node_distance
         ) * 0.500
 
@@ -523,9 +520,9 @@ class Nodes:
 
 
 def process_all_images():
-    #TransformOffering("all").process_all_images()
-    #TransformOffering("survivors").process_all_images()
-    #TransformOffering("killers").process_all_images()
+    TransformOffering("all").process_all_images()
+    TransformOffering("survivors").process_all_images()
+    TransformOffering("killers").process_all_images()
     #TransformItem().process_all_images()
     #TransformAddon("survivors").process_all_images()
     #TransformAddon("killers").process_all_images()
@@ -536,12 +533,9 @@ def process_all_images():
     pass
 
 
-def main():
-    main_result_folder = ImageResource.get_result_path('./results')
-    setup_logger(main_result_folder)
-
-    templates_to_match = ImageResource.select_templates("survivors", killer_name=None,
-        whitelist=[
+presets = {
+    "survivors": {
+        "whitelist": [
             'purple     item    :   flashlight',
             'green      item    :   flashlight',
             'yellow     item    :   flashlight',
@@ -568,13 +562,65 @@ def main():
             '           addon   :   cutting wire',
             'green      addon   :   hacksaw',
         ],
-        blacklist=[
+        "blacklist": [
             'brown      item    :   worn out tools',
             'brown      addon   :   power bulb',
             'brown      offer   :   *',
             'yellow     offer   :   *',
             '           addon   :   abdominal dressing',
-        ])
+        ]
+    },
+    "killers": {
+        "nurse": {
+            "whitelist": [
+                'addon: ataxic respiration',
+                'addon: catatonic boys treasure',
+                'purple offer: oak',
+                'offer: bloody party',
+                'offer: ward',
+            ]
+        },
+        "hag": {
+            "whitelist": [
+                'addon: rusty shackles',
+                'map: marys letter',
+                'addon: scarred hand',
+                'addon: mint rag',
+                'addon: swamp orchid necklet',
+                'addon: cracked turtle egg',
+                'addon: dried cicada',
+                'map: rpd badge',
+                'purple offer: oak',
+                'offer: bloody party',
+                'offer: ward',
+                'map: jigsaw'
+            ],
+            "blacklist": [
+                'brown offer: *',
+                'yellow offer: *',
+            ]
+        }
+    }
+}
+
+
+def main():
+    main_result_folder = ImageResource.get_result_path('./results')
+    setup_logger(main_result_folder)
+
+    template_type = "killers"
+    template_killer_name = "hag"
+
+    preset = presets.get(template_type)
+    if template_killer_name is not None:
+        preset = preset.get(template_killer_name)
+
+    templates_to_match = ImageResource.select_templates(
+        template_type,
+        killer_name=template_killer_name,
+        whitelist=preset.get("whitelist", []),
+        blacklist=preset.get("blacklist", [])
+    )
 
     node_handler = Nodes()
     matcher = Matcher()
