@@ -305,6 +305,9 @@ class ImageResource:
         file = 'bloodweb.png'
         path = result_folder + file
 
+        logger.info('Taking screenshot')
+        logger.info('\n')
+
         screenshot = pyautogui.screenshot(region=region)
 
         if save:
@@ -481,7 +484,8 @@ class Nodes:
             sleep(0.4)
             pyautogui.mouseUp()
 
-        pyautogui.moveTo(50, 50)
+        pyautogui.moveTo(80, 80)
+        pyautogui.click()
 
 
     def click_node(self):
@@ -614,6 +618,29 @@ presets = {
                 'brown offer: *',
                 'yellow offer: *',
             ]
+        },
+        "shape": {
+            "whitelist": [
+                'red addon: tombstone',
+                'red addon: tuft',
+                'purple addon: scratched mirror',
+                'map: marys letter',
+                'map: shattered glasses',
+                'purple addon: vanity mirror',
+                'purple addon: tombstone piece',
+                'green addon: memorial',
+                'offer: bloody party',
+                'green addon: jewellery box',
+                'offer: ward',
+                'map: rpd badge',
+                'map: jigsaw',
+                'purple offer: oak',
+            ],
+            "blacklist": [
+                'brown offer: *',
+                'yellow offer: *',
+                'offer: cut coin',
+            ]
         }
     }
 }
@@ -624,7 +651,7 @@ def main():
     setup_logger(main_result_folder)
 
     template_type = "killers"
-    template_killer_name = "clown"
+    template_killer_name = "shape"
 
     preset = presets.get(template_type)
     if template_killer_name is not None:
