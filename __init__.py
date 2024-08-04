@@ -389,12 +389,12 @@ class ImageResource:
 
         for index in range(len(whitelist)):
             if found_whitelist_pattern.get(index) is None:
-                logger.info(f'\t/!\\ Pattern \'{whitelist[index]}\' did not match any file')
+                logger.info(f'\t/!\\ Pattern \'*{whitelist[index]}*\' did not match any file')
 
 
         for index in range(len(blacklist)):
             if found_blacklist_pattern.get(index) is None:
-                logger.info(f'\t/!\\ Pattern \'{blacklist[index]}\' did not match any file')
+                logger.info(f'\t/!\\ Pattern \'*{blacklist[index]}*\' did not match any file')
 
 
         for index in range(len(templates)):
