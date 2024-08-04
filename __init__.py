@@ -219,7 +219,10 @@ class Template:
 
 
     def __str__(self):
-        return f'Template(path={self.path.name}, w={self.w}, h={self.h}, priority={self.priority}, ignore={self.ignore})'
+        if self.ignore:
+            return f'Template(path={self.path.name}, priority={self.priority}, ignore={self.ignore})'
+        else:
+            return f'Template(path={self.path.name}, w={self.w}, h={self.h}, priority={self.priority})'
 
 
 class TextProcessor:
@@ -316,44 +319,47 @@ class ImageResource:
         return path
 
 
-    def select_templates(type, killer_name=None,
+    def get_template_paths(type, killer_name=None,
         disable_addons=False, disable_items=False,
-        disable_offerings=False, disable_perks=False,
-        whitelist=None, blacklist=None):
-
-        logger.info('Selected templates:')
+        disable_offerings=False, disable_perks=False):
 
         is_survivor = type == 'survivors'
 
-        directory_paths = []
+        template_paths = []
 
         if not disable_offerings:
-            directory_paths.append(Path('./images/processed/offerings/all'))
-            directory_paths.append(Path('./images/processed/offerings').joinpath(type))
+            template_paths.append(Path('./images/processed/offerings/all'))
+            template_paths.append(Path('./images/processed/offerings').joinpath(type))
 
 
         if not disable_items and is_survivor:
-            directory_paths.append(Path('./images/processed/items/survivors'))
+            template_paths.append(Path('./images/processed/items/survivors'))
 
 
         if not disable_perks:
-            directory_paths.append(Path('./images/processed/perks/').joinpath(type))
+            template_paths.append(Path('./images/processed/perks/').joinpath(type))
 
 
         if not disable_addons:
             if is_survivor:
-                directory_paths.append(Path('./images/processed/addons/survivors'))
+                template_paths.append(Path('./images/processed/addons/survivors'))
             else:
-                directory_paths.append(Path('./images/processed/addons/killers/all'))
-                directory_paths.append(Path('./images/processed/addons/killers').joinpath(killer_name))
+                template_paths.append(Path('./images/processed/addons/killers/all'))
+                template_paths.append(Path('./images/processed/addons/killers').joinpath(killer_name))
+
+        return template_paths
 
 
+    def filter_templates_by_list(template_paths, whitelist=None, blacklist=None):
         whitelist = whitelist and TextProcessor.check_paths_list(whitelist)
         blacklist = blacklist and TextProcessor.check_paths_list(blacklist) or []
 
+        found_whitelist_pattern = {}
+        found_blacklist_pattern = {}
+
         templates = []
 
-        for path in directory_paths:
+        for path in template_paths:
             for file in path.rglob('*.png'):
                 if file.is_file():
                     raw_path = f'.\\{file}'
@@ -366,14 +372,29 @@ class ImageResource:
                     else:
                         for index in range(len(whitelist)):
                             if fnmatch.fnmatch(raw_path, f'*{whitelist[index]}*'):
+                                found_whitelist_pattern[index] = True
                                 priority = index
                                 break
 
                     if priority is not None:
                         templates.append(Template(raw_path=raw_path, priority=priority))
 
-                    elif any(fnmatch.fnmatch(file, f'*{pattern}*') for pattern in blacklist):
-                        templates.append(Template(raw_path=raw_path, priority=-1, ignore=True))
+                    else:
+                        for index in range(len(blacklist)):
+                            if fnmatch.fnmatch(raw_path, f'*{blacklist[index]}*'):
+                                found_blacklist_pattern[index] = True
+                                templates.append(Template(raw_path=raw_path, priority=-1, ignore=True))
+                                break
+
+
+        for index in range(len(whitelist)):
+            if found_whitelist_pattern.get(index) is None:
+                logger.info(f'\t/!\\ Pattern \'{whitelist[index]}\' did not match any file')
+
+
+        for index in range(len(blacklist)):
+            if found_blacklist_pattern.get(index) is None:
+                logger.info(f'\t/!\\ Pattern \'{blacklist[index]}\' did not match any file')
 
 
         for index in range(len(templates)):
@@ -390,9 +411,28 @@ class ImageResource:
 
 
         templates.sort(key=lambda template: template.priority)
+
+        logger.info('\n')
         for template in templates:
             logger.info(f'\t{str(template)}')
 
+
+        return templates
+
+
+    def select_templates(type, killer_name=None,
+        disable_addons=False, disable_items=False,
+        disable_offerings=False, disable_perks=False,
+        whitelist=None, blacklist=None):
+
+        logger.info('Selecting templates:')
+
+        template_paths = ImageResource.get_template_paths(type, killer_name,
+            disable_addons, disable_items,
+            disable_offerings, disable_perks)
+
+
+        templates = ImageResource.filter_templates_by_list(template_paths, whitelist, blacklist)
 
         return templates
 
@@ -641,6 +681,22 @@ presets = {
                 'yellow offer: *',
                 'offer: cut coin',
             ]
+        },
+        "doctor": {
+            "whitelist": [
+                'purple addon: discipline',
+                'green addon: discipline',
+                'red addon: queen',
+                'red addon: king',
+                'purple offer: oak',
+                'offer: bloody party',
+                'offer: ward',
+                'yellow addon: discipline',
+            ],
+            "blacklist": [
+                'brown offer: *',
+                'yellow offer: *',
+            ]
         }
     }
 }
@@ -651,7 +707,7 @@ def main():
     setup_logger(main_result_folder)
 
     template_type = "killers"
-    template_killer_name = "shape"
+    template_killer_name = "doctor"
 
     preset = presets.get(template_type)
     if template_killer_name is not None:
@@ -685,7 +741,7 @@ def main():
         node_handler.set_nodes(nodes)
         node_handler.click_all_nodes()
 
-        sleep(5.5)
+        sleep(4)
 
 
 if __name__ == "__main__":
