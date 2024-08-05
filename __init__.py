@@ -208,7 +208,13 @@ class CoordinateOffset:
 
 class Template:
     def __init__(self, template=None, w=None, h=None, path=None,
-        priority=None, ignore=None, raw_path=None):
+        priority=None, ignore=None, raw_path=None, threshold=None):
+
+        default_threshold = 0.75
+        if ignore:
+            # ignoring has to be more stricit
+            default_threshold += 0.03
+
         self.template = template
         self.w = w
         self.h = h
@@ -216,13 +222,14 @@ class Template:
         self.priority = priority
         self.ignore = ignore
         self.raw_path = raw_path
+        self.threshold = threshold or default_threshold
 
 
     def __str__(self):
         if self.ignore:
-            return f'Template(path={self.path.name}, priority={self.priority}, ignore={self.ignore})'
+            return f'Template(path={self.path.name}, priority={self.priority}, threshold={self.threshold}, ignore={self.ignore})'
         else:
-            return f'Template(path={self.path.name}, w={self.w}, h={self.h}, priority={self.priority})'
+            return f'Template(path={self.path.name}, w={self.w}, h={self.h}, threshold={self.threshold}, priority={self.priority})'
 
 
 class TextProcessor:
@@ -291,7 +298,19 @@ class TextProcessor:
 
 
     def check_paths_list(paths):
-        return [TextProcessor.text_to_unix_file_name(path) for path in paths]
+        for index in range(len(paths)):
+            path = paths[index]
+
+            is_list = isinstance(path, list)
+
+            pattern = TextProcessor.text_to_unix_file_name(path[0] if is_list else path)
+
+            if is_list:
+                path[0] = pattern
+            else:
+                paths[index] = pattern
+
+        return paths
 
 
 class ImageResource:
@@ -350,52 +369,57 @@ class ImageResource:
         return template_paths
 
 
-    def filter_templates_by_list(template_paths, whitelist=None, blacklist=None):
-        whitelist = whitelist and TextProcessor.check_paths_list(whitelist)
-        blacklist = blacklist and TextProcessor.check_paths_list(blacklist) or []
+    def populate_templates(ref_lists, pattern_list, priority=None, ignore=False):
+        (ref_templates_list, ref_files) = ref_lists
 
-        found_whitelist_pattern = {}
-        found_blacklist_pattern = {}
+        identified_file = {}
+
+        for index in range(len(pattern_list)):
+            obj = pattern_list[index]
+
+            pattern, threshold = None, None
+            if isinstance(obj, list):
+                pattern, threshold = obj
+            else:
+                pattern = obj
+
+            pattern = f'*{pattern}*'
+
+            matched_at_least_once = False
+            for file in ref_files:
+                if identified_file.get(file) is None and fnmatch.fnmatch(file, pattern):
+                    matched_at_least_once = True
+                    identified_file[file] = True
+
+                    ref_templates_list.append(
+                        Template(
+                            raw_path=file,
+                            priority=priority or index,
+                            threshold=threshold,
+                            ignore=ignore
+                        )
+                    )
+
+
+            if not matched_at_least_once:
+                logger.info(f'\t/!\\ Pattern \'{pattern}\' did not match any file')
+
+
+    def filter_templates_by_list(template_paths, whitelist=None, blacklist=None):
+        whitelist = whitelist and TextProcessor.check_paths_list(whitelist) or ['*']
+        blacklist = blacklist and TextProcessor.check_paths_list(blacklist) or []
 
         templates = []
 
-        for path in template_paths:
-            for file in path.rglob('*.png'):
-                if file.is_file():
-                    raw_path = f'.\\{file}'
+        files = [
+            f'.\\{file}'
+            for path in template_paths
+                for file in path.rglob('*.png')
+                    if file.is_file()
+        ]
 
-                    priority = None
-
-                    if whitelist is None:
-                        priority = 1
-
-                    else:
-                        for index in range(len(whitelist)):
-                            if fnmatch.fnmatch(raw_path, f'*{whitelist[index]}*'):
-                                found_whitelist_pattern[index] = True
-                                priority = index
-                                break
-
-                    if priority is not None:
-                        templates.append(Template(raw_path=raw_path, priority=priority))
-
-                    else:
-                        for index in range(len(blacklist)):
-                            if fnmatch.fnmatch(raw_path, f'*{blacklist[index]}*'):
-                                found_blacklist_pattern[index] = True
-                                templates.append(Template(raw_path=raw_path, priority=-1, ignore=True))
-                                break
-
-
-        for index in range(len(whitelist)):
-            if found_whitelist_pattern.get(index) is None:
-                logger.info(f'\t/!\\ Pattern \'*{whitelist[index]}*\' did not match any file')
-
-
-        for index in range(len(blacklist)):
-            if found_blacklist_pattern.get(index) is None:
-                logger.info(f'\t/!\\ Pattern \'*{blacklist[index]}*\' did not match any file')
-
+        ImageResource.populate_templates((templates, files), whitelist)
+        ImageResource.populate_templates((templates, files), blacklist, -1, True)
 
         for index in range(len(templates)):
             template = templates[index]
@@ -431,14 +455,13 @@ class ImageResource:
             disable_addons, disable_items,
             disable_offerings, disable_perks)
 
-
         templates = ImageResource.filter_templates_by_list(template_paths, whitelist, blacklist)
 
         return templates
 
 
 class Matcher:
-    def match_template(self, result_folder, source_image, image_templates, threshold=0.75, debug=True):
+    def match_template(self, result_folder, source_image, image_templates):
         logger.info('Matched templates:')
 
         image = cv2.imread(source_image)
@@ -452,12 +475,8 @@ class Matcher:
 
             match_result = cv2.matchTemplate(gray_image, template.template, cv2.TM_CCOEFF_NORMED)
 
-            _threshold = threshold
-            if (template.ignore):
-                # ignoring has to be more stricit
-                _threshold = threshold + 0.03
-
-            location = numpy.where(match_result >= _threshold)
+            threshold = template.threshold
+            location = numpy.where(match_result >= threshold)
 
             for (x, y) in zip(*location[::-1]):
                 if mask_duplicate_rectangles[
@@ -476,7 +495,7 @@ class Matcher:
 
                 if not template.ignore:
                     detected_positions.append((x, y, x2, y2, template))
-                elif debug:
+                else:
                     # mark red
                     cv2.rectangle(image, (x, y), (x2, y2), (0, 0, 255), 2)
 
@@ -484,13 +503,11 @@ class Matcher:
         for (x1, y1, x2, y2, template) in detected_positions:
             logger.info(f'\tFound \'{template.path.name}\' at [{x1}, {y1}, {x2}, {y2}]')
             #mark green
-            if debug:
-                cv2.rectangle(image, (x1, y1), (x2, y2), (0, 255, 0), 2)
+            cv2.rectangle(image, (x1, y1), (x2, y2), (0, 255, 0), 2)
 
 
-        if debug:
-            result_file = 'matched_result.png'
-            cv2.imwrite(result_folder + result_file, image)
+        result_file = 'matched_result.png'
+        cv2.imwrite(result_folder + result_file, image)
 
         #cv2.imshow('Matched Result', image)
         #cv2.waitKey(0)
@@ -697,7 +714,7 @@ presets = {
                 'brown offer: *',
                 'yellow offer: *',
             ]
-        }
+        },
     }
 }
 
@@ -716,10 +733,11 @@ def main():
     templates_to_match = ImageResource.select_templates(
         template_type,
         killer_name=template_killer_name,
-        whitelist=preset.get("whitelist", []),
-        blacklist=preset.get("blacklist", [])
+        whitelist=preset.get("whitelist"),
+        blacklist=preset.get("blacklist")
     )
 
+    return
     node_handler = Nodes()
     matcher = Matcher()
 
