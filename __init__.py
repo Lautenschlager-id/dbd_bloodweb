@@ -737,7 +737,6 @@ def main():
         blacklist=preset.get("blacklist")
     )
 
-    return
     node_handler = Nodes()
     matcher = Matcher()
 
