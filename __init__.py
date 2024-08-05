@@ -116,7 +116,7 @@ class TransformOffering(TransformImage):
     def __init__(self, type):
         self.path_bg_template = Path('./images/templates/offerings')
         self.icon_path = Path('./images/originals/offerings/').joinpath(type)
-        self.icon_width = 68
+        self.icon_width = 70
 
         #self.hide_bg = True
         #self.hide_additional = True
@@ -580,9 +580,9 @@ class Nodes:
 
 
 def process_all_images():
-    TransformOffering("all").process_all_images()
-    TransformOffering("survivors").process_all_images()
-    TransformOffering("killers").process_all_images()
+    #TransformOffering("all").process_all_images()
+    #TransformOffering("survivors").process_all_images()
+    #TransformOffering("killers").process_all_images()
     #TransformItem().process_all_images()
     #TransformAddon("survivors").process_all_images()
     #TransformAddon("killers").process_all_images()
@@ -635,25 +635,25 @@ presets = {
             "whitelist": [
                 'addon: ataxic respiration',
                 'addon: catatonic boys treasure',
-                'purple offer: oak',
                 'offer: bloody party',
                 'offer: ward',
+                'purple offer: oak',
             ]
         },
         "hag": {
             "whitelist": [
                 'addon: rusty shackles',
                 'map: marys letter',
-                'addon: scarred hand',
+                ['addon: scarred hand', 0.8],
                 'addon: mint rag',
                 'addon: swamp orchid necklet',
                 'addon: cracked turtle egg',
                 'addon: dried cicada',
-                'map: rpd badge',
-                'purple offer: oak',
+                ['map: rpd badge', 0.66],
                 'offer: bloody party',
-                'offer: ward',
                 'map: jigsaw'
+                'purple offer: oak',
+                'offer: ward',
             ],
             "blacklist": [
                 'brown offer: *',
@@ -688,7 +688,7 @@ presets = {
                 'offer: bloody party',
                 'green addon: jewellery box',
                 'offer: ward',
-                'map: rpd badge',
+                ['map: rpd badge', 0.66],
                 'map: jigsaw',
                 'purple offer: oak',
             ],
@@ -701,13 +701,30 @@ presets = {
         "doctor": {
             "whitelist": [
                 'purple addon: discipline',
-                'green addon: discipline',
+                ['green addon: discipline', 0.88],
                 'red addon: queen',
                 'red addon: king',
-                'purple offer: oak',
                 'offer: bloody party',
                 'offer: ward',
-                'yellow addon: discipline',
+                'purple offer: oak',
+            ],
+            "blacklist": [
+                'brown offer: *',
+                'yellow offer: *',
+            ]
+        },
+        "huntress": {
+            "whitelist": [
+                'purple addon: glowing',
+                'addon: wooden fox',
+                'green addon: rose root',
+                'green addon: flower',
+                'red addon: head',
+                'offer: bloody party',
+                'map: marys letter',
+                'offer: ward',
+                ['map: rpd badge', 0.66],
+                'purple offer: oak',
             ],
             "blacklist": [
                 'brown offer: *',
@@ -723,7 +740,7 @@ def main():
     setup_logger(main_result_folder)
 
     template_type = "killers"
-    template_killer_name = "doctor"
+    template_killer_name = "huntress"
 
     preset = presets.get(template_type)
     if template_killer_name is not None:
