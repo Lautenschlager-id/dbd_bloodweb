@@ -370,9 +370,7 @@ class ImageResource:
 
 
     def populate_templates(ref_lists, pattern_list, priority=None, ignore=False):
-        (ref_templates_list, ref_files) = ref_lists
-
-        identified_file = {}
+        (ref_templates_list, ref_files, ref_identified_file) = ref_lists
 
         for index in range(len(pattern_list)):
             obj = pattern_list[index]
@@ -387,9 +385,9 @@ class ImageResource:
 
             matched_at_least_once = False
             for file in ref_files:
-                if identified_file.get(file) is None and fnmatch.fnmatch(file, pattern):
+                if ref_identified_file.get(file) is None and fnmatch.fnmatch(file, pattern):
                     matched_at_least_once = True
-                    identified_file[file] = True
+                    ref_identified_file[file] = True
 
                     ref_templates_list.append(
                         Template(
@@ -418,8 +416,9 @@ class ImageResource:
                     if file.is_file()
         ]
 
-        ImageResource.populate_templates((templates, files), whitelist)
-        ImageResource.populate_templates((templates, files), blacklist, -1, True)
+        identified_file = {}
+        ImageResource.populate_templates((templates, files, identified_file), whitelist)
+        ImageResource.populate_templates((templates, files, identified_file), blacklist, -1, True)
 
         for index in range(len(templates)):
             template = templates[index]
