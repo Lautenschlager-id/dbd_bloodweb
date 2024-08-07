@@ -11,6 +11,7 @@ import fnmatch
 import datetime
 import logging
 import unicodedata
+import pytesseract
 
 logger = logging.getLogger()
 
@@ -185,7 +186,8 @@ class TransformAddon(TransformImage):
 
 
 class CoordinateOffset:
-    def __init__(self):
+    def __init__(self, name):
+        self.name = name
         self.region_x = None
         self.region_y = None
         self.region_width = None
@@ -220,6 +222,11 @@ class CoordinateOffset:
 
     def calculate_distance_from_center(self, x, y):
         return math.sqrt( (self.center_x - x) ** 2 + (self.center_y - y) ** 2 )
+
+
+    def get_region_screenshot(self):
+        logger.info(f'Taking {self.name} screenshot')
+        return pyautogui.screenshot(region=self.get_region())
 
 
 class Template:
@@ -339,14 +346,9 @@ class ImageResource:
         return sub_folder
 
 
-    def take_screenshot(result_folder, region=None, save=True):
+    def process_bloodweb_screenshot(result_folder, screenshot, save=True):
         file = 'bloodweb.png'
         path = result_folder + file
-
-        logger.info('Taking screenshot')
-        logger.info('\n')
-
-        screenshot = pyautogui.screenshot(region=region)
 
         if save:
             screenshot.save(path)
@@ -531,21 +533,83 @@ class Matcher:
 
 
 class Nodes:
+    re_bloodlevel = re.compile(r'BLOODWEB LEVEL (\d+)', re.IGNORECASE)
+
     def __init__(self, nodes=None):
         self.nodes = nodes
 
-        self.coordinate_offset = CoordinateOffset()
-        self.coordinate_offset.set_region(x=230, y=160, width=920, height=800)
-        self.coordinate_offset.set_center(x=460, y=400)
+        self.bloodweb_coordinate = CoordinateOffset('bloodweb')
+        self.bloodweb_coordinate.set_region(x=230, y=160, width=920, height=800)
+        self.bloodweb_coordinate.set_center(x=460, y=400)
+
+        self.level_coordinate = CoordinateOffset('bloodweb_level')
+        self.level_coordinate.set_region(x=380, y=70, width=300, height=40)
 
         self.avg_node_distance = math.sqrt( 2 * ((85 // 2) ** 2) )
+
+        self.bloodweb_level = None
+        self.levels_to_grind_until_check_bloodweb_level = 0
+        self.levels_to_skip = 0
+
+
+    def get_bloodweb_level(self):
+        logger.info('\n')
+
+        screenshot = self.level_coordinate.get_region_screenshot()
+        text = pytesseract.image_to_string(screenshot)
+        level = int(Nodes.re_bloodlevel.search(text).group(1))
+
+        logger.info(f'\t=> Identified current bloodweb level: {level}')
+
+        self.bloodweb_level = level
+        self.set_total_grind_until_read_bloodweb_level()
+
+        return level
+
+
+    def set_total_grind_until_read_bloodweb_level(self):
+        current_level = self.bloodweb_level
+
+        self.total_grind_until_read_bloodweb_level = 0
+        self.levels_to_skip = 0
+
+        # in theory, reading more than once per run wouldn't be needed, but it's nice to keep the value updated
+
+        # 1. Screenshot first run
+        # 2. If level >= 12, click and only check again when it's level 1
+        # 3. If level between 1 and 9, skip
+        # 3.1. If level is 9, screenshot after click_center to check if it's 10
+        # 4. If level is 10, click
+        # 4.1. If level is 10, screenshot after click_center to check if it's 11
+        # 5. If level is 11, skip
+        # 5.1. If level is 9, screenshot after click_center to check if it's 12
+
+        if current_level >= 12:
+            self.total_grind_until_read_bloodweb_level = 50 - current_level
+
+        elif current_level == 11:
+            self.levels_to_skip = 1
+            self.total_grind_until_read_bloodweb_level = 0
+
+        elif current_level <= 10:
+            self.levels_to_skip = 10 - current_level
+            self.total_grind_until_read_bloodweb_level = self.levels_to_skip - 1
+
+
+    def check_bloodweb_level(self):
+        if self.total_grind_until_read_bloodweb_level <= 0:
+            self.get_bloodweb_level()
+            self.set_total_grind_until_read_bloodweb_level()
+        else:
+            self.levels_to_skip -= 1
+            self.total_grind_until_read_bloodweb_level -= 1
 
 
     def set_nodes(self, nodes):
         self.nodes = nodes
         self.nodes.sort(key=lambda node: (
             -node[4].priority,
-            -self.coordinate_offset.calculate_distance_from_center(node[0], node[1])
+            -self.bloodweb_coordinate.calculate_distance_from_center(node[0], node[1])
         ))
 
 
@@ -565,13 +629,13 @@ class Nodes:
 
         node = self.nodes.pop()
 
-        (x, y) = self.coordinate_offset.normalize_xy1(node[0], node[1], 30)
+        (x, y) = self.bloodweb_coordinate.normalize_xy1(node[0], node[1], 30)
 
         logger.info(f'\tClicking \'{node[4].path.name}\'')
         self.click(x, y)
 
         node_delay_between_clicks = 0 + (
-            self.coordinate_offset.calculate_distance_from_center(x, y) / self.avg_node_distance
+            self.bloodweb_coordinate.calculate_distance_from_center(x, y) / self.avg_node_distance
         ) * 0.500
 
         sleep(node_delay_between_clicks)
@@ -587,11 +651,16 @@ class Nodes:
         self.click_center()
 
 
-    def click_center(self):
-        logger.info('\t=> Moving to next bloodweb')
-        (x, y) = self.coordinate_offset.get_center()
-        (x, y) = self.coordinate_offset.normalize_xy1(x, y)
+    def click_center(self, skipping=False):
+        logger.info(f'\t=> {"Skipping" if skipping else "Moving"} to the next bloodweb')
+
+        (x, y) = self.bloodweb_coordinate.get_center()
+        (x, y) = self.bloodweb_coordinate.normalize_xy1(x, y)
         self.click(x, y)
+
+        sleep(4.5)
+
+        self.check_bloodweb_level()
 
 
 def process_all_images():
@@ -798,15 +867,22 @@ def main():
     node_handler = Nodes()
     matcher = Matcher()
 
+    logger.info('\n')
+    node_handler.get_bloodweb_level()
+
     while True:
         result_folder = ImageResource.get_result_path(main_result_folder)
 
         logger.info('\n')
 
-        screenshot_path = ImageResource.take_screenshot(
+        screenshot_path = ImageResource.process_bloodweb_screenshot(
             result_folder,
-            node_handler.coordinate_offset.get_region(),
+            node_handler.bloodweb_coordinate.get_region_screenshot(),
             save=True)
+
+        if node_handler.levels_to_skip > 0:
+            node_handler.click_center(skipping=True)
+            continue
 
         nodes = matcher.match_template(
             result_folder,
@@ -815,8 +891,6 @@ def main():
 
         node_handler.set_nodes(nodes)
         node_handler.click_all_nodes()
-
-        sleep(4.5)
 
 
 if __name__ == "__main__":
