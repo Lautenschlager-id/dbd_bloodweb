@@ -52,33 +52,34 @@ class TransformImage:
     def init_processed_path(self, path):
         output_dir = str(path.parent).replace('\\originals\\', '\\processed\\')
         os.makedirs(output_dir, exist_ok=True)
+
         output_path = str(path).replace('\\originals\\', '\\processed\\').replace('.webp', '.png')
         return output_path
 
 
-    def process_image(self, path):
-        output_path = self.init_processed_path(path)
+    def process_image(self, path, custom_output_template_id=None):
+        custom_path = None
+        if custom_output_template_id is not None:
+            custom_path = Path(TransformImage.re_template.sub(f'template_{custom_output_template_id}', str(path)))
+        process_path = custom_path or path
+
+        output_path = self.init_processed_path(process_path)
 
         magick_commands = [
             self.set_webp_icon_to_png(path)
         ]
 
         if getattr(self, 'hide_bg', None) is None:
-            magick_commands.append(self.add_bg_template(path))
+            magick_commands.append(self.add_bg_template(process_path))
 
-        magick_commands.append(self.resize_png(path))
+        magick_commands.append(self.resize_png())
 
         if getattr(self, 'hide_additional', None) is None:
             if getattr(self, 'path_additional_template', None) is not None:
-                magick_commands.insert(3 if self.additional_resize_first else 2, self.add_additional_template(path))
+                magick_commands.insert(3 if self.additional_resize_first else 2, self.add_additional_template(process_path))
 
         magick_commands = ' | '.join(magick_commands)
-
-        # Replace the last "png:-" to the actual output_path
-        magick_commands = re.sub(
-            r'^(.+ )\S+:-(.*?)$',
-            lambda r: f'{r.group(1)}{output_path}{r.group(2)}',
-            magick_commands)
+        magick_commands += self.send_data_to_path(output_path)
 
         subprocess.call(magick_commands, shell=True)
 
@@ -94,7 +95,7 @@ class TransformImage:
         return magick_command
 
 
-    def resize_png(self, path):
+    def resize_png(self):
         magick_command = f'magick - -resize {self.icon_width}x png:-'
         return magick_command
 
@@ -105,11 +106,25 @@ class TransformImage:
         return magick_command
 
 
+    def send_data_to_path(self, output_path):
+        command = f' > {output_path}'
+        return command
+
+
     def process_all_images(self):
+        if getattr(self, 'reuse_resource_for_all_templates', None) == True:
+            custom_template_id_list = []
+            for file in self.path_bg_template.glob('*.png'):
+                custom_template_id_list.append(file.name[:-4])
+
+        else:
+            custom_template_id_list = [None]
+
         for file in self.icon_path.rglob('*.webp'):
             if file.is_file():
                 logger.info(f'Processing image {file}')
-                self.process_image(file)
+                for template_id in custom_template_id_list:
+                    self.process_image(file, custom_output_template_id=template_id)
 
 
 class TransformOffering(TransformImage):
@@ -126,11 +141,12 @@ class TransformPerk(TransformImage):
     def __init__(self, type):
         self.path_bg_template = Path('./images/templates/perks')
         self.path_additional_template = Path('./images/templates/perks/additional')
-        self.icon_path = Path('./images/originals/perks/').joinpath(type)
+        self.icon_path = Path('./images/originals/perks/').joinpath(type).joinpath('template_1')
         self.icon_width = 70
         self.additional_position = 'center'
         self.additional_offset = '+0'
         self.additional_resize_first = False
+        self.reuse_resource_for_all_templates=True
 
         #self.hide_bg = True
         #self.hide_additional = True
@@ -658,6 +674,7 @@ presets = {
             "blacklist": [
                 'brown offer: *',
                 'yellow offer: *',
+                'offer: cut coin',
             ]
         },
         "clown": {
@@ -673,6 +690,7 @@ presets = {
             "blacklist": [
                 'brown offer: *',
                 'yellow offer: *',
+                'offer: cut coin',
             ]
         },
         "shape": {
@@ -711,6 +729,7 @@ presets = {
             "blacklist": [
                 'brown offer: *',
                 'yellow offer: *',
+                'offer: cut coin',
             ]
         },
         "huntress": {
@@ -718,8 +737,8 @@ presets = {
                 'purple addon: glowing',
                 'addon: wooden fox',
                 'green addon: rose root',
-                'green addon: flower',
                 'red addon: head',
+                'green addon: flower',
                 'offer: bloody party',
                 'map: marys letter',
                 'offer: ward',
@@ -729,6 +748,7 @@ presets = {
             "blacklist": [
                 'brown offer: *',
                 'yellow offer: *',
+                'offer: cut coin',
             ]
         },
     }
@@ -774,7 +794,7 @@ def main():
         node_handler.set_nodes(nodes)
         node_handler.click_all_nodes()
 
-        sleep(4)
+        sleep(4.5)
 
 
 if __name__ == "__main__":
