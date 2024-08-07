@@ -502,21 +502,20 @@ class Matcher:
 
                 x2, y2 = x + width, y + height
 
-
                 mask_duplicate_rectangles[
                     y:y + height,
                     x:x + width
                 ] = 255
 
                 if not template.ignore:
-                    detected_positions.append((x, y, x2, y2, template))
+                    detected_positions.append((x, y, x2, y2, template, match_result[y, x]))
                 else:
                     # mark red
                     cv2.rectangle(image, (x, y), (x2, y2), (0, 0, 255), 2)
 
 
-        for (x1, y1, x2, y2, template) in detected_positions:
-            logger.info(f'\tFound \'{template.path.name}\' at [{x1}, {y1}, {x2}, {y2}]')
+        for (x1, y1, x2, y2, template, matched_threshold) in detected_positions:
+            logger.info(f'\tFound \'{template.path.name}\' with threshold [{matched_threshold:.5f}] at [{x1}, {y1}, {x2}, {y2}]')
             #mark green
             cv2.rectangle(image, (x1, y1), (x2, y2), (0, 255, 0), 2)
 
@@ -665,7 +664,7 @@ presets = {
                 'addon: swamp orchid necklet',
                 'addon: cracked turtle egg',
                 'addon: dried cicada',
-                ['map: rpd badge', 0.66],
+                ['map: rpd badge', 0.6785],
                 'offer: bloody party',
                 'map: jigsaw'
                 'purple offer: oak',
@@ -706,7 +705,7 @@ presets = {
                 'offer: bloody party',
                 'green addon: jewellery box',
                 'offer: ward',
-                ['map: rpd badge', 0.66],
+                ['map: rpd badge', 0.6785],
                 'map: jigsaw',
                 'purple offer: oak',
             ],
@@ -742,13 +741,36 @@ presets = {
                 'offer: bloody party',
                 'map: marys letter',
                 'offer: ward',
-                ['map: rpd badge', 0.66],
+                ['map: rpd badge', 0.6785],
                 'purple offer: oak',
             ],
             "blacklist": [
                 'brown offer: *',
                 'yellow offer: *',
                 'offer: cut coin',
+            ]
+        },
+        "twins": {
+            "whitelist": [
+                'red addon: cloth',
+                'addon: forest stew',
+                'red addon: pendant',
+                'addon: spinning top',
+                'addon: perfume',
+                'addon: rattle',
+                'offer: bloody party',
+                'map: jigsaw',
+                'offer: ward',
+                ['map: rpd badge', 0.672],
+                'map: marys letter',
+                ['purple offer: oak', 0.758],
+            ],
+            "blacklist": [
+                'brown offer: *',
+                'yellow offer: *',
+                'offer: cut coin',
+                'addon: tiny fingernail',
+                'map: cookbook'
             ]
         },
     }
@@ -760,7 +782,7 @@ def main():
     setup_logger(main_result_folder)
 
     template_type = "killers"
-    template_killer_name = "huntress"
+    template_killer_name = "twins"
 
     preset = presets.get(template_type)
     if template_killer_name is not None:
