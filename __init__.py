@@ -549,29 +549,36 @@ class Nodes:
 
         self.bloodweb_level = None
         self.levels_to_grind_until_check_bloodweb_level = 0
-        self.levels_to_skip = 0
+        self.skip_x_bloodweb_levels = 0
 
 
     def get_bloodweb_level(self):
         logger.info('\n')
 
-        screenshot = self.level_coordinate.get_region_screenshot()
-        text = pytesseract.image_to_string(screenshot)
-        level = int(Nodes.re_bloodlevel.search(text).group(1))
+        release = False
+        while not release:
+            try:
+                screenshot = self.level_coordinate.get_region_screenshot()
+                text = pytesseract.image_to_string(screenshot)
+                level = int(Nodes.re_bloodlevel.search(text).group(1))
+
+                release = True
+            except:
+                pass
 
         logger.info(f'\t=> Identified current bloodweb level: {level}')
 
         self.bloodweb_level = level
-        self.set_total_grind_until_read_bloodweb_level()
+        self.set_read_bloodweb_level_in_x_levels()
 
         return level
 
 
-    def set_total_grind_until_read_bloodweb_level(self):
+    def set_read_bloodweb_level_in_x_levels(self):
         current_level = self.bloodweb_level
 
-        self.total_grind_until_read_bloodweb_level = 0
-        self.levels_to_skip = 0
+        self.read_bloodweb_level_in_x_levels = 0
+        self.skip_x_bloodweb_levels = 0
 
         # in theory, reading more than once per run wouldn't be needed, but it's nice to keep the value updated
 
@@ -583,26 +590,28 @@ class Nodes:
         # 4.1. If level is 10, screenshot after click_center to check if it's 11
         # 5. If level is 11, skip
         # 5.1. If level is 9, screenshot after click_center to check if it's 12
+        # 6. If level is 49, take a screenshot after click_center to check if it's 50
+        # 6.1. level 50 has extra clicks to be made
 
         if current_level >= 12:
-            self.total_grind_until_read_bloodweb_level = 50 - current_level
+            self.read_bloodweb_level_in_x_levels = 49 - current_level
 
         elif current_level == 11:
-            self.levels_to_skip = 1
-            self.total_grind_until_read_bloodweb_level = 0
+            self.skip_x_bloodweb_levels = 1
+            self.read_bloodweb_level_in_x_levels = 0
 
         elif current_level <= 10:
-            self.levels_to_skip = 10 - current_level
-            self.total_grind_until_read_bloodweb_level = self.levels_to_skip - 1
+            self.skip_x_bloodweb_levels = 10 - current_level
+            self.read_bloodweb_level_in_x_levels = self.skip_x_bloodweb_levels - 1
 
 
     def check_bloodweb_level(self):
-        if self.total_grind_until_read_bloodweb_level <= 0:
+        if self.read_bloodweb_level_in_x_levels <= 0:
             self.get_bloodweb_level()
-            self.set_total_grind_until_read_bloodweb_level()
+            self.set_read_bloodweb_level_in_x_levels()
         else:
-            self.levels_to_skip -= 1
-            self.total_grind_until_read_bloodweb_level -= 1
+            self.skip_x_bloodweb_levels -= 1
+            self.read_bloodweb_level_in_x_levels -= 1
 
 
     def set_nodes(self, nodes):
@@ -651,16 +660,22 @@ class Nodes:
         self.click_center()
 
 
-    def click_center(self, skipping=False):
-        logger.info(f'\t=> {"Skipping" if skipping else "Moving"} to the next bloodweb')
+    def click_center(self, skipping=False, level_up=False):
+        if level_up:
+            logger.info(f'\t=> Leveling up to the next prestige level')
+        else:
+            logger.info(f'\t=> {"Skipping" if skipping else "Moving"} to the next bloodweb')
 
         (x, y) = self.bloodweb_coordinate.get_center()
         (x, y) = self.bloodweb_coordinate.normalize_xy1(x, y)
         self.click(x, y)
 
-        sleep(4.5)
-
-        self.check_bloodweb_level()
+        if self.bloodweb_level == 50 and level_up == False:
+            sleep(3.5)
+            self.click_center(level_up=True)
+        else:
+            sleep(4.5)
+            self.check_bloodweb_level()
 
 
 def process_all_images():
@@ -721,7 +736,7 @@ presets = {
                 'addon: catatonic boys treasure',
                 'offer: bloody party',
                 'offer: ward',
-                'purple offer: oak',
+                ['purple offer: oak', 0.758],
             ]
         },
         "hag": {
@@ -735,8 +750,8 @@ presets = {
                 'addon: dried cicada',
                 ['map: rpd badge', 0.6785],
                 'offer: bloody party',
-                'map: jigsaw'
-                'purple offer: oak',
+                'map: jigsaw',
+                ['purple offer: oak', 0.758],
                 'offer: ward',
             ],
             "blacklist": [
@@ -753,7 +768,7 @@ presets = {
                 'purple addon: gin bottle',
                 'offer: bloody party',
                 'offer: ward',
-                'purple offer: oak',
+                ['purple offer: oak', 0.758],
             ],
             "blacklist": [
                 'brown offer: *',
@@ -776,7 +791,7 @@ presets = {
                 'offer: ward',
                 ['map: rpd badge', 0.6785],
                 'map: jigsaw',
-                'purple offer: oak',
+                ['purple offer: oak', 0.758],
             ],
             "blacklist": [
                 'brown offer: *',
@@ -792,7 +807,7 @@ presets = {
                 'red addon: king',
                 'offer: bloody party',
                 'offer: ward',
-                'purple offer: oak',
+                ['purple offer: oak', 0.758],
             ],
             "blacklist": [
                 'brown offer: *',
@@ -811,7 +826,7 @@ presets = {
                 'map: marys letter',
                 'offer: ward',
                 ['map: rpd badge', 0.6785],
-                'purple offer: oak',
+                ['purple offer: oak', 0.758],
             ],
             "blacklist": [
                 'brown offer: *',
@@ -839,7 +854,42 @@ presets = {
                 'yellow offer: *',
                 'offer: cut coin',
                 'addon: tiny fingernail',
-                'map: cookbook'
+                'map: cookbook',
+            ]
+        },
+        "artist": {
+            "whitelist": [
+                'addon: hands',
+                'red addon: rot',
+                'addon: grief',
+                'addon: bell',
+                'offer: bloody party',
+                'red offer: mori',
+                'offer: ward',
+                ['purple offer: oak', 0.758],
+            ],
+            "blacklist": [
+                'brown offer: *',
+                'yellow offer: *',
+                'offer: cut coin',
+            ]
+        },
+        "nightmare": {
+            "whitelist": [
+                'red addon: brush',
+                'red addon: box',
+                'purple addon: pill bottle',
+                'map: jigsaw',
+                ['map: rpd badge', 0.672],
+                'offer: bloody party',
+                'offer: ward',
+                ['purple offer: oak', 0.758],
+            ],
+            "blacklist": [
+                'brown offer: *',
+                'yellow offer: *',
+                'offer: cut coin',
+                'map: cookbook',
             ]
         },
     }
@@ -851,7 +901,7 @@ def main():
     setup_logger(main_result_folder)
 
     template_type = "killers"
-    template_killer_name = "twins"
+    template_killer_name = "nightmare"
 
     preset = presets.get(template_type)
     if template_killer_name is not None:
@@ -880,7 +930,7 @@ def main():
             node_handler.bloodweb_coordinate.get_region_screenshot(),
             save=True)
 
-        if node_handler.levels_to_skip > 0:
+        if node_handler.skip_x_bloodweb_levels > 0:
             node_handler.click_center(skipping=True)
             continue
 
