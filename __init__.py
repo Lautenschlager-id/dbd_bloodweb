@@ -739,35 +739,17 @@ presets = {
                 ['purple offer: oak', 0.758],
             ]
         },
-        "hag": {
+        "huntress": {
             "whitelist": [
-                'addon: rusty shackles',
+                'purple addon: glowing',
+                'addon: wooden fox',
+                'green addon: rose root',
+                'red addon: head',
+                'green addon: flower',
+                'offer: bloody party',
                 'map: marys letter',
-                ['addon: scarred hand', 0.8],
-                'addon: mint rag',
-                'addon: swamp orchid necklet',
-                'addon: cracked turtle egg',
-                'addon: dried cicada',
+                'offer: ward',
                 ['map: rpd badge', 0.6785],
-                'offer: bloody party',
-                'map: jigsaw',
-                ['purple offer: oak', 0.758],
-                'offer: ward',
-            ],
-            "blacklist": [
-                'brown offer: *',
-                'yellow offer: *',
-                'offer: cut coin',
-            ]
-        },
-        "clown": {
-            "whitelist": [
-                'addon: cigar box',
-                'red addon: redhead',
-                'addon: flask of bleach',
-                'purple addon: gin bottle',
-                'offer: bloody party',
-                'offer: ward',
                 ['purple offer: oak', 0.758],
             ],
             "blacklist": [
@@ -799,6 +781,27 @@ presets = {
                 'offer: cut coin',
             ]
         },
+        "hag": {
+            "whitelist": [
+                'addon: rusty shackles',
+                'map: marys letter',
+                ['addon: scarred hand', 0.8],
+                'addon: mint rag',
+                'addon: swamp orchid necklet',
+                'addon: cracked turtle egg',
+                'addon: dried cicada',
+                ['map: rpd badge', 0.6785],
+                'offer: bloody party',
+                'map: jigsaw',
+                ['purple offer: oak', 0.758],
+                'offer: ward',
+            ],
+            "blacklist": [
+                'brown offer: *',
+                'yellow offer: *',
+                'offer: cut coin',
+            ]
+        },
         "doctor": {
             "whitelist": [
                 'purple addon: discipline',
@@ -815,23 +818,38 @@ presets = {
                 'offer: cut coin',
             ]
         },
-        "huntress": {
+        "clown": {
             "whitelist": [
-                'purple addon: glowing',
-                'addon: wooden fox',
-                'green addon: rose root',
-                'red addon: head',
-                'green addon: flower',
+                'addon: cigar box',
+                'red addon: redhead',
+                'addon: flask of bleach',
+                'purple addon: gin bottle',
                 'offer: bloody party',
-                'map: marys letter',
                 'offer: ward',
-                ['map: rpd badge', 0.6785],
                 ['purple offer: oak', 0.758],
             ],
             "blacklist": [
                 'brown offer: *',
                 'yellow offer: *',
                 'offer: cut coin',
+            ]
+        },
+        "nightmare": {
+            "whitelist": [
+                'red addon: brush',
+                'red addon: box',
+                'purple addon: pill bottle',
+                'map: jigsaw',
+                ['map: rpd badge', 0.672],
+                'offer: bloody party',
+                'offer: ward',
+                ['purple offer: oak', 0.758],
+            ],
+            "blacklist": [
+                'brown offer: *',
+                'yellow offer: *',
+                'offer: cut coin',
+                'map: cookbook',
             ]
         },
         "twins": {
@@ -874,14 +892,15 @@ presets = {
                 'offer: cut coin',
             ]
         },
-        "nightmare": {
+        "dredge": {
             "whitelist": [
-                'red addon: brush',
-                'red addon: box',
-                'purple addon: pill bottle',
-                'map: jigsaw',
-                ['map: rpd badge', 0.672],
+                'addon: lavalier',
+                'addon: boat key',
+                'red addon: wooden',
+                'addon: doll',
+                'addon: skull',
                 'offer: bloody party',
+                'red offer: mori',
                 'offer: ward',
                 ['purple offer: oak', 0.758],
             ],
@@ -889,7 +908,6 @@ presets = {
                 'brown offer: *',
                 'yellow offer: *',
                 'offer: cut coin',
-                'map: cookbook',
             ]
         },
     }
@@ -901,7 +919,7 @@ def main():
     setup_logger(main_result_folder)
 
     template_type = "killers"
-    template_killer_name = "nightmare"
+    template_killer_name = "dredge"
 
     preset = presets.get(template_type)
     if template_killer_name is not None:
