@@ -4,14 +4,9 @@ import os
 import re
 
 from ImageMagickWrapper import ImageMagickWrapper
+from ...utils.enums import ROOT_DIRECTORY, FILE_EXTENSION
 
 class ImageProcessor(ABC):
-	ROOT_DIR_RAW_RESOURCE = '\\originals\\'
-	ROOT_DIR_PROCESSED_RESOURCE = '\\processed\\'
-
-	EXT_RAW_RESOURCE = '.webp'
-	EXT_PROCESSED_RESOURCE = '.png'
-
 	RE_TEMPLATE_ID = re.compile(r'template_(\d)')
 
 	@property
@@ -38,14 +33,9 @@ class ImageProcessor(ABC):
 	@abstractmethod
 	def resize_image_before_placing_side_icon(self): pass
 
-	@property
-	@abstractmethod
-	def a:
-		pass
-
 	def __init__(self):
 		self.magick = ImageMagickWrapper(
-			final_extension=self.EXT_PROCESSED_RESOURCE[1:],
+			final_extension=FILE_EXTENSION.PROCESSED_RESOURCE.name,
 			resource_icon_width=self.resource_icon_width,
 			side_icon_position=self.side_icon_position
 		)
@@ -105,25 +95,25 @@ class ImageProcessor(ABC):
 	def _get_template_id(self, path_resource, include_extension=False):
 		template_id = self.RE_TEMPLATE_ID.search(str(path_resource)).group(1)
 		if include_extension:
-			template_id += self.EXT_PROCESSED_RESOURCE
+			template_id += FILE_EXTENSION.PROCESSED_RESOURCE
 		return template_id
 
 	def _get_processed_resource_path(self, path_resource_icon):
 		self._start_processed_resource_directory(path_resource_icon)
 
 		output_path = str(path_resource_icon).replace(
-			self.ROOT_DIR_RAW_RESOURCE,
-			self.ROOT_DIR_PROCESSED_RESOURCE
+			ROOT_DIRECTORY.RAW_RESOURCE,
+			ROOT_DIRECTORY.PROCESSED_RESOURCE
 		).replace(
-			self.EXT_RAW_RESOURCE,
-			self.EXT_PROCESSED_RESOURCE
+			FILE_EXTENSION.RAW_RESOURCE,
+			FILE_EXTENSION.PROCESSED_RESOURCE
 		)
 
 		return output_path
 
 	def _start_processed_resource_directory(self, path_resource_icon):
 		output_dir = str(path_resource_icon.parent).replace(
-			self.ROOT_DIR_RAW_RESOURCE,
-			self.ROOT_DIR_PROCESSED_RESOURCE
+			ROOT_DIRECTORY.RAW_RESOURCE,
+			ROOT_DIRECTORY.PROCESSED_RESOURCE
 		)
 		os.makedirs(output_dir, exist_ok=True)
