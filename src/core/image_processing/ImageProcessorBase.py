@@ -1,12 +1,13 @@
 from abc import ABC, abstractmethod
+from concurrent.futures import ProcessPoolExecutor, as_completed
 from pathlib import Path
 import os
 import re
 
-from ImageMagickWrapper import ImageMagickWrapper
-from ...utils.enums import ROOT_DIRECTORY, FILE_EXTENSION
+from .ImageMagickWrapper import ImageMagickWrapper
+from utils.enums import ROOT_DIRECTORY, FILE_EXTENSION
 
-class ImageProcessor(ABC):
+class ImageProcessorBase(ABC):
 	RE_TEMPLATE_ID = re.compile(r'template_(\d)')
 
 	@property
@@ -22,16 +23,16 @@ class ImageProcessor(ABC):
 	def resource_icon_width(self): pass
 
 	@property
-	@abstractmethod
 	def path_side_icon_template_base(self): pass
 
 	@property
-	@abstractmethod
 	def side_icon_position(self): pass
 
 	@property
-	@abstractmethod
 	def resize_image_before_placing_side_icon(self): pass
+
+	@property
+	def apply_resources_from_one_template_to_all_templates(self): pass
 
 	def __init__(self):
 		self.magick = ImageMagickWrapper(
@@ -40,7 +41,7 @@ class ImageProcessor(ABC):
 			side_icon_position=self.side_icon_position
 		)
 
-	def combine_image_resources(self, path_resource_icon, custom_output_template_id=None):
+	def process_image(self, path_resource_icon, custom_output_template_id=None):
 		self.magick.convert_resource_extension(path_resource_icon)
 
 		path_resource_icon = self._evaluate_custom_resource_icon_template(
@@ -52,20 +53,52 @@ class ImageProcessor(ABC):
 			self._get_background_template_by_path(path_resource_icon)
 		)
 
-		self.magick.resize_image()
-
 		if self.path_side_icon_template_base is not None:
 			self.magick.place_side_icon_template(
 				self._get_side_icon_template_by_path(path_resource_icon)
 			)
 
-			if self.resize_image_before_placing_side_icon is True:
-				self.magick.swap_last_command()
+		self.magick.resize_image()
+
+		if (self.path_side_icon_template_base is not None
+			and self.resize_image_before_placing_side_icon is True):
+			self.magick.swap_last_command()
 
 		output_path = self._get_processed_resource_path(path_resource_icon)
 		self.magick.save_image(output_path)
 
-	def _evaluate_custom_resource_icon_template(self, path_resource_icon, custom_output_template_id):
+	def process_all_images(self):
+		if self.apply_resources_from_one_template_to_all_templates is True:
+			custom_template_id_list = [
+				file.name[:-4]
+				for file in self.path_background_template_base.glob(
+					FILE_EXTENSION.PROCESSED_RESOURCE.as_unix_filename_pattern
+				)
+			]
+		else:
+			custom_template_id_list = [None]
+
+		with ProcessPoolExecutor() as executor:
+			futures = []
+
+			for file in self.path_resource_icon_base.rglob(
+				FILE_EXTENSION.RAW_RESOURCE.as_unix_filename_pattern
+			):
+				for template_id in custom_template_id_list:
+					futures.append(
+						executor.submit(self.process_image, file, template_id)
+					)
+
+			for future in as_completed(futures):
+				try:
+					result = future.result()
+				except Exception as exception:
+					print(f'Threaded task generated an exception: {exception}')
+
+	def _evaluate_custom_resource_icon_template(
+		self, path_resource_icon,
+		custom_output_template_id
+	):
 		if custom_output_template_id is None:
 			return path_resource_icon
 
@@ -82,38 +115,38 @@ class ImageProcessor(ABC):
 		template_id = self._get_template_id(path_resource_icon, include_extension=True)
 		return self._get_background_template(template_id)
 
-	def _get_background_template(template_id):
+	def _get_background_template(self, template_id):
 		return str(self.path_background_template_base.joinpath(template_id))
 
 	def _get_side_icon_template_by_path(self, path_resource_icon):
 		template_id = self._get_template_id(path_resource_icon, include_extension=True)
 		return self._get_side_icon_template(template_id)
 
-	def _get_side_icon_template(template_id):
+	def _get_side_icon_template(self, template_id):
 		return str(self.path_side_icon_template_base.joinpath(template_id))
 
 	def _get_template_id(self, path_resource, include_extension=False):
 		template_id = self.RE_TEMPLATE_ID.search(str(path_resource)).group(1)
 		if include_extension:
-			template_id += FILE_EXTENSION.PROCESSED_RESOURCE
+			template_id += FILE_EXTENSION.PROCESSED_RESOURCE.value
 		return template_id
 
 	def _get_processed_resource_path(self, path_resource_icon):
 		self._start_processed_resource_directory(path_resource_icon)
 
 		output_path = str(path_resource_icon).replace(
-			ROOT_DIRECTORY.RAW_RESOURCE,
-			ROOT_DIRECTORY.PROCESSED_RESOURCE
+			ROOT_DIRECTORY.RAW_RESOURCE.value,
+			ROOT_DIRECTORY.PROCESSED_RESOURCE.value
 		).replace(
-			FILE_EXTENSION.RAW_RESOURCE,
-			FILE_EXTENSION.PROCESSED_RESOURCE
+			FILE_EXTENSION.RAW_RESOURCE.value,
+			FILE_EXTENSION.PROCESSED_RESOURCE.value
 		)
 
 		return output_path
 
 	def _start_processed_resource_directory(self, path_resource_icon):
 		output_dir = str(path_resource_icon.parent).replace(
-			ROOT_DIRECTORY.RAW_RESOURCE,
-			ROOT_DIRECTORY.PROCESSED_RESOURCE
+			ROOT_DIRECTORY.RAW_RESOURCE.value,
+			ROOT_DIRECTORY.PROCESSED_RESOURCE.value
 		)
 		os.makedirs(output_dir, exist_ok=True)

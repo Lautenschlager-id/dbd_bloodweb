@@ -16,13 +16,13 @@ class ImageMagickWrapper:
 		self.command_list = []
 
 	def convert_resource_extension(self, path_resource_icon):
-		command = f'magick {str(path_resource_icon)} {self.final_extension}:-'
+		command = f'magick "{str(path_resource_icon)}" {self.final_extension}:-'
 		self._add_command_to_list(command)
 
 	def place_background_template(self, path_background_template):
 		command = (
 			f'magick composite -gravity center'
-			f' - {path_background_template} {self.final_extension}:-'
+			f' - "{path_background_template}" {self.final_extension}:-'
 		)
 		self._add_command_to_list(command)
 
@@ -34,7 +34,7 @@ class ImageMagickWrapper:
 		command = (
 			f'magick composite -gravity {self.side_icon_gravity} '
 			f'-geometry {2 * self.side_icon_offset} '
-			f'{path_side_icon_template} - {self.final_extension}:-'
+			f'"{path_side_icon_template}" - {self.final_extension}:-'
 		)
 		self._add_command_to_list(command)
 
@@ -44,7 +44,7 @@ class ImageMagickWrapper:
 	def save_image(self, output_path):
 		commands = ' | '.join(self.command_list)
 
-		command_to_execute = f'{commands} > {output_path}'
+		command_to_execute = f'{commands} > "{output_path}"'
 		subprocess.call(command_to_execute, shell=True)
 
 		self.command_list = []
