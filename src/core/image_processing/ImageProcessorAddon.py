@@ -13,7 +13,7 @@ class ImageProcessorAddon(ImageProcessorBase):
 		)
 
 		if self.killer_name is not None:
-			path.joinpath(self.killer_name)
+			path = path.joinpath(self.killer_name)
 
 		return path
 

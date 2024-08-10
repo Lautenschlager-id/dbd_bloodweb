@@ -1,16 +1,24 @@
-from core.image_processing.ImageProcessorAddon import ImageProcessorAddon
-from core.image_processing.ImageProcessorItem import ImageProcessorItem
-from core.image_processing.ImageProcessorOffering import ImageProcessorOffering
-from core.image_processing.ImageProcessorPerk import ImageProcessorPerk
+from argparse import ArgumentParser
 
-from utils.enums import OFFERING_TYPE, PERK_TYPE, ADDON_TYPE
+from core.command_handling.CommandHandlerImage import CommandHandlerImage
+
+def capture_command_arguments():
+	parser = ArgumentParser()
+
+	parser.add_argument(
+		'-i', '--image',
+		type=str,
+		nargs='*',
+		help='Process images.'
+	)
+	#parser.add_argument('-r', '--run', type=str, help='Target for the blodweeb grinding. E.g.: \'survivor'\, \'huntress\'.')
+	#parser.add_argument('--noskip', action='store_true', help='Disables bloodweb level detection.')
+
+	return parser.parse_args()
 
 if __name__ == '__main__':
-	ImageProcessorOffering(OFFERING_TYPE.ALL).process_all_images()
-	ImageProcessorOffering(OFFERING_TYPE.SURVIVOR).process_all_images()
-	ImageProcessorOffering(OFFERING_TYPE.KILLER).process_all_images()
-	ImageProcessorItem().process_all_images()
-	ImageProcessorAddon(ADDON_TYPE.SURVIVOR).process_all_images()
-	ImageProcessorAddon(ADDON_TYPE.KILLER).process_all_images()
-	ImageProcessorPerk(PERK_TYPE.SURVIVOR).process_all_images()
-	ImageProcessorPerk(PERK_TYPE.KILLER).process_all_images()
+	args = capture_command_arguments()
+
+	if args.image is not None:
+		CommandHandlerImage(args.image).run()
+
