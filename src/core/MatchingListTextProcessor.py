@@ -52,7 +52,7 @@ class MatchingListTextProcessor:
 			self._set_text_to_camel_case(description)
 		)
 
-		return f'*{color}*{type}*{description}*'
+		return f'*{color}*{resource_prefix}*{description}*'
 
 	def convert_all_lines_to_unix_file_name(self):
 		for index in range(len(self.entry_list)):

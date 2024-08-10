@@ -1,5 +1,5 @@
 from .ImageProcessorBase import ImageProcessorBase
-from utils.enums import RESOURCE_DIRECTORY, PERK_TYPE
+from utils.enums import PERK_TYPE, RESOURCE_DIRECTORY
 
 class ImageProcessorPerk(ImageProcessorBase):
 	template_with_all_icon_resources = 'template_1'

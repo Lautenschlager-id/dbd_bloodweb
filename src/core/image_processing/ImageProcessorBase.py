@@ -5,7 +5,7 @@ import os
 import re
 
 from .ImageMagickWrapper import ImageMagickWrapper
-from utils.enums import RESOURCE_DIRECTORY, FILE_EXTENSION
+from utils.enums import FILE_EXTENSION, RESOURCE_DIRECTORY
 
 class ImageProcessorBase(ABC):
 	RE_TEMPLATE_ID = re.compile(r'template_(\d)')
@@ -21,9 +21,11 @@ class ImageProcessorBase(ABC):
 		if self.apply_resources_from_one_template_to_all_templates is True:
 			path = path.parent
 
-		return str(path).replace(
-			RESOURCE_DIRECTORY.RAW_RESOURCE.value,
-			RESOURCE_DIRECTORY.PROCESSED_RESOURCE.value
+		return Path(
+			str(path).replace(
+				RESOURCE_DIRECTORY.RAW_RESOURCE.value,
+				RESOURCE_DIRECTORY.PROCESSED_RESOURCE.value
+			)
 		)
 
 	@property
@@ -107,8 +109,8 @@ class ImageProcessorBase(ABC):
 				except Exception as exception:
 					print(f'Threaded task generated an exception: {exception}')
 
-	def _evaluate_custom_resource_icon_template(
-		self, path_resource_icon,
+	def _evaluate_custom_resource_icon_template(self,
+		path_resource_icon,
 		custom_output_template_id
 	):
 		if custom_output_template_id is None:

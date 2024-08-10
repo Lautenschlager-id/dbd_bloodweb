@@ -32,6 +32,6 @@ if __name__ == '__main__':
 		CommandHandlerGrind(args.run).run()
 
 
-	x = ResourceHandler('killers', 'nurse')
-	print(x.match_list)
+	x = ResourceHandler('killers', 'nurse').initialize()
+	print(x)
 

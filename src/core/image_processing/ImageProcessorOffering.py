@@ -1,5 +1,5 @@
 from .ImageProcessorBase import ImageProcessorBase
-from utils.enums import RESOURCE_DIRECTORY, OFFERING_TYPE
+from utils.enums import OFFERING_TYPE, RESOURCE_DIRECTORY
 
 class ImageProcessorOffering(ImageProcessorBase):
 	@property

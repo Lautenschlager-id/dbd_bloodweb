@@ -1,5 +1,5 @@
 from .ImageProcessorBase import ImageProcessorBase
-from utils.enums import RESOURCE_DIRECTORY, ADDON_TYPE
+from utils.enums import ADDON_TYPE, RESOURCE_DIRECTORY
 
 class ImageProcessorAddon(ImageProcessorBase):
 	default_side_icon_file = 'small.png'
