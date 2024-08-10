@@ -1,5 +1,5 @@
 from .ImageProcessorBase import ImageProcessorBase
-from utils.enums import ROOT_DIRECTORY, PERK_TYPE
+from utils.enums import RESOURCE_DIRECTORY, PERK_TYPE
 
 class ImageProcessorPerk(ImageProcessorBase):
 	template_with_all_icon_resources = 'template_1'
@@ -7,7 +7,7 @@ class ImageProcessorPerk(ImageProcessorBase):
 	@property
 	def path_resource_icon_base(self):
 		return (
-			ROOT_DIRECTORY.RAW_RESOURCE.full_path
+			RESOURCE_DIRECTORY.RAW_RESOURCE.full_path
 				.joinpath('perks')
 				.joinpath(self.type)
 				.joinpath(self.template_with_all_icon_resources)
@@ -16,7 +16,7 @@ class ImageProcessorPerk(ImageProcessorBase):
 	@property
 	def path_background_template_base(self):
 		return (
-			ROOT_DIRECTORY.TEMPLATE.full_path
+			RESOURCE_DIRECTORY.TEMPLATE.full_path
 				.joinpath('perks')
 		)
 
@@ -46,6 +46,6 @@ class ImageProcessorPerk(ImageProcessorBase):
 
 		type = str(type)
 
-		assert PERK_TYPE.any_matching(type), "Invalid perk type"
+		assert PERK_TYPE.any_matching(type), f'Invalid perk type \'{type}\''
 		self.type = type
 		#'        self.reuse_resource_for_all_templates=True'

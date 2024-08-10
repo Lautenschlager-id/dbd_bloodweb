@@ -24,7 +24,7 @@ class CustomEnum(Enum):
 	def get_all(cls):
 		return cls._value2member_map_
 
-class ROOT_DIRECTORY(CustomEnum):
+class RESOURCE_DIRECTORY(CustomEnum):
 	PROCESSED_RESOURCE = '\\processed\\'
 	RAW_RESOURCE = '\\originals\\'
 	ROOT = '.\\..\\images'
@@ -71,3 +71,12 @@ class IMAGE_PROCESSING_PARAMETER_TARGET(CustomEnum):
 	all = 'Process for all killers and survivors'
 	killer = 'Process for all killers or specified killer'
 	survivor = 'Process for survivors'
+
+class CONFIG_DIRECTORY(CustomEnum):
+	PRESET = '\\presets.json'
+	ROOT = '.\\config'
+	SETTING = '\\settings.json'
+
+	@property
+	def full_path(self):
+		return Path(f'{self.ROOT.value}{self.value}')

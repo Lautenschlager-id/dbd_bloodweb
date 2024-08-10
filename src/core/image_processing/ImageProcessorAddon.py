@@ -1,5 +1,5 @@
 from .ImageProcessorBase import ImageProcessorBase
-from utils.enums import ROOT_DIRECTORY, ADDON_TYPE
+from utils.enums import RESOURCE_DIRECTORY, ADDON_TYPE
 
 class ImageProcessorAddon(ImageProcessorBase):
 	default_side_icon_file = 'small.png'
@@ -7,7 +7,7 @@ class ImageProcessorAddon(ImageProcessorBase):
 	@property
 	def path_resource_icon_base(self):
 		path = (
-			ROOT_DIRECTORY.RAW_RESOURCE.full_path
+			RESOURCE_DIRECTORY.RAW_RESOURCE.full_path
 				.joinpath('addons')
 				.joinpath(self.type)
 		)
@@ -20,7 +20,7 @@ class ImageProcessorAddon(ImageProcessorBase):
 	@property
 	def path_background_template_base(self):
 		return (
-			ROOT_DIRECTORY.TEMPLATE.full_path
+			RESOURCE_DIRECTORY.TEMPLATE.full_path
 				.joinpath('items')
 		)
 
@@ -31,7 +31,7 @@ class ImageProcessorAddon(ImageProcessorBase):
 	@property
 	def path_side_icon_template_base(self):
 		return (
-			ROOT_DIRECTORY.TEMPLATE.full_path
+			RESOURCE_DIRECTORY.TEMPLATE.full_path
 				.joinpath('addons')
 				.joinpath('additional')
 		)
@@ -51,7 +51,7 @@ class ImageProcessorAddon(ImageProcessorBase):
 
 		type = str(type)
 
-		assert ADDON_TYPE.any_matching(type), "Invalid addon type"
+		assert ADDON_TYPE.any_matching(type), f'Invalid addon type \'{type}\''
 		self.type = type
 		self.killer_name = killer_name
 

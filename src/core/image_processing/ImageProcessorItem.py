@@ -1,11 +1,11 @@
 from .ImageProcessorBase import ImageProcessorBase
-from utils.enums import ROOT_DIRECTORY
+from utils.enums import RESOURCE_DIRECTORY
 
 class ImageProcessorItem(ImageProcessorBase):
 	@property
 	def path_resource_icon_base(self):
 		return (
-			ROOT_DIRECTORY.RAW_RESOURCE.full_path
+			RESOURCE_DIRECTORY.RAW_RESOURCE.full_path
 				.joinpath('items')
 				.joinpath('survivors')
 		)
@@ -13,7 +13,7 @@ class ImageProcessorItem(ImageProcessorBase):
 	@property
 	def path_background_template_base(self):
 		return (
-			ROOT_DIRECTORY.TEMPLATE.full_path
+			RESOURCE_DIRECTORY.TEMPLATE.full_path
 				.joinpath('items')
 		)
 

@@ -5,7 +5,7 @@ from core.image_processing.ImageProcessorOffering import ImageProcessorOffering
 from core.image_processing.ImageProcessorPerk import ImageProcessorPerk
 from utils.enums import (
 	IMAGE_PROCESSING_PARAMETER, IMAGE_PROCESSING_PARAMETER_TARGET,
-	OFFERING_TYPE, PERK_TYPE, ADDON_TYPE
+	ADDON_TYPE, OFFERING_TYPE, PERK_TYPE
 )
 from utils.functions import get_list_value, get_all_killer_names
 

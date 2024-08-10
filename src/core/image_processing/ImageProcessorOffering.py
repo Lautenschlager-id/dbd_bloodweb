@@ -1,11 +1,11 @@
 from .ImageProcessorBase import ImageProcessorBase
-from utils.enums import ROOT_DIRECTORY, OFFERING_TYPE
+from utils.enums import RESOURCE_DIRECTORY, OFFERING_TYPE
 
 class ImageProcessorOffering(ImageProcessorBase):
 	@property
 	def path_resource_icon_base(self):
 		return (
-			ROOT_DIRECTORY.RAW_RESOURCE.full_path
+			RESOURCE_DIRECTORY.RAW_RESOURCE.full_path
 				.joinpath('offerings')
 				.joinpath(self.type)
 		)
@@ -13,7 +13,7 @@ class ImageProcessorOffering(ImageProcessorBase):
 	@property
 	def path_background_template_base(self):
 		return (
-			ROOT_DIRECTORY.TEMPLATE.full_path
+			RESOURCE_DIRECTORY.TEMPLATE.full_path
 				.joinpath('offerings')
 		)
 
@@ -26,5 +26,5 @@ class ImageProcessorOffering(ImageProcessorBase):
 
 		type = str(type)
 
-		assert OFFERING_TYPE.any_matching(type), "Invalid offering type"
+		assert OFFERING_TYPE.any_matching(type), f'Invalid offering type \'{type}\''
 		self.type = type

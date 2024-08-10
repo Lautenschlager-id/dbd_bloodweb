@@ -5,7 +5,7 @@ import os
 import re
 
 from .ImageMagickWrapper import ImageMagickWrapper
-from utils.enums import ROOT_DIRECTORY, FILE_EXTENSION
+from utils.enums import RESOURCE_DIRECTORY, FILE_EXTENSION
 
 class ImageProcessorBase(ABC):
 	RE_TEMPLATE_ID = re.compile(r'template_(\d)')
@@ -13,6 +13,18 @@ class ImageProcessorBase(ABC):
 	@property
 	@abstractmethod
 	def path_resource_icon_base(self): pass
+
+	@property
+	def path_resource_icon_processed(self):
+		path = self.path_resource_icon_base
+
+		if self.apply_resources_from_one_template_to_all_templates is True:
+			path = path.parent
+
+		return str(path).replace(
+			RESOURCE_DIRECTORY.RAW_RESOURCE.value,
+			RESOURCE_DIRECTORY.PROCESSED_RESOURCE.value
+		)
 
 	@property
 	@abstractmethod
@@ -135,8 +147,8 @@ class ImageProcessorBase(ABC):
 		self._start_processed_resource_directory(path_resource_icon)
 
 		output_path = str(path_resource_icon).replace(
-			ROOT_DIRECTORY.RAW_RESOURCE.value,
-			ROOT_DIRECTORY.PROCESSED_RESOURCE.value
+			RESOURCE_DIRECTORY.RAW_RESOURCE.value,
+			RESOURCE_DIRECTORY.PROCESSED_RESOURCE.value
 		).replace(
 			FILE_EXTENSION.RAW_RESOURCE.value,
 			FILE_EXTENSION.PROCESSED_RESOURCE.value
@@ -146,7 +158,7 @@ class ImageProcessorBase(ABC):
 
 	def _start_processed_resource_directory(self, path_resource_icon):
 		output_dir = str(path_resource_icon.parent).replace(
-			ROOT_DIRECTORY.RAW_RESOURCE.value,
-			ROOT_DIRECTORY.PROCESSED_RESOURCE.value
+			RESOURCE_DIRECTORY.RAW_RESOURCE.value,
+			RESOURCE_DIRECTORY.PROCESSED_RESOURCE.value
 		)
 		os.makedirs(output_dir, exist_ok=True)

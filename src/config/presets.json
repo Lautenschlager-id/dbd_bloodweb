@@ -1,0 +1,218 @@
+{
+	"survivors": {
+		"match": [
+			"purple item: flashlight",
+			"green item: flashlight",
+			"yellow item: flashlight",
+			"addon: styptic",
+			"green addon: battery",
+			"yellow addon: battery",
+			"brown addon: battery",
+			"purple item: medkit",
+			"purple item: toolbox",
+			"green item: toolbox",
+			"red addon: *",
+			"green item: medkit",
+			"yellow item: aid kit",
+			"offer: bloody party",
+			"offer: escape cake",
+			"offer: ward",
+			"addon: sapphire lens",
+			"addon: halogen",
+			"addon: socket swivels",
+			"map: jigsaw",
+			"map: shattered glasses",
+			"yellow addon: wire spool",
+			"addon: bandages",
+			"addon: cutting wire",
+			"green addon: hacksaw"
+		],
+		"ignore": [
+			"brown item: worn out tools",
+			"brown addon: power bulb",
+			"brown offer: *",
+			"yellow offer: *",
+			"addon: abdominal dressing"
+		]
+	},
+	"nurse": {
+		"match": [
+			"addon: ataxic respiration",
+			"addon: catatonic boys treasure",
+			"offer: bloody party",
+			"offer: ward",
+			["purple offer: oak", 0.758]
+		]
+	},
+	"huntress": {
+		"match": [
+			"purple addon: glowing",
+			"addon: wooden fox",
+			"green addon: rose root",
+			"red addon: head",
+			"green addon: flower",
+			"offer: bloody party",
+			"map: marys letter",
+			"offer: ward",
+			["map: rpd badge", 0.6785],
+			["purple offer: oak", 0.758]
+		],
+		"ignore": [
+			"brown offer: *",
+			"yellow offer: *",
+			"offer: cut coin"
+		]
+	},
+	"shape": {
+		"match": [
+			"red addon: tombstone",
+			"red addon: tuft",
+			"purple addon: scratched mirror",
+			"map: marys letter",
+			"map: shattered glasses",
+			"purple addon: vanity mirror",
+			"purple addon: tombstone piece",
+			"green addon: memorial",
+			"offer: bloody party",
+			"green addon: jewellery box",
+			"offer: ward",
+			["map: rpd badge", 0.6785],
+			"map: jigsaw",
+			["purple offer: oak", 0.758]
+		],
+		"ignore": [
+			"brown offer: *",
+			"yellow offer: *",
+			"offer: cut coin"
+		]
+	},
+	"hag": {
+		"match": [
+			"addon: rusty shackles",
+			"map: marys letter",
+			["addon: scarred hand", 0.8],
+			"addon: mint rag",
+			"addon: swamp orchid necklet",
+			"addon: cracked turtle egg",
+			"addon: dried cicada",
+			["map: rpd badge", 0.6785],
+			"offer: bloody party",
+			"map: jigsaw",
+			["purple offer: oak", 0.758],
+			"offer: ward"
+		],
+		"ignore": [
+			"brown offer: *",
+			"yellow offer: *",
+			"offer: cut coin"
+		]
+	},
+	"doctor": {
+		"match": [
+			"purple addon: discipline",
+			["green addon: discipline", 0.88],
+			"red addon: queen",
+			"red addon: king",
+			"offer: bloody party",
+			"offer: ward",
+			["purple offer: oak", 0.758]
+		],
+		"ignore": [
+			"brown offer: *",
+			"yellow offer: *",
+			"offer: cut coin"
+		]
+	},
+	"clown": {
+		"match": [
+			"addon: cigar box",
+			"red addon: redhead",
+			"addon: flask of bleach",
+			"purple addon: gin bottle",
+			"offer: bloody party",
+			"offer: ward",
+			["purple offer: oak", 0.758]
+		],
+		"ignore": [
+			"brown offer: *",
+			"yellow offer: *",
+			"offer: cut coin"
+		]
+	},
+	"nightmare": {
+		"match": [
+			"red addon: brush",
+			"red addon: box",
+			"purple addon: pill bottle",
+			"map: jigsaw",
+			["map: rpd badge", 0.672],
+			"offer: bloody party",
+			"offer: ward",
+			["purple offer: oak", 0.758]
+		],
+		"ignore": [
+			"brown offer: *",
+			"yellow offer: *",
+			"offer: cut coin",
+			"map: cookbook"
+		]
+	},
+	"twins": {
+		"match": [
+			"red addon: cloth",
+			"addon: forest stew",
+			"red addon: pendant",
+			"addon: spinning top",
+			"addon: perfume",
+			"addon: rattle",
+			"offer: bloody party",
+			"map: jigsaw",
+			"offer: ward",
+			["map: rpd badge", 0.672],
+			"map: marys letter",
+			["purple offer: oak", 0.758]
+		],
+		"ignore": [
+			"brown offer: *",
+			"yellow offer: *",
+			"offer: cut coin",
+			"addon: tiny fingernail",
+			"map: cookbook"
+		]
+	},
+	"artist": {
+		"match": [
+			"addon: hands",
+			"red addon: rot",
+			"addon: grief",
+			"addon: bell",
+			"offer: bloody party",
+			"red offer: mori",
+			"offer: ward",
+			["purple offer: oak", 0.758]
+		],
+		"ignore": [
+			"brown offer: *",
+			"yellow offer: *",
+			"offer: cut coin"
+		]
+	},
+	"dredge": {
+		"match": [
+			"addon: lavalier",
+			"addon: boat key",
+			"red addon: wooden",
+			"addon: doll",
+			"addon: skull",
+			"offer: bloody party",
+			"red offer: mori",
+			"offer: ward",
+			["purple offer: oak", 0.758]
+		],
+		"ignore": [
+			"brown offer: *",
+			"yellow offer: *",
+			"offer: cut coin"
+		]
+	}
+}
