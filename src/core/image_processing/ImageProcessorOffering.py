@@ -6,7 +6,7 @@ class ImageProcessorOffering(ImageProcessorBase):
 	def path_resource_icon_base(self):
 		return (
 			RESOURCE_DIRECTORY.RAW_RESOURCE.full_path
-				.joinpath('offerings')
+				.joinpath('offering')
 				.joinpath(self.type)
 		)
 
@@ -14,7 +14,7 @@ class ImageProcessorOffering(ImageProcessorBase):
 	def path_background_template_base(self):
 		return (
 			RESOURCE_DIRECTORY.TEMPLATE.full_path
-				.joinpath('offerings')
+				.joinpath('offering')
 		)
 
 	@property

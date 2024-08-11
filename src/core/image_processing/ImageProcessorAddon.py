@@ -8,7 +8,7 @@ class ImageProcessorAddon(ImageProcessorBase):
 	def path_resource_icon_base(self):
 		path = (
 			RESOURCE_DIRECTORY.RAW_RESOURCE.full_path
-				.joinpath('addons')
+				.joinpath('addon')
 				.joinpath(self.type)
 		)
 
@@ -21,7 +21,7 @@ class ImageProcessorAddon(ImageProcessorBase):
 	def path_background_template_base(self):
 		return (
 			RESOURCE_DIRECTORY.TEMPLATE.full_path
-				.joinpath('items')
+				.joinpath('item')
 		)
 
 	@property
@@ -32,8 +32,8 @@ class ImageProcessorAddon(ImageProcessorBase):
 	def path_side_icon_template_base(self):
 		return (
 			RESOURCE_DIRECTORY.TEMPLATE.full_path
-				.joinpath('addons')
-				.joinpath('additional')
+				.joinpath('addon')
+				.joinpath('side')
 		)
 
 	@property

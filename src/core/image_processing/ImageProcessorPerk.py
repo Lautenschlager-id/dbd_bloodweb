@@ -8,7 +8,7 @@ class ImageProcessorPerk(ImageProcessorBase):
 	def path_resource_icon_base(self):
 		return (
 			RESOURCE_DIRECTORY.RAW_RESOURCE.full_path
-				.joinpath('perks')
+				.joinpath('perk')
 				.joinpath(self.type)
 				.joinpath(self.template_with_all_icon_resources)
 		)
@@ -17,7 +17,7 @@ class ImageProcessorPerk(ImageProcessorBase):
 	def path_background_template_base(self):
 		return (
 			RESOURCE_DIRECTORY.TEMPLATE.full_path
-				.joinpath('perks')
+				.joinpath('perk')
 		)
 
 	@property
@@ -28,7 +28,7 @@ class ImageProcessorPerk(ImageProcessorBase):
 	def path_side_icon_template_base(self):
 		return (
 			self.path_background_template_base
-				.joinpath('additional')
+				.joinpath('side')
 		)
 
 	@property

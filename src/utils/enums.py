@@ -26,9 +26,9 @@ class CustomEnum(Enum):
 
 class RESOURCE_DIRECTORY(CustomEnum):
 	PROCESSED_RESOURCE = '\\processed\\'
-	RAW_RESOURCE = '\\originals\\'
-	ROOT = '.\\..\\images'
-	TEMPLATE = '\\templates\\'
+	RAW_RESOURCE = '\\original\\'
+	ROOT = '.\\..\\image'
+	TEMPLATE = '\\template\\'
 
 	@property
 	def full_path(self):
@@ -48,17 +48,17 @@ class FILE_EXTENSION(CustomEnum):
 
 class OFFERING_TYPE(CustomEnum):
 	ALL = 'all'
-	KILLER = 'killers'
-	SURVIVOR = 'survivors'
+	KILLER = 'killer'
+	SURVIVOR = 'survivor'
 
 
 class PERK_TYPE(CustomEnum):
-	KILLER = 'killers'
-	SURVIVOR = 'survivors'
+	KILLER = 'killer'
+	SURVIVOR = 'survivor'
 
 class ADDON_TYPE(CustomEnum):
-	KILLER = 'killers'
-	SURVIVOR = 'survivors'
+	KILLER = 'killer'
+	SURVIVOR = 'survivor'
 
 class IMAGE_PROCESSING_PARAMETER(CustomEnum):
 	all = 'Process all images'
