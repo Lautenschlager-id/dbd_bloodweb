@@ -14,6 +14,7 @@ from utils.logger import logger
 class BloodwebHandler:
 	_initialized = False
 
+	has_bloodweb_level_controller = None
 	RE_BLOODWEB_LEVEL = re.compile(r'BLOODWEB LEVEL (\d+)', re.IGNORECASE)
 
 	strategy_lambda = None
@@ -49,6 +50,12 @@ class BloodwebHandler:
 
 		cls.average_distance_between_two_nodes = math.sqrt( 2 * ((85 // 2) ** 2) )
 
+		if SETTINGS.get('use_bloodweb_level_controller') is False:
+			pass_fn = lambda *_: None
+			cls.get_bloodweb_level = pass_fn
+			cls._check_bloodweb_level_metadata = pass_fn
+			cls._set_bloodweb_level_metadata = pass_fn
+
 	def __new__(cls, *args, **kwargs):
 		if cls._initialized is False:
 			cls._initialized = True
@@ -83,7 +90,7 @@ class BloodwebHandler:
 	def grind_once(self, iteration):
 		result_directory = create_directory(
 			logger.get_result_folder(),
-			iteration
+			f'{iteration:03d}'
 		)
 
 		(screenshot_path, _) = self.region_bloodweb.take_screenshot(result_directory)
@@ -167,7 +174,6 @@ class BloodwebHandler:
 		sleep(4.5)
 		self._check_bloodweb_level_metadata()
 
-
 	def get_bloodweb_level(self):
 		logger.log('\n')
 
@@ -198,6 +204,7 @@ class BloodwebHandler:
 		self.nodes = nodes
 
 	def _click(self, x, y):
+		return
 		# sometimes the bloodweb doesn't handle the click, thus clicking thrice to guarantee
 		for _ in range(3):
 			pyautogui.mouseDown(x, y)

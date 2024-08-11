@@ -1,9 +1,14 @@
 {
 	"default_matching_threshold": 0.75,
 	"default_ignore_threshold": 0.78,
+
 	"grind_strategy": "default",
+	"use_bloodweb_level_controller": false,
+
 	"disable_addon_grinding": false,
 	"disable_item_grinding": false,
 	"disable_offering_grinding": false,
-	"disable_perk_grinding": false
+	"disable_perk_grinding": false,
+
+	"log_ignored_matches": false
 }

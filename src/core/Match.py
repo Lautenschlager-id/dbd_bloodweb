@@ -1,5 +1,6 @@
 import cv2
 
+from config.ConfigLoader import SETTINGS
 from utils.enums import PAINT
 from utils.logger import logger
 
@@ -35,7 +36,7 @@ class Match:
 				f'with threshold [{self.match_threshold:.5f}] '
 				+ position
 			)
-		else:
+		elif SETTINGS.get('log_ignored_matches'):
 			logger.log(
 				f'\tIgnored \'{self.resource.path.name}\' '
 				+ position
