@@ -9,6 +9,10 @@ class CommandHandlerGrind(CommandHandlerBase):
 	def help(self):
 		if self.args: return False
 
+		print('=> Identifies preset nodes and grinds them on the current bloodweb.')
+
+		print('\n')
+
 		print('Syntax:'
 			'\n\t--run <preset>')
 

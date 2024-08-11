@@ -21,6 +21,8 @@ class BloodwebHandler:
 
 	average_distance_between_two_nodes = None
 
+	maximum_prestiges = -1
+
 	grind_strategy = {
 		GRIND_STRATEGY.PRIORITY_THEN_CLOSER_TO_CENTER.value: lambda match, distance_fn: (
 			-match.resource.priority,
@@ -55,6 +57,11 @@ class BloodwebHandler:
 			cls.get_bloodweb_level = pass_fn
 			cls._check_bloodweb_level_metadata = pass_fn
 			cls._set_bloodweb_level_metadata = pass_fn
+
+	@classmethod
+	def set_maximum_prestiges(cls, maximum_prestiges):
+		logger.log(f'Set maximum prestiges on this run to \'{maximum_prestiges}\'')
+		cls.maximum_prestiges = maximum_prestiges
 
 	def __new__(cls, *args, **kwargs):
 		if cls._initialized is False:
@@ -164,11 +171,18 @@ class BloodwebHandler:
 
 		self._click(center_x, center_y)
 
-		if self.captured_bloodweb_level == 50 and level_up is False:
-			sleep(3.5)
-			# clicks twice in the center, one to grind, one to level_up
-			self.click_next_bloodweb(level_up=True)
-			return
+		if self.captured_bloodweb_level == 50:
+			if level_up is False:
+				sleep(3.5)
+				# clicks twice in the center, one to grind, one to level_up
+				self.click_next_bloodweb(level_up=True)
+				return
+
+			else:
+				self.maximum_prestiges -= 1
+				if self.maximum_prestiges == 0:
+					logger.log('\nSystem has hit the set maximum prestiges.')
+					exit()
 
 		sleep(4.5)
 		self._check_bloodweb_level_metadata()

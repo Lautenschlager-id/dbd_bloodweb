@@ -26,7 +26,7 @@ class ConfigLoader(ABC):
 			except Exception as exception:
 				logger.log(f'Invalid JSON at \'{self.config_path}\':')
 				logger.log(exception)
-				raise
+				exit()
 
 			self._data = data
 

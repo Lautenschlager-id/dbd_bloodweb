@@ -125,6 +125,10 @@ class CommandHandlerImage(CommandHandlerBase):
 	def help(self):
 		if self.args: return False
 
+		print('=> Process raw images to be used in the grinding system.')
+
+		print('\n')
+
 		print('Syntax:'
 			'\n\t--image <type>'
 			'\n\t--image <type> <target>'

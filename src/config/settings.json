@@ -3,7 +3,7 @@
 	"default_ignore_threshold": 0.78,
 
 	"grind_strategy": "default",
-	"use_bloodweb_level_controller": false,
+	"use_bloodweb_level_controller": true,
 
 	"disable_addon_grinding": false,
 	"disable_item_grinding": false,
