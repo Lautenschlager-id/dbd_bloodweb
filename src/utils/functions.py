@@ -1,5 +1,6 @@
 from datetime import datetime
 import os
+import pyautogui
 
 from core.image_processing.ImageProcessorAddon import ImageProcessorAddon
 from .enums import ADDON_TYPE
@@ -17,10 +18,19 @@ def get_list_value(array, index, default=None):
 	except:
 		return default
 
+def create_directory(parent_directory, directory_name):
+	directory = f'{parent_directory}\\{directory_name}'
+	os.makedirs(directory, exist_ok=True)
+	return directory
+
 def create_timestamp_directory(parent_directory):
-    timestamp = datetime.now().strftime('%Y-%m-%dT%H-%M-%S.%f')
+	timestamp = datetime.now().strftime('%Y-%m-%dT%H-%M-%S.%f')
+	return create_directory(parent_directory, f'00_TEST_{timestamp}')
 
-    timestamp_directory = f'{parent_directory}/00_TEST_{timestamp}/'
-    os.makedirs(timestamp_directory, exist_ok=True)
+def take_screenshot(region=None, save_path=None):
+	screenshot = pyautogui.screenshot(region=region)
 
-    return timestamp_directory
+	if save_path is not None:
+		screenshot.save(save_path)
+
+	return (save_path, screenshot)

@@ -23,6 +23,10 @@ class Logger:
 
         logging.getLogger().addHandler(logging.StreamHandler())
 
+    @classmethod
+    def get_result_folder(cls):
+        return cls._result_folder
+
     def __init__(self):
         self.logger = logging.getLogger()
 

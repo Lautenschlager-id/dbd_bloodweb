@@ -12,10 +12,10 @@ class Resource:
     ):
         self.path = Path(path)
 
-        gray_image = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
+        grayed_image = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
 
-        self.width, self.height = gray_image.shape[::-1]
-        self.template = gray_image
+        self.width, self.height = grayed_image.shape[::-1]
+        self.grayed_image = grayed_image
 
         self.priority = priority
         self.ignore = ignore

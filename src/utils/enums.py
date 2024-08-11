@@ -85,3 +85,19 @@ class LOG(CustomEnum):
 	FILENAME = 'logs.txt'
 	FORMATTING = '%(asctime)s: %(message)s'
 	ROOT_DIRECTORY = '.\\..\\result'
+
+class REGION_BLOODWEB(CustomEnum):
+	NAME = 'Bloodweb Nodes'
+	FILENAME = '\\bloodweb.png'
+
+class REGION_LEVEL(CustomEnum):
+	NAME = 'Bloodweb Level'
+	FILENAME = None
+
+class PAINT(CustomEnum):
+	GREEN = (0, 255, 0)
+	RED = (0, 0, 255)
+	THICKNESS = 2
+
+class MATCH(CustomEnum):
+	FILENAME = '\\match_result.png'

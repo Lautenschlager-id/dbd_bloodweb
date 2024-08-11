@@ -1,5 +1,7 @@
 from .CommandHandlerBase import CommandHandlerBase
 from config.ConfigLoader import PRESETS
+from core.BloodwebHandler import BloodwebHandler
+from core.ImageMatcher import ImageMatcher
 from core.ResourceHandler import ResourceHandler
 from utils.enums import IMAGE_PROCESSING_PARAMETER_TARGET
 
@@ -42,4 +44,7 @@ class CommandHandlerGrind(CommandHandlerBase):
 		if sanitized_arg is None: return
 
 		resources = ResourceHandler(*sanitized_arg).initialize()
+		ImageMatcher.set_resources(resources)
 
+		bloodweb = BloodwebHandler()
+		bloodweb.grind()

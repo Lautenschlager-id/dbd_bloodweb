@@ -1,5 +1,5 @@
 {
-	"survivors": {
+	"survivor": {
 		"match": [
 			"purple item: flashlight",
 			"green item: flashlight",
@@ -17,11 +17,12 @@
 			"offer: bloody party",
 			"offer: escape cake",
 			"offer: ward",
+			"map: jigsaw",
+			"map: shattered glasses",
+			"purple offer: oak",
 			"addon: sapphire lens",
 			"addon: halogen",
 			"addon: socket swivels",
-			"map: jigsaw",
-			"map: shattered glasses",
 			"yellow addon: wire spool",
 			"addon: bandages",
 			"addon: cutting wire",
