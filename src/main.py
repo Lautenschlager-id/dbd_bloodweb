@@ -3,7 +3,6 @@ from argparse import ArgumentParser
 from core.command_handling.CommandHandlerImage import CommandHandlerImage
 from core.command_handling.CommandHandlerGrind import CommandHandlerGrind
 
-from core.ResourceHandler import ResourceHandler
 
 def capture_command_arguments():
 	parser = ArgumentParser()
@@ -17,6 +16,7 @@ def capture_command_arguments():
 	parser.add_argument(
 		'-r', '--run',
 		type=str,
+		nargs='*',
 		help='Target for the blodweeb grinding. E.g.: -r survivor, -r trapper'
 	)
 	#parser.add_argument('--noskip', action='store_true', help='Disables bloodweb level detection.')
@@ -30,8 +30,3 @@ if __name__ == '__main__':
 		CommandHandlerImage(args.image).run()
 	elif args.run is not None:
 		CommandHandlerGrind(args.run).run()
-
-
-	x = ResourceHandler('killers', 'nurse').initialize()
-	print(x)
-

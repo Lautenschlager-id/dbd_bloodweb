@@ -16,5 +16,10 @@ class ConfigLoader:
 	def get(self, config):
 		return self._data.get(config, None)
 
+	def list_keys(self, div='\n\t'):
+		keys = list(self._data.keys())
+		keys.sort()
+		return div.join(keys)
+
 SETTINGS = ConfigLoader(CONFIG_DIRECTORY.SETTING.full_path).load()
 PRESETS = ConfigLoader(CONFIG_DIRECTORY.PRESET.full_path).load()

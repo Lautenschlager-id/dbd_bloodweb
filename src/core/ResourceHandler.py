@@ -20,7 +20,7 @@ class ResourceHandler:
 	def __init__(self, type, killer_name=None, preset_name=None):
 		self.type = type
 		self.killer_name = killer_name
-		self.preset_name = preset_name
+		self.preset_name = preset_name # todo
 
 		self.is_survivor = type in [
 			ADDON_TYPE.SURVIVOR.value,
