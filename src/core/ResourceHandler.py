@@ -6,7 +6,8 @@ from .image_processing.ImageProcessorOffering import ImageProcessorOffering
 from .image_processing.ImageProcessorPerk import ImageProcessorPerk
 from .MatchingListTextProcessor import MatchingListTextProcessor
 from .Resource import Resource
-from config.ConfigLoader import PRESETS, SETTINGS
+from config.ConfigLoaderPresets import PRESETS
+from config.ConfigLoaderSettings import SETTINGS
 from utils.logger import logger
 from utils.enums import (
 	ADDON_TYPE,

@@ -1,7 +1,7 @@
 import cv2
 from pathlib import Path
 
-from config.ConfigLoader import SETTINGS
+from config.ConfigLoaderSettings import SETTINGS
 
 class Resource:
     def __init__(self,

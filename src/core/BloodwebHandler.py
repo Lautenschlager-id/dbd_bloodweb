@@ -5,7 +5,7 @@ import re
 from time import sleep
 
 from .ImageMatcher import ImageMatcher
-from config.ConfigLoader import SETTINGS
+from config.ConfigLoaderSettings import SETTINGS
 from utils.CoordinateController import CoordinateController
 from utils.enums import GRIND_STRATEGY, REGION_BLOODWEB, REGION_LEVEL
 from utils.functions import create_directory
@@ -94,7 +94,6 @@ class BloodwebHandler:
 		)
 
 		(screenshot_path, _) = self.region_bloodweb.take_screenshot(result_directory)
-		#screenshot_path = '.\\..\\result\\00_TEST_2024-08-11T02-45-02.877825\\1\\bloodweb.png'
 
 		matched_bloodweb_nodes = ImageMatcher(
 			image_source=screenshot_path,

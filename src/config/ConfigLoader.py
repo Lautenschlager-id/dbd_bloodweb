@@ -1,15 +1,34 @@
+from abc import ABC, abstractmethod
 import json
 
-from utils.enums import CONFIG_DIRECTORY
+from utils.logger import logger
+from utils.functions import jsonschema_with_default
 
-class ConfigLoader:
-	def __init__(self, config_path):
-		self.config_path = config_path
+class ConfigLoader(ABC):
+	@property
+	@abstractmethod
+	def config_path(self): pass
+
+	@property
+	@abstractmethod
+	def data_schema(self): pass
+
+	def __init__(self):
 		self._data = None
+		self.load()
 
 	def load(self):
 		with open(self.config_path, 'r') as file:
-			self._data = json.load(file)
+			data = json.load(file)
+
+			try:
+				jsonschema_with_default(self.data_schema).validate(data)
+			except Exception as exception:
+				logger.log(f'Invalid JSON at \'{self.config_path}\':')
+				logger.log(exception)
+				raise
+
+			self._data = data
 
 		return self
 
@@ -20,6 +39,3 @@ class ConfigLoader:
 		keys = list(self._data.keys())
 		keys.sort()
 		return div.join(keys)
-
-SETTINGS = ConfigLoader(CONFIG_DIRECTORY.SETTING.full_path).load()
-PRESETS = ConfigLoader(CONFIG_DIRECTORY.PRESET.full_path).load()

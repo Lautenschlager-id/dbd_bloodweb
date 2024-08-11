@@ -1,5 +1,5 @@
 from .CommandHandlerBase import CommandHandlerBase
-from config.ConfigLoader import PRESETS
+from config.ConfigLoaderPresets import PRESETS
 from core.BloodwebHandler import BloodwebHandler
 from core.ImageMatcher import ImageMatcher
 from core.ResourceHandler import ResourceHandler

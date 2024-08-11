@@ -82,7 +82,7 @@ class CONFIG_DIRECTORY(CustomEnum):
 		return Path(f'{self.ROOT.value}{self.value}')
 
 class LOG(CustomEnum):
-	FILENAME = 'logs.txt'
+	FILENAME = '\\logs.txt'
 	FORMATTING = '%(asctime)s: %(message)s'
 	ROOT_DIRECTORY = '.\\..\\result'
 

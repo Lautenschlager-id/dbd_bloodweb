@@ -1,4 +1,5 @@
 from datetime import datetime
+import jsonschema
 import os
 import pyautogui
 
@@ -25,7 +26,7 @@ def create_directory(parent_directory, directory_name):
 
 def create_timestamp_directory(parent_directory):
 	timestamp = datetime.now().strftime('%Y-%m-%dT%H-%M-%S.%f')
-	return create_directory(parent_directory, f'00_TEST_{timestamp}')
+	return create_directory(parent_directory, timestamp)
 
 def take_screenshot(region=None, save_path=None):
 	screenshot = pyautogui.screenshot(region=region)
@@ -34,3 +35,22 @@ def take_screenshot(region=None, save_path=None):
 		screenshot.save(save_path)
 
 	return (save_path, screenshot)
+
+def extend_jsonschema_with_default_fields(validator_class):
+	validate_properties = validator_class.VALIDATORS["properties"]
+
+	def set_defaults(validator, properties, instance, schema):
+		for property, subschema in properties.items():
+			if "default" in subschema:
+				instance.setdefault(property, subschema["default"])
+
+		for error in validate_properties(
+			validator, properties, instance, schema,
+		):
+			yield error
+
+	return jsonschema.validators.extend(
+		validator_class, {"properties" : set_defaults},
+	)
+
+jsonschema_with_default = extend_jsonschema_with_default_fields(jsonschema.Draft202012Validator)

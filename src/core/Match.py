@@ -1,6 +1,6 @@
 import cv2
 
-from config.ConfigLoader import SETTINGS
+from config.ConfigLoaderSettings import SETTINGS
 from utils.enums import PAINT
 from utils.logger import logger
 
