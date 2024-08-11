@@ -7,6 +7,7 @@ from .image_processing.ImageProcessorPerk import ImageProcessorPerk
 from .MatchingListTextProcessor import MatchingListTextProcessor
 from .Resource import Resource
 from config.ConfigLoader import PRESETS, SETTINGS
+from utils.logger import logger
 from utils.enums import (
 	ADDON_TYPE,
 	FILE_EXTENSION,
@@ -35,14 +36,17 @@ class ResourceHandler:
 		self.ignore_list = None
 
 	def initialize(self):
-		#logger.info('Selecting templates:')
+		logger.log('Selecting templates:')
+
 		self._set_processed_paths()
 		self._set_presets()
 		self._set_resources_based_on_presets()
-		#templates.sort(key=lambda template: template.priority)
-		#logger.info('\n')
-		#for template in templates:
-		#    logger.info(f'\t{str(template)}')
+
+		self.resources.sort(key=lambda resource: resource.priority)
+		logger.log('\n')
+		for resource in self.resources:
+		    logger.log(f'\t{str(resource)}')
+
 		return self.resources
 
 	def _set_processed_paths(self):

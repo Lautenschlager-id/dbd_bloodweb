@@ -80,3 +80,8 @@ class CONFIG_DIRECTORY(CustomEnum):
 	@property
 	def full_path(self):
 		return Path(f'{self.ROOT.value}{self.value}')
+
+class LOG(CustomEnum):
+	FILENAME = 'logs.txt'
+	FORMATTING = '%(asctime)s: %(message)s'
+	ROOT_DIRECTORY = '.\\..\\result'

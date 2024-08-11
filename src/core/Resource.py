@@ -29,4 +29,4 @@ class Resource:
         if self.ignore:
             return f'Resource(path={self.path.name}, priority={self.priority}, threshold={self.threshold}, ignore={self.ignore})'
         else:
-            return f'Resource(path={self.path.name}, w={self.width}, h={self.height}, threshold={self.threshold}, priority={self.priority})'
+            return f'Resource(path={self.path.name}, width={self.width}, height={self.height}, threshold={self.threshold}, priority={self.priority})'
