@@ -112,10 +112,14 @@ class CommandHandlerImage(CommandHandlerBase):
 			)
 		}
 
+	@classmethod
+	def initialize(cls):
+		cls.complete_class_mapping()
+
 	def __new__(cls, *args, **kwargs):
 		if cls._initialized is False:
 			cls._initialized = True
-			cls.complete_class_mapping()
+			cls.initialize()
 		return super().__new__(cls)
 
 	def help(self):

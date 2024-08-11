@@ -1,3 +1,5 @@
+import math
+
 from .functions import take_screenshot
 from .logger import logger
 
@@ -29,6 +31,24 @@ class CoordinateController:
 			self.y,
 			self.width,
 			self.height
+		)
+
+	def get_center_as_region(self):
+		return (
+			self.center_x,
+			self.center_y
+		)
+
+	def get_distance_from_center(self, x, y):
+		return math.sqrt(
+			(self.center_x - x) ** 2
+			+ (self.center_y - y) ** 2
+		)
+
+	def get_absolute_coordinate(self, x, y):
+		return (
+			self.x + x,
+			self.y + y
 		)
 
 	def take_screenshot(self, save_directory=None):

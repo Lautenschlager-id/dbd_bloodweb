@@ -13,10 +13,15 @@ class Match:
 		image_source
 	):
 		self.resource = resource
+
 		self.x1 = x1
 		self.y1 = y1
 		self.x2 = x2
 		self.y2 = y2
+
+		self.center_x = (x1 + x2) / 2
+		self.center_y = (y1 + y2) / 2
+
 		self.match_threshold = match_threshold
 		self.ignore = ignore
 		self.image_source = image_source

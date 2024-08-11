@@ -73,7 +73,7 @@ class ImageMatcher:
 
 		for resource in self.resources:
 			thread = threading.Thread(
-				target=self.match_with_resource_v2,
+				target=self.match_with_resource,
 				args=(resource, matched_locations, lock)
 			)
 			threads.append(thread)

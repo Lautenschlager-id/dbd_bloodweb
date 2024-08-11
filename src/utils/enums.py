@@ -101,3 +101,11 @@ class PAINT(CustomEnum):
 
 class MATCH(CustomEnum):
 	FILENAME = '\\match_result.png'
+
+class GRIND_STRATEGY(CustomEnum):
+	DEFAULT = 'default'
+	DISTANCE_CLOSER = 'distance_closer'
+	DISTANCE_FURTHER = 'distance_further'
+	PRIORITY = 'priority'
+	PRIORITY_THEN_CLOSER_TO_CENTER = 'priority_then_closer_to_center'
+	PRIORITY_THEN_FURTHER_TO_CENTER = 'priority_then_further_to_center'
