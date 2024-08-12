@@ -45,7 +45,7 @@ class ImageMagickWrapper:
 		commands = ' | '.join(self.command_list)
 
 		command_to_execute = f'{commands} > "{output_path}"'
-		#subprocess.call(command_to_execute, shell=True)
+		subprocess.call(command_to_execute, shell=True)
 
 		self.command_list = []
 

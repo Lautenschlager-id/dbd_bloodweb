@@ -114,7 +114,12 @@ class ImageProcessorBase(ABC):
 				try:
 					result = future.result()
 				except Exception as exception:
-					print(f'Threaded task generated an exception: {exception}')
+					logger.log(
+						'Threaded task generated an exception: %s'
+						, exception
+					)
+
+		logger.log('\t=> Processed all images!')
 
 	def _evaluate_custom_resource_icon_template(self,
 		path_resource_icon,
