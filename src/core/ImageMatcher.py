@@ -4,12 +4,14 @@ import threading
 
 from .Match import Match
 from utils.enums import MATCH
+from utils.logger import logger
 
 class ImageMatcher:
 	resources = None
 
 	@classmethod
 	def set_resources(cls, resources):
+		logger.log('\n[match] Resources received!')
 		cls.resources = resources
 
 	def __init__(self, image_source, result_directory):
@@ -66,6 +68,8 @@ class ImageMatcher:
 			matched_locations.extend(local_matched_locations)
 
 	def match_with_all_resources(self):
+		logger.log('\n\t[match] Matching all resources')
+
 		matched_locations = []
 
 		lock = threading.Lock()
@@ -82,13 +86,17 @@ class ImageMatcher:
 		for thread in threads:
 			thread.join()
 
+		logger.log('\t\t>> [')
+
 		matched_locations_no_ignore = []
 		for match in matched_locations:
-			match.log()
+			match.log(log_level=3)
 			match.paint()
 
 			if not match.ignore:
 				matched_locations_no_ignore.append(match)
+
+		logger.log('\t\t>> ]')
 
 		cv2.imwrite(self.result_directory + MATCH.FILENAME.value, self.image_source)
 

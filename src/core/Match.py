@@ -27,19 +27,18 @@ class Match:
 		self.ignore = ignore
 		self.image_source = image_source
 
-	def log(self):
-		position = f'at [({self.x1}, {self.y1}), ({self.x2}, {self.y2})]'
+	def __str__(self):
+		if self.ignore:
+			return f'IgnoredMatch(name={self.resource.path.name}, position=[({self.x1}, {self.y1}), ({self.x2}, {self.y2})])'
+		else:
+			return f'Match(name={self.resource.path.name}, threshold={self.match_threshold:.5f}, position=[({self.x1}, {self.y1}), ({self.x2}, {self.y2})])'
 
-		if not self.ignore:
+	def log(self, log_level=1):
+		if not self.ignore or SETTINGS.get('log_ignored_matches'):
 			logger.log(
-				f'\tFound \'{self.resource.path.name}\' '
-				f'with threshold [{self.match_threshold:.5f}] '
-				+ position
-			)
-		elif SETTINGS.get('log_ignored_matches'):
-			logger.log(
-				f'\tIgnored \'{self.resource.path.name}\' '
-				+ position
+				'%s%s'
+				, '\t' * log_level,
+				str(self)
 			)
 
 	def paint(self):

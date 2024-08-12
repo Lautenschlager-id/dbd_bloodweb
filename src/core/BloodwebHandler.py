@@ -95,6 +95,11 @@ class BloodwebHandler:
 		self.get_bloodweb_level_after_x_levels = 0
 
 	def grind_once(self, iteration):
+		logger.log(
+			'\n[bloodweb] Grinding on iteration <%s>'
+			, iteration
+		)
+
 		result_directory = create_directory(
 			logger.get_result_folder(),
 			f'{iteration:03d}'
@@ -116,7 +121,7 @@ class BloodwebHandler:
 		self.click_all_nodes()
 
 	def grind(self):
-		logger.log('\n')
+		logger.log('\n[bloodweb] Initializing grinding system')
 
 		iteration = 0
 
@@ -125,8 +130,6 @@ class BloodwebHandler:
 
 		while True:
 			iteration += 1
-
-			logger.log('\n')
 			self.grind_once(iteration)
 
 	def click_all_nodes(self):
@@ -188,7 +191,7 @@ class BloodwebHandler:
 		self._check_bloodweb_level_metadata()
 
 	def get_bloodweb_level(self):
-		logger.log('\n')
+		logger.log('\n[bloodweb] Capturing bloodweb level:')
 
 		captured = False
 		while not captured:
@@ -200,9 +203,12 @@ class BloodwebHandler:
 				captured = True
 			except:
 				# if any error ocurred, especially on captured_level, then try again
-				pass
+				sleep(0.500)
 
-		logger.log(f'\t=> Identified current bloodweb level: {captured_level}')
+		logger.log(
+			'\t=> Identified current level: %s'
+			, captured_level
+		)
 
 		self.captured_bloodweb_level = captured_level
 		self._set_bloodweb_level_metadata()
@@ -231,7 +237,6 @@ class BloodwebHandler:
 	def _check_bloodweb_level_metadata(self):
 		if self.get_bloodweb_level_after_x_levels <= 0:
 			self.get_bloodweb_level()
-			self._set_bloodweb_level_metadata()
 		else:
 			self.skip_x_bloodweb_levels -= 1
 			self.get_bloodweb_level_after_x_levels -= 1
@@ -268,4 +273,13 @@ class BloodwebHandler:
 			# checks that after grinding lvl 9, the next lvl is 10
 			self.get_bloodweb_level_after_x_levels = self.skip_x_bloodweb_levels - 1 # (10-9)=1-1=0
 
+		if self.skip_x_bloodweb_levels > 0:
+			logger.log(
+				'\t=> Skipping the next <%s> levels'
+				, self.skip_x_bloodweb_levels
+			)
 
+		logger.log(
+			'\t=> Bloodweb level will be captured again after <%s> levels'
+			, self.get_bloodweb_level_after_x_levels
+		)

@@ -51,8 +51,12 @@ class CoordinateController:
 			self.y + y
 		)
 
-	def take_screenshot(self, save_directory=None):
-		logger.log(f'Taking screenshot: {self.name}')
+	def take_screenshot(self, save_directory=None, log_level=1):
+		logger.log(
+			'%s>> Taking screenshot of \'%s\''
+			, '\t' * log_level,
+			self.name
+		)
 
 		save_directory = (
 			save_directory + self.filename

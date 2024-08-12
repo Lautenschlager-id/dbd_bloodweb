@@ -8,7 +8,6 @@ from .MatchingListTextProcessor import MatchingListTextProcessor
 from .Resource import Resource
 from config.ConfigLoaderPresets import PRESETS
 from config.ConfigLoaderSettings import SETTINGS
-from utils.logger import logger
 from utils.enums import (
 	ADDON_TYPE,
 	FILE_EXTENSION,
@@ -17,6 +16,7 @@ from utils.enums import (
 	OFFERING_TYPE,
 	PERK_TYPE
 )
+from utils.logger import logger
 
 class ResourceHandler:
 	def __init__(self, type, killer_name=None, preset_name=None):
@@ -37,16 +37,29 @@ class ResourceHandler:
 		self.ignore_list = None
 
 	def initialize(self):
-		logger.log('Selecting templates:')
-
 		self._set_processed_paths()
+
+		logger.log(
+			'\n[resource] Selected resources for preset <%s, %s>:'
+			, self.type,
+			self.killer_name
+		)
+
 		self._set_presets()
 		self._set_resources_based_on_presets()
 
 		self.resources.sort(key=lambda resource: resource.priority)
-		logger.log('\n')
-		for resource in self.resources:
-		    logger.log(f'\t{str(resource)}')
+		logger.log(
+			'\t>> ['
+			'\n'
+			'\t\t%s'
+			'\n'
+			'\t>> ]'
+			, '\n\t\t'.join([
+				str(resource)
+				for resource in self.resources
+			])
+		)
 
 		return self.resources
 
@@ -83,7 +96,14 @@ class ResourceHandler:
 
 	def _set_presets(self):
 		preset = PRESETS.get(self.preset_name or self.killer_name or self.type)
-		assert preset, f'Missing preset for {self.type}, {self.killer_name}'
+
+		if not preset:
+			logger.log(
+				'\t=> Missing preset for <%s, %s>:'
+				, self.type,
+				self.killer_name
+			)
+			exit()
 
 		match_list = preset['match']
 		ignore_list = preset.get('ignore', [])
@@ -136,6 +156,8 @@ class ResourceHandler:
 		priority=None,
 		ignore=False
 	):
+		should_exit = False
+
 		for index in range(len(preset_list)):
 			preset = preset_list[index]
 
@@ -163,4 +185,12 @@ class ResourceHandler:
 						)
 					)
 
-			assert matched_at_least_once, f'Pattern \'{pattern}\' did not match any resource file'
+			if not matched_at_least_once:
+				logger.log(
+					'\t=> Pattern \'%s\' did not match any resource file'
+					, pattern
+				)
+				should_exit = True
+
+		if should_exit:
+			exit()
