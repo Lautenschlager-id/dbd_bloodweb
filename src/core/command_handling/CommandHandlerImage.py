@@ -67,8 +67,7 @@ class CommandHandlerImage(CommandHandlerBase):
 	@staticmethod
 	def get_help_message():
 		return (
-			'\n'
-			'[cmd] {full_command}: Process raw images to be used in the grinding system.'
+			'{full_command}: Process raw images to be used in the grinding system.'
 			'\n'
 				'\t>> Syntax:'
 					'\n\t\t{full_command} <type>'
@@ -177,13 +176,12 @@ class CommandHandlerImage(CommandHandlerBase):
 
 		arg_type = self.args[0]
 		if not IMAGE_PROCESSING_PARAMETER.any_matching(arg_type, is_key=True):
-			logger.log(
-				'\t=> Bad parameter:\n'
-					'\t\t'
-					'No such <type> \'%s\'. '
-					'Type \'%s\' to learn more.'
-				, arg_type,
-				self.__class__.get_short_command()
+			logger.result('Bad parameter:')
+			logger.detail(
+				'No such <type> \'{}\'. '
+				'Type \'{}\' to learn more.'
+				, arg_type
+				, self.__class__.get_short_command()
 			)
 			return
 
@@ -196,13 +194,12 @@ class CommandHandlerImage(CommandHandlerBase):
 
 		arg_target = get_list_value(self.args, 1, IMAGE_PROCESSING_PARAMETER_TARGET.all.name)
 		if not IMAGE_PROCESSING_PARAMETER_TARGET.any_matching(arg_target, is_key=True):
-			logger.log(
-				'\t=> Bad parameter:\n'
-					'\t\t'
-					'No such <target> \'%s\'. '
-					'Type \'%s\' to learn more.'
-				, arg_target,
-				self.__class__.get_short_command()
+			logger.result('Bad parameter:')
+			logger.detail(
+				'No such <target> \'{}\'. '
+				'Type \'{}\' to learn more.'
+				, arg_target
+				, self.__class__.get_short_command()
 			)
 			return
 
@@ -216,16 +213,16 @@ class CommandHandlerImage(CommandHandlerBase):
 			if arg_killer_name is not None:
 				killers = get_all_killer_names()
 				if arg_killer_name not in killers:
-					logger.log(
-						'\t=> Bad parameter:\n'
-							'\t\t'
-							'No such <killer_name> \'%s\'.'
-						'\n\n'
-							'\t\t'
-							'Available killers:'
-								'\n\t\t\t%s'
-						, arg_killer_name,
-						'\n\t\t\t'.join(killers)
+					logger.result('Bad parameter:')
+					logger.detail(
+						'No such <killer_name> \'{}\'.'
+						, arg_killer_name
+					)
+					logger.detail(
+						'Available killers:'
+							'\n\t\t\t{}'
+						, '\n\t\t\t'.join(killers)
+						, breakline=True
 					)
 					return
 

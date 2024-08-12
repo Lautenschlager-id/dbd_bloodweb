@@ -60,7 +60,11 @@ class BloodwebHandler:
 
 	@classmethod
 	def set_maximum_prestiges(cls, maximum_prestiges):
-		logger.log(f'Set maximum prestiges on this run to \'{maximum_prestiges}\'')
+		logger.init(
+			'bloodweb'
+			, 'Set maximum prestiges on this run to <{}>'
+			, maximum_prestiges
+		)
 		cls.maximum_prestiges = maximum_prestiges
 
 	def __new__(cls, *args, **kwargs):
@@ -95,8 +99,9 @@ class BloodwebHandler:
 		self.get_bloodweb_level_after_x_levels = 0
 
 	def grind_once(self, iteration):
-		logger.log(
-			'\n[bloodweb] Grinding on iteration <%s>'
+		logger.init(
+			'bloodweb'
+			, 'Processing iteration <{}>'
 			, iteration
 		)
 
@@ -121,7 +126,10 @@ class BloodwebHandler:
 		self.click_all_nodes()
 
 	def grind(self):
-		logger.log('\n[bloodweb] Initializing grinding system')
+		logger.init(
+			'bloodweb'
+			, 'Initializing grinding system'
+		)
 
 		iteration = 0
 
@@ -133,8 +141,10 @@ class BloodwebHandler:
 			self.grind_once(iteration)
 
 	def click_all_nodes(self):
-		logger.log('\n')
-		logger.log('Grinding: ')
+		logger.action(
+			'Grinding bloodweb:'
+			, breakline=True
+		)
 
 		while self.nodes:
 			self.click_next_node()
@@ -152,22 +162,30 @@ class BloodwebHandler:
 			node.center_y
 		)
 
-		logger.log(f'\tClicking \'{node.resource.path.name}\' ({click_x}, {click_y})')
-		self._click(click_x, click_y)
-
 		delay_until_next_node = (
 			self.region_bloodweb.get_distance_from_center(click_x, click_y)
 			/ self.average_distance_between_two_nodes
 		) * 0.500
 
+		logger.action(
+			'Clicking on \'{}\' at ({:.0f}, {:.0f}) with delay of ~{:.3f}s'
+			, node.resource.path.name
+			, click_x
+			, click_y
+			, delay_until_next_node
+			, log_level=2
+		)
+		self._click(click_x, click_y)
+
 		# gives enough time for the animations to end
 		sleep(delay_until_next_node)
 
 	def click_next_bloodweb(self, skip=False, level_up=False):
-		logger.log(
-			'\t=> Leveling up to the next prestige level'
+		logger.result(
+			'Leveling up to the next prestige level'
 			if level_up else
-			f'\t=> {"Skipping" if skip else "Moving"} to the next bloodweb'
+			'{} to the next bloodweb'
+			, 'Skipping' if skip else 'Moving'
 		)
 
 		(center_x, center_y) = self.region_bloodweb.get_center_as_region()
@@ -184,14 +202,20 @@ class BloodwebHandler:
 			else:
 				self.maximum_prestiges -= 1
 				if self.maximum_prestiges == 0:
-					logger.log('\nSystem has hit the set maximum prestiges.')
+					logger.init(
+						'limit'
+						, 'System has hit the set maximum prestiges.'
+					)
 					exit()
 
 		sleep(4.5)
 		self._check_bloodweb_level_metadata()
 
 	def get_bloodweb_level(self):
-		logger.log('\n[bloodweb] Capturing bloodweb level:')
+		logger.init(
+			'bloodweb'
+			, 'Capturing bloodweb level:'
+		)
 
 		captured = False
 		while not captured:
@@ -205,8 +229,8 @@ class BloodwebHandler:
 				# if any error ocurred, especially on captured_level, then try again
 				sleep(0.500)
 
-		logger.log(
-			'\t=> Identified current level: %s'
+		logger.result(
+			'Identified current level: {}'
 			, captured_level
 		)
 
@@ -223,7 +247,6 @@ class BloodwebHandler:
 		self.nodes = nodes
 
 	def _click(self, x, y):
-		return
 		# sometimes the bloodweb doesn't handle the click, thus clicking thrice to guarantee
 		for _ in range(3):
 			pyautogui.mouseDown(x, y)
@@ -274,12 +297,12 @@ class BloodwebHandler:
 			self.get_bloodweb_level_after_x_levels = self.skip_x_bloodweb_levels - 1 # (10-9)=1-1=0
 
 		if self.skip_x_bloodweb_levels > 0:
-			logger.log(
-				'\t=> Skipping the next <%s> levels'
+			logger.result(
+				'Skipping the next <{}> levels'
 				, self.skip_x_bloodweb_levels
 			)
 
-		logger.log(
-			'\t=> Bloodweb level will be captured again after <%s> levels'
+		logger.result(
+			'Bloodweb level will be captured again after <{}> levels'
 			, self.get_bloodweb_level_after_x_levels
 		)

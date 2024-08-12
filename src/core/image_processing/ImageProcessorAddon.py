@@ -51,16 +51,17 @@ class ImageProcessorAddon(ImageProcessorBase):
 	def __init__(self, type, killer_name=None):
 		type = str(type)
 
-		logger.log(
-			'\n[image] Initialized %s <%s, %s>'
-			, self.class_name,
-			type,
-			killer_name
+		logger.init(
+			'image'
+			, 'Initialized {} <{}, {}>'
+			, self.class_name
+			, type
+			, killer_name
 		)
 
 		if not ADDON_TYPE.any_matching(type):
-			logger.log(
-				'\t=> Invalid addon type \'%s\''
+			logger.result(
+				'Invalid addon type \'{}\''
 				, type
 			)
 			exit()
@@ -70,14 +71,16 @@ class ImageProcessorAddon(ImageProcessorBase):
 
 			killers = get_all_killer_names()
 			if killer_name not in killers:
-				logger.log(
-					'\t=> Invalid killer name \'%s\'.'
-					'\n\n'
-						'\t\t'
-						'Available killers:'
-							'\n\t\t\t%s'
-					, killer_name,
-					'\n\t\t\t'.join(killers)
+				logger.result('Bad parameter:')
+				logger.detail(
+					'Invalid killer name \'{}\'.'
+					, killer_name
+				)
+				logger.detail(
+					'Available killers:'
+						'\n\t\t\t{}'
+					, '\n\t\t\t'.join(killers)
+					, breakline=True
 				)
 				exit()
 

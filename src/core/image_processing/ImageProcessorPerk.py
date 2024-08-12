@@ -45,15 +45,16 @@ class ImageProcessorPerk(ImageProcessorBase):
 	def __init__(self, type):
 		type = str(type)
 
-		logger.log(
-			'\n[image] Initialized %s <%s>'
+		logger.init(
+			'image'
+			, 'Initialized {} <{}>'
 			, self.class_name,
 			type
 		)
 
 		if not PERK_TYPE.any_matching(type):
-			logger.log(
-				'\t=> Invalid perk type \'%s\''
+			logger.result(
+				'Invalid perk type \'{}\''
 				, type
 			)
 			exit()

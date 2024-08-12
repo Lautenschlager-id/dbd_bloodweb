@@ -14,8 +14,7 @@ class CommandHandlerSetPrestigeLimit(CommandHandlerBase):
 	@staticmethod
 	def get_help_message():
 		return (
-			'\n'
-			'[cmd] {short_command}: Limits how many prestiges the system will attempt to grind.'
+			'{short_command}: Limits how many prestiges the system will attempt to grind.'
 			'\n'
 				'\t>> Syntax:'
 					'\n\t\t{short_command} <prestige>'
@@ -44,22 +43,20 @@ class CommandHandlerSetPrestigeLimit(CommandHandlerBase):
 				raise
 
 			if SETTINGS.get('use_bloodweb_level_controller') is False:
-				logger.log(
-					'\t=> Bad configuration:\n'
-						'\t\t'
-						'Command \'%s\' cannot be used because '
-						'the setting \'use_bloodweb_level_controller\' is disabled.'
+				logger.result('Bad configuration:')
+				logger.detail(
+					'Command \'{}\' cannot be used because '
+					'the setting \'use_bloodweb_level_controller\' is disabled.'
 					, self.__class__.get_short_command()
 				)
 				return
 
 			return [arg_prestiges]
 		except:
-			logger.log(
-				'\t=> Bad parameter:\n'
-					'\t\t'
-					'Invalid <prestiges> \'%s\'. '
-					'The prestige should be one positive number.'
+			logger.result('Bad parameter:')
+			logger.detail(
+				'No such <prestiges> \'{}\'. '
+				'The prestige should be one positive number.'
 				, arg_prestiges
 			)
 			return

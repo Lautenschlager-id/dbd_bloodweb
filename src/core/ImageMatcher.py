@@ -3,6 +3,7 @@ import numpy
 import threading
 
 from .Match import Match
+from config.ConfigLoaderSettings import SETTINGS
 from utils.enums import MATCH
 from utils.logger import logger
 
@@ -11,7 +12,10 @@ class ImageMatcher:
 
 	@classmethod
 	def set_resources(cls, resources):
-		logger.log('\n[match] Resources received!')
+		logger.init(
+			'match'
+			, 'Resources received!'
+		)
 		cls.resources = resources
 
 	def __init__(self, image_source, result_directory):
@@ -24,6 +28,7 @@ class ImageMatcher:
 		)
 
 		self.result_directory = result_directory
+		self.log_ignored_matches = SETTINGS.get('log_ignored_matches')
 
 	def match_with_resource(self, resource, matched_locations, lock):
 		width, height = resource.width, resource.height
@@ -68,7 +73,11 @@ class ImageMatcher:
 			matched_locations.extend(local_matched_locations)
 
 	def match_with_all_resources(self):
-		logger.log('\n\t[match] Matching all resources')
+		logger.init(
+			'match'
+			, 'Matching all resources'
+			, log_level=1
+		)
 
 		matched_locations = []
 
@@ -86,17 +95,28 @@ class ImageMatcher:
 		for thread in threads:
 			thread.join()
 
-		logger.log('\t\t>> [')
+		logger.action(
+			'['
+			, log_level=2
+		)
 
 		matched_locations_no_ignore = []
 		for match in matched_locations:
-			match.log(log_level=3)
+			if not match.ignore or self.log_ignored_matches:
+				logger.detail(
+					str(match)
+					, log_level=3
+				)
+
 			match.paint()
 
 			if not match.ignore:
 				matched_locations_no_ignore.append(match)
 
-		logger.log('\t\t>> ]')
+		logger.action(
+			']'
+			, log_level=2
+		)
 
 		cv2.imwrite(self.result_directory + MATCH.FILENAME.value, self.image_source)
 

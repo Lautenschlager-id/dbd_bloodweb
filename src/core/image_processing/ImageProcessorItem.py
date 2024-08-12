@@ -23,8 +23,9 @@ class ImageProcessorItem(ImageProcessorBase):
 		return 55
 
 	def __init__(self):
-		logger.log(
-			'\n[image] Initialized %s'
+		logger.init(
+			'image'
+			, 'Initialized {}'
 			, self.class_name
 		)
 

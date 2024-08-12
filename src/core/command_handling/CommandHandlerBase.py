@@ -24,20 +24,25 @@ class CommandHandlerBase(ABC):
 
 	def help(self):
 		if self.args: return
-		logger.log(self.__class__.get_help_message())
+		logger.init(
+			'help'
+			, self.__class__.get_help_message()
+			, breakline=True
+		)
 		exit()
 
 	@abstractmethod
 	def sanitize_arg(self):
-		logger.log('\t>> Validating parameters')
+		logger.action('Validating parameters')
 
 	@abstractmethod
 	def run(self):
 		self.help()
 
-		logger.log(
-			'\n[cmd] Running command \'%s\'',
-			(
+		logger.init(
+			'cmd'
+			, 'Running command \'{}\''
+			, (
 				self.__class__.get_full_command()
 				or self.__class__.get_short_command()
 			)
@@ -48,6 +53,6 @@ class CommandHandlerBase(ABC):
 		if sanitized_arg is None:
 			exit()
 
-		logger.log('\t=> Valid parameters!')
+		logger.result('Valid parameters!')
 
 		return sanitized_arg

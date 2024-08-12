@@ -26,19 +26,25 @@ class ConfigLoader(ABC):
 		return cls._instances[cls]
 
 	def load(self):
-		logger.log('\n[init] Loading config \'%s\'', self.config_path)
+		logger.init(
+			'init'
+			, 'Loading config \'{}\''
+			, self.config_path
+		)
 
 		with open(self.config_path, 'r') as file:
 			data = json.load(file)
 
 			try:
-				logger.log('\t>> Validating config')
 				jsonschema_with_default(self.data_schema).validate(data)
 			except Exception as exception:
-				logger.log('\t=> Invalid schema:\n%s', exception)
+				logger.result(
+					'Invalid schema:\n{}'
+					, exception
+				)
 				exit()
 			else:
-				logger.log('\t=> Valid config!')
+				logger.result('Config loaded successfully!')
 				self._data = data
 
 		return self
@@ -46,7 +52,7 @@ class ConfigLoader(ABC):
 	def get(self, config):
 		return self._data.get(config, None)
 
-	def list_keys(self, div='\n\t'):
+	def get_keys(self):
 		keys = list(self._data.keys())
 		keys.sort()
-		return div.join(keys)
+		return keys

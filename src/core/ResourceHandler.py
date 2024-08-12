@@ -38,28 +38,29 @@ class ResourceHandler:
 
 	def initialize(self):
 		self._set_processed_paths()
-
-		logger.log(
-			'\n[resource] Selected resources for preset <%s, %s>:'
-			, self.type,
-			self.killer_name
-		)
-
 		self._set_presets()
 		self._set_resources_based_on_presets()
 
 		self.resources.sort(key=lambda resource: resource.priority)
-		logger.log(
-			'\t>> ['
-			'\n'
-			'\t\t%s'
-			'\n'
-			'\t>> ]'
+
+		logger.init(
+			'resource',
+			'Selected resources for preset <{}, {}>:'
+			, self.type
+			, self.killer_name
+		)
+
+		logger.action('[')
+
+		logger.detail(
+			'{}'
 			, '\n\t\t'.join([
 				str(resource)
 				for resource in self.resources
 			])
 		)
+
+		logger.action(']')
 
 		return self.resources
 
@@ -98,10 +99,10 @@ class ResourceHandler:
 		preset = PRESETS.get(self.preset_name or self.killer_name or self.type)
 
 		if not preset:
-			logger.log(
-				'\t=> Missing preset for <%s, %s>:'
-				, self.type,
-				self.killer_name
+			logger.result(
+				'Missing preset for <{}, {}>:'
+				, self.type
+				, self.killer_name
 			)
 			exit()
 
@@ -186,8 +187,8 @@ class ResourceHandler:
 					)
 
 			if not matched_at_least_once:
-				logger.log(
-					'\t=> Pattern \'%s\' did not match any resource file'
+				logger.result(
+					'Pattern \'{}\' did not match any resource file'
 					, pattern
 				)
 				should_exit = True

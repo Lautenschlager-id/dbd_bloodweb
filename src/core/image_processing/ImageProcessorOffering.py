@@ -25,15 +25,16 @@ class ImageProcessorOffering(ImageProcessorBase):
 	def __init__(self, type):
 		type = str(type)
 
-		logger.log(
-			'\n[image] Initialized %s <%s>'
-			, self.class_name,
-			type
+		logger.init(
+			'image'
+			, 'Initialized {} <{}>'
+			, self.class_name
+			, type
 		)
 
 		if not OFFERING_TYPE.any_matching(type):
-			logger.log(
-				'\t=> Invalid offering type \'%s\''
+			logger.result(
+				'Invalid offering type \'{}\''
 				, type
 			)
 			exit()

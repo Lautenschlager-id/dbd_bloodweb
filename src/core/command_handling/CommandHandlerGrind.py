@@ -18,8 +18,7 @@ class CommandHandlerGrind(CommandHandlerBase):
 	@staticmethod
 	def get_help_message():
 		return (
-			'\n'
-			'[cmd] {full_command}: Identifies and grinds bloodweb nodes displayed in the screen.'
+			'{full_command}: Identifies and grinds bloodweb nodes displayed in the screen.'
 			'\n'
 				'\t>> Syntax:'
 					'\n\t\t{full_command} <preset>'
@@ -32,7 +31,7 @@ class CommandHandlerGrind(CommandHandlerBase):
 					'\n\t\t{full_command} trapper'
 		).format(
 			full_command=CommandHandlerGrind.get_full_command(),
-			presets=PRESETS.list_keys(div='\n\t\t')
+			presets='\n\t\t'.join(PRESETS.get_keys())
 		)
 
 	@staticmethod
@@ -46,14 +45,13 @@ class CommandHandlerGrind(CommandHandlerBase):
 		super().sanitize_arg()
 
 		arg_preset = self.args[0]
-		if arg_preset not in PRESETS.list_keys():
-			logger.log(
-				'\t=> Bad parameter:\n'
-					'\t\t'
-					'No such <preset> \'%s\'. '
-					'Type \'%s\' to learn more.'
-				, arg_preset,
-				self.__class__.get_short_command()
+		if arg_preset not in PRESETS.get_keys():
+			logger.result('Bad parameter:')
+			logger.detail(
+				'No such <preset> \'{}\'. '
+				'Type \'{}\' to learn more.'
+				, arg_preset
+				, self.__class__.get_short_command()
 			)
 			return
 

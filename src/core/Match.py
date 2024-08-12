@@ -1,6 +1,5 @@
 import cv2
 
-from config.ConfigLoaderSettings import SETTINGS
 from utils.enums import PAINT
 from utils.logger import logger
 
@@ -32,14 +31,6 @@ class Match:
 			return f'IgnoredMatch(name={self.resource.path.name}, position=[({self.x1}, {self.y1}), ({self.x2}, {self.y2})])'
 		else:
 			return f'Match(name={self.resource.path.name}, threshold={self.match_threshold:.5f}, position=[({self.x1}, {self.y1}), ({self.x2}, {self.y2})])'
-
-	def log(self, log_level=1):
-		if not self.ignore or SETTINGS.get('log_ignored_matches'):
-			logger.log(
-				'%s%s'
-				, '\t' * log_level,
-				str(self)
-			)
 
 	def paint(self):
 		cv2.rectangle(

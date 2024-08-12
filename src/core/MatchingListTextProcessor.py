@@ -1,6 +1,8 @@
 import re
 import unicodedata
 
+from utils.logger import logger
+
 class MatchingListTextProcessor:
 	TEMPLATE_COLOR = {
 		"brown": 1,
@@ -38,12 +40,23 @@ class MatchingListTextProcessor:
 		# item: flashlight -> IconItems_*flashlight*
 
 		valid_line = self.RE_ENTRY_TEXT.search(line.lower())
-		assert valid_line, f'Got invalid line \'{line}\''
+		if not valid_line:
+			logger.result(
+				'Got invalid line \'{}\''
+				, line
+			)
+			exit()
 
 		(color, type, description) = valid_line.groups()
 
 		resource_prefix = self.RESOURCE_PREFIX.get(type)
-		assert resource_prefix, f'Got invalid type \'{type}\' at line \'{line}\''
+		if not resource_prefix:
+			logger.result(
+				'Got invalid type \'{}\' at line \'{}\''
+				, type
+				, line
+			)
+			exit()
 
 		color = self.TEMPLATE_COLOR.get(color)
 		color = '*' if color is None else f'template_{color}'
@@ -55,6 +68,11 @@ class MatchingListTextProcessor:
 		return f'*{color}*{resource_prefix}*{description}*'
 
 	def convert_all_lines_to_unix_file_name(self):
+		logger.init(
+			'text'
+			, 'Processing preset paths'
+		)
+
 		for index in range(len(self.entry_list)):
 			preset = self.entry_list[index]
 
@@ -67,6 +85,8 @@ class MatchingListTextProcessor:
 				preset[0] = unix_file_name
 			else:
 				self.entry_list[index] = unix_file_name
+
+		logger.result('Preset paths processed successfully!')
 
 		return self.entry_list
 

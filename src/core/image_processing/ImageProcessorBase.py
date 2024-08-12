@@ -87,7 +87,7 @@ class ImageProcessorBase(ABC):
 		self.magick.save_image(output_path)
 
 	def process_all_images(self):
-		logger.log('\t>> Processing all images')
+		logger.action('Processing all images')
 
 		if self.apply_resources_from_one_template_to_all_templates is True:
 			custom_template_id_list = [
@@ -114,12 +114,12 @@ class ImageProcessorBase(ABC):
 				try:
 					result = future.result()
 				except Exception as exception:
-					logger.log(
-						'Threaded task generated an exception: %s'
+					logger.result(
+						'Threaded task generated an exception: {}'
 						, exception
 					)
 
-		logger.log('\t=> Processed all images!')
+		logger.result('Processed all images!')
 
 	def _evaluate_custom_resource_icon_template(self,
 		path_resource_icon,
