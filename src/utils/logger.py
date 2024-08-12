@@ -1,36 +1,45 @@
 import logging
+import multiprocessing
 
 from .enums import LOG
-from .functions import create_timestamp_directory
+from .functions import create_timestamp_directory, get_last_directory
 
 class Logger:
-    _initialized = False
-    _result_folder = create_timestamp_directory(LOG.ROOT_DIRECTORY.value)
+    _instance = None
 
     def __new__(cls, *args, **kwargs):
-        if cls._initialized is False:
-            cls._initialized = True
-            cls.initialize()
-        return super().__new__(cls)
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+            cls._instance._initialize()
 
-    @classmethod
-    def initialize(cls):
+        return cls._instance
+
+    def _initialize(self):
+        if multiprocessing.current_process().name == 'MainProcess':
+            self._result_folder = create_timestamp_directory(LOG.ROOT_DIRECTORY.value)
+        else:
+            self._result_folder = get_last_directory(LOG.ROOT_DIRECTORY.value)
+
         logging.basicConfig(
-            filename=cls._result_folder + LOG.FILENAME.value,
+            filename=f'{self._result_folder}{LOG.FILENAME.value}',
+            filemode='a+',
             format=LOG.FORMATTING.value,
             level=logging.INFO
         )
 
         logging.getLogger().addHandler(logging.StreamHandler())
-
-    @classmethod
-    def get_result_folder(cls):
-        return cls._result_folder
-
-    def __init__(self):
         self.logger = logging.getLogger()
 
+    def get_result_folder(self):
+        return self._result_folder
+
     def log(self, *args):
-        self.logger.info(*args)
+        str_index = 0
+
+        if args[0][0] == '\n':
+            str_index = 1
+            self.logger.info('')
+
+        self.logger.info(args[0][str_index:], *args[1:])
 
 logger = Logger()

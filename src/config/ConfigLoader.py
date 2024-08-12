@@ -5,6 +5,8 @@ from utils.logger import logger
 from utils.functions import jsonschema_with_default
 
 class ConfigLoader(ABC):
+	_instances = {}
+
 	@property
 	@abstractmethod
 	def config_path(self): pass
@@ -13,9 +15,15 @@ class ConfigLoader(ABC):
 	@abstractmethod
 	def data_schema(self): pass
 
-	def __init__(self):
-		self._data = None
-		self.load()
+	def __new__(cls, *args, **kwargs):
+		if cls not in cls._instances:
+			instance = super().__new__(cls)
+			instance._data = None
+			instance.load()
+
+			cls._instances[cls] = instance
+
+		return cls._instances[cls]
 
 	def load(self):
 		logger.log('\n[init] Loading config \'%s\'', self.config_path)

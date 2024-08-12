@@ -1,15 +1,19 @@
 from datetime import datetime
 import jsonschema
 import os
+from pathlib import Path
 import pyautogui
 
-from core.image_processing.ImageProcessorAddon import ImageProcessorAddon
-from .enums import ADDON_TYPE
+from .enums import RESOURCE_DIRECTORY
 
 def get_all_killer_names():
 	killers = [
 		name.name
-		for name in ImageProcessorAddon(ADDON_TYPE.KILLER).path_resource_icon_base.glob('*')
+		for name in (
+			RESOURCE_DIRECTORY.RAW_RESOURCE.full_path
+				.joinpath('addon')
+				.joinpath('killer')
+			).glob('*')
 	]
 	return killers
 
@@ -27,6 +31,19 @@ def create_directory(parent_directory, directory_name):
 def create_timestamp_directory(parent_directory):
 	timestamp = datetime.now().strftime('%Y-%m-%dT%H-%M-%S.%f')
 	return create_directory(parent_directory, timestamp)
+
+def get_last_directory(parent_directory):
+	parent_path = Path(parent_directory)
+
+	directories = [
+		dir for dir in parent_path.iterdir()
+	]
+
+	if not directories:
+		return None
+
+	last_directory = max(directories, key=lambda dir: dir.stat().st_ctime)
+	return last_directory
 
 def take_screenshot(region=None, save_path=None):
 	screenshot = pyautogui.screenshot(region=region)

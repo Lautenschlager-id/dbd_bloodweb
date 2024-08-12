@@ -1,3 +1,5 @@
+import multiprocessing
+
 from .ConfigLoader import ConfigLoader
 from core.MatchingListTextProcessor import MatchingListTextProcessor
 from utils.enums import CONFIG_DIRECTORY
@@ -78,4 +80,8 @@ class ConfigLoaderPresets(ConfigLoader):
 	def config_path(self):
 		return CONFIG_DIRECTORY.PRESET.full_path
 
-PRESETS = ConfigLoaderPresets()
+PRESETS = (
+	ConfigLoaderPresets()
+	if multiprocessing.current_process().name == 'MainProcess'
+	else None
+)

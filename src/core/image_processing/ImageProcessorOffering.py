@@ -1,5 +1,6 @@
 from .ImageProcessorBase import ImageProcessorBase
 from utils.enums import OFFERING_TYPE, RESOURCE_DIRECTORY
+from utils.logger import logger
 
 class ImageProcessorOffering(ImageProcessorBase):
 	@property
@@ -22,9 +23,20 @@ class ImageProcessorOffering(ImageProcessorBase):
 		return 70
 
 	def __init__(self, type):
-		super().__init__()
-
 		type = str(type)
 
-		assert OFFERING_TYPE.any_matching(type), f'Invalid offering type \'{type}\''
+		logger.log(
+			'\n[image] Initialized %s <%s>'
+			, self.class_name,
+			type
+		)
+
+		if not OFFERING_TYPE.any_matching(type):
+			logger.log(
+				'\t=> Invalid offering type \'%s\''
+				, type
+			)
+			exit()
+
 		self.type = type
+		super().__init__()

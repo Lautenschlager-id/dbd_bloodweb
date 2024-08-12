@@ -1,5 +1,6 @@
 from .ImageProcessorBase import ImageProcessorBase
 from utils.enums import PERK_TYPE, RESOURCE_DIRECTORY
+from utils.logger import logger
 
 class ImageProcessorPerk(ImageProcessorBase):
 	template_with_all_icon_resources = 'template_1'
@@ -42,10 +43,20 @@ class ImageProcessorPerk(ImageProcessorBase):
 		return True
 
 	def __init__(self, type):
-		super().__init__()
-
 		type = str(type)
 
-		assert PERK_TYPE.any_matching(type), f'Invalid perk type \'{type}\''
+		logger.log(
+			'\n[image] Initialized %s <%s>'
+			, self.class_name,
+			type
+		)
+
+		if not PERK_TYPE.any_matching(type):
+			logger.log(
+				'\t=> Invalid perk type \'%s\''
+				, type
+			)
+			exit()
+
 		self.type = type
-		#'        self.reuse_resource_for_all_templates=True'
+		super().__init__()

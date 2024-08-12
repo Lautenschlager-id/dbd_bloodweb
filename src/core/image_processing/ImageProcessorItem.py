@@ -1,5 +1,6 @@
 from .ImageProcessorBase import ImageProcessorBase
 from utils.enums import RESOURCE_DIRECTORY
+from utils.logger import logger
 
 class ImageProcessorItem(ImageProcessorBase):
 	@property
@@ -20,3 +21,11 @@ class ImageProcessorItem(ImageProcessorBase):
 	@property
 	def resource_icon_width(self):
 		return 55
+
+	def __init__(self):
+		logger.log(
+			'\n[image] Initialized %s'
+			, self.class_name
+		)
+
+		super().__init__()

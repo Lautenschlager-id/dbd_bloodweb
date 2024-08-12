@@ -1,3 +1,5 @@
+import multiprocessing
+
 from .ConfigLoader import ConfigLoader
 from utils.enums import CONFIG_DIRECTORY, GRIND_STRATEGY
 
@@ -57,4 +59,8 @@ class ConfigLoaderSettings(ConfigLoader):
 	def config_path(self):
 		return CONFIG_DIRECTORY.SETTING.full_path
 
-SETTINGS = ConfigLoaderSettings()
+SETTINGS = (
+	ConfigLoaderSettings()
+	if multiprocessing.current_process().name == 'MainProcess'
+	else None
+)

@@ -6,6 +6,7 @@ import re
 
 from .ImageMagickWrapper import ImageMagickWrapper
 from utils.enums import FILE_EXTENSION, RESOURCE_DIRECTORY
+from utils.logger import logger
 
 class ImageProcessorBase(ABC):
 	RE_TEMPLATE_ID = re.compile(r'template_(\d)')
@@ -48,6 +49,10 @@ class ImageProcessorBase(ABC):
 	@property
 	def apply_resources_from_one_template_to_all_templates(self): pass
 
+	@property
+	def class_name(self):
+		return re.sub(r'(?<!^)(?=[A-Z])', ' ', self.__class__.__name__)
+
 	def __init__(self):
 		self.magick = ImageMagickWrapper(
 			final_extension=FILE_EXTENSION.PROCESSED_RESOURCE.name,
@@ -82,6 +87,8 @@ class ImageProcessorBase(ABC):
 		self.magick.save_image(output_path)
 
 	def process_all_images(self):
+		logger.log('\t>> Processing all images')
+
 		if self.apply_resources_from_one_template_to_all_templates is True:
 			custom_template_id_list = [
 				file.name[:-4]
