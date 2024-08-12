@@ -7,23 +7,30 @@ from core.command_handling.CommandHandlerSetPrestigeLimit import CommandHandlerS
 def capture_command_arguments():
 	parser = ArgumentParser()
 
+	argument_parameter_info = CommandHandlerImage.get_argument_parameter_info()
 	parser.add_argument(
-		'-i', '--image',
-		type=str,
-		nargs='*',
-		help='Process images. E.g.: -i addon killer trapper, -i offering all'
+		CommandHandlerImage.get_short_command(),
+		CommandHandlerImage.get_full_command(),
+		type=argument_parameter_info['type'],
+		nargs=argument_parameter_info['nargs'],
+		help=CommandHandlerImage.get_help_message()
 	)
+
+	argument_parameter_info = CommandHandlerGrind.get_argument_parameter_info()
 	parser.add_argument(
-		'-r', '--run',
-		type=str,
-		nargs='*',
-		help='Target for the blodweeb grinding. E.g.: -r survivor, -r trapper'
+		CommandHandlerGrind.get_short_command(),
+		CommandHandlerGrind.get_full_command(),
+		type=argument_parameter_info['type'],
+		nargs=argument_parameter_info['nargs'],
+		help=CommandHandlerGrind.get_help_message()
 	)
+
+	argument_parameter_info = CommandHandlerSetPrestigeLimit.get_argument_parameter_info()
 	parser.add_argument(
-		'-p',
-		type=int,
-		nargs='*',
-		help='Limits how many prestiges the system will attempt to grind. E.g.: -l 2'
+		CommandHandlerSetPrestigeLimit.get_short_command(),
+		type=argument_parameter_info['type'],
+		nargs=argument_parameter_info['nargs'],
+		help=CommandHandlerSetPrestigeLimit.get_help_message()
 	)
 
 	return parser.parse_args()
@@ -33,8 +40,9 @@ if __name__ == '__main__':
 
 	if args.image is not None:
 		CommandHandlerImage(args.image).run()
-	elif args.run is not None:
+	else:
 		if args.p is not None:
 			CommandHandlerSetPrestigeLimit(args.p).run()
 
-		CommandHandlerGrind(args.run).run()
+		if args.run is not None:
+			CommandHandlerGrind(args.run).run()

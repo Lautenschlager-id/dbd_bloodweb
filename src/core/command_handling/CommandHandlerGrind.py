@@ -4,34 +4,57 @@ from core.BloodwebHandler import BloodwebHandler
 from core.ImageMatcher import ImageMatcher
 from core.ResourceHandler import ResourceHandler
 from utils.enums import IMAGE_PROCESSING_PARAMETER_TARGET
+from utils.logger import logger
 
 class CommandHandlerGrind(CommandHandlerBase):
-	def help(self):
-		if self.args: return False
+	@staticmethod
+	def get_full_command():
+		return '--run'
 
-		print('=> Identifies preset nodes and grinds them on the current bloodweb.')
+	@staticmethod
+	def get_short_command():
+		return '-r'
 
-		print('\n')
+	@staticmethod
+	def get_help_message():
+		return (
+			'\n'
+			'[cmd] {full_command}: Identifies and grinds bloodweb nodes displayed in the screen.'
+			'\n'
+				'\t>> Syntax:'
+					'\n\t\t{full_command} <preset>'
+			'\n\n'
+				'\t>> Available presets:'
+					'\n\t\t{presets}'
+			'\n\n'
+				'\t>> Usage:'
+					'\n\t\t{full_command} survivor'
+					'\n\t\t{full_command} trapper'
+		).format(
+			full_command=CommandHandlerGrind.get_full_command(),
+			presets=PRESETS.list_keys(div='\n\t\t')
+		)
 
-		print('Syntax:'
-			'\n\t--run <preset>')
-
-		print('\n')
-
-		print(f'Available presets:\n\t{PRESETS.list_keys()}')
-
-		print('\n')
-
-		print('Usage:'
-			'\n\t--run survivor'
-			'\n\t--run trapper')
-
-		return True
+	@staticmethod
+	def get_argument_parameter_info():
+		return {
+			'type': str,
+			'nargs': '*'
+		}
 
 	def sanitize_arg(self):
+		super().sanitize_arg()
+
 		arg_preset = self.args[0]
 		if arg_preset not in PRESETS.list_keys():
-			print(f'No such <preset> \'{arg_preset}\'. Type \'-r\' to see the full list.')
+			logger.log(
+				'\t=> Bad parameter:\n'
+					'\t\t'
+					'No such <preset> \'%s\'. '
+					'Type \'%s\' to learn more.'
+				, arg_preset,
+				self.__class__.get_short_command()
+			)
 			return
 
 		killer_name = None
@@ -42,9 +65,7 @@ class CommandHandlerGrind(CommandHandlerBase):
 		return [arg_preset, killer_name]
 
 	def run(self):
-		if self.help(): return
-
-		sanitized_arg = self.sanitize_arg()
+		sanitized_arg = super().run()
 		if sanitized_arg is None: return
 
 		resources = ResourceHandler(*sanitized_arg).initialize()

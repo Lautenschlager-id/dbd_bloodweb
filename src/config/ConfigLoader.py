@@ -18,17 +18,20 @@ class ConfigLoader(ABC):
 		self.load()
 
 	def load(self):
+		logger.log('\n[init] Loading config \'%s\'', self.config_path)
+
 		with open(self.config_path, 'r') as file:
 			data = json.load(file)
 
 			try:
+				logger.log('\t>> Validating config')
 				jsonschema_with_default(self.data_schema).validate(data)
 			except Exception as exception:
-				logger.log(f'Invalid JSON at \'{self.config_path}\':')
-				logger.log(exception)
+				logger.log('\t=> Invalid schema:\n%s', exception)
 				exit()
-
-			self._data = data
+			else:
+				logger.log('\t=> Valid config!')
+				self._data = data
 
 		return self
 

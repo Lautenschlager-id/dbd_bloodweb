@@ -11,6 +11,7 @@ from utils.enums import (
 	PERK_TYPE
 )
 from utils.functions import get_list_value, get_all_killer_names
+from utils.logger import logger
 
 class CommandHandlerImage(CommandHandlerBase):
 	_initialized = False
@@ -54,6 +55,55 @@ class CommandHandlerImage(CommandHandlerBase):
 			]
 		}
 	}
+
+	@staticmethod
+	def get_full_command():
+		return '--image'
+
+	@staticmethod
+	def get_short_command():
+		return '-i'
+
+	@staticmethod
+	def get_help_message():
+		return (
+			'\n'
+			'[cmd] {full_command}: Process raw images to be used in the grinding system.'
+			'\n'
+				'\t>> Syntax:'
+					'\n\t\t{full_command} <type>'
+					'\n\t\t{full_command} <type> <target>'
+					'\n\t\t{full_command} <type> <target> <killer_name>'
+			'\n\n'
+				'\t>> Available types:'
+					'\n\t\t{types}'
+			'\n\n'
+				'\t>> Available targets:'
+					'\n\t\t{targets}'
+			'\n\n'
+				'\t>> Usage:'
+					'\n\t\t{full_command} addon killer'
+					'\n\t\t{full_command} addon killer trapper'
+					'\n\t\t{full_command} perk survivor'
+					'\n\t\t{full_command} all'
+		).format(
+			full_command=CommandHandlerImage.get_full_command(),
+			types='\n\t\t'.join([
+				f'{type.name} => {type.value}'
+				for type in IMAGE_PROCESSING_PARAMETER
+			]),
+			targets='\n\t\t'.join([
+				f'{target.name} => {target.value}'
+				for target in IMAGE_PROCESSING_PARAMETER_TARGET
+			])
+		)
+
+	@staticmethod
+	def get_argument_parameter_info():
+		return {
+			'type': str,
+			'nargs': '*'
+		}
 
 	@classmethod
 	def complete_class_mapping(cls):
@@ -122,44 +172,19 @@ class CommandHandlerImage(CommandHandlerBase):
 			cls.initialize()
 		return super().__new__(cls)
 
-	def help(self):
-		if self.args: return False
-
-		print('=> Process raw images to be used in the grinding system.')
-
-		print('\n')
-
-		print('Syntax:'
-			'\n\t--image <type>'
-			'\n\t--image <type> <target>'
-			'\n\t--image <type> <target killer-name>')
-
-		print('\n')
-
-		print('Available types:')
-		for type in IMAGE_PROCESSING_PARAMETER:
-			print(f'\t{type.name} => {type.value}')
-
-		print('\n')
-
-		print('Available target types:')
-		for target in IMAGE_PROCESSING_PARAMETER_TARGET:
-			print(f'\t{target.name} => {target.value}')
-
-		print('\n')
-
-		print('Usage:'
-			'\n\t--image addon killer'
-			'\n\t--image addon killer trapper'
-			'\n\t--image perk survivor'
-			'\n\t--image all')
-
-		return True
-
 	def sanitize_arg(self):
+		super().sanitize_arg()
+
 		arg_type = self.args[0]
 		if not IMAGE_PROCESSING_PARAMETER.any_matching(arg_type, is_key=True):
-			print(f'No such <type> \'{arg_type}\'. Type \'-i\' to see the full list.')
+			logger.log(
+				'\t=> Bad parameter:\n'
+					'\t\t'
+					'No such <type> \'%s\'. '
+					'Type \'%s\' to learn more.'
+				, arg_type,
+				self.__class__.get_short_command()
+			)
 			return
 
 		if arg_type not in [
@@ -171,7 +196,14 @@ class CommandHandlerImage(CommandHandlerBase):
 
 		arg_target = get_list_value(self.args, 1, IMAGE_PROCESSING_PARAMETER_TARGET.all.name)
 		if not IMAGE_PROCESSING_PARAMETER_TARGET.any_matching(arg_target, is_key=True):
-			print(f'No such <target> \'{arg_target}\'. Type \'-i\' to see the full list.')
+			logger.log(
+				'\t=> Bad parameter:\n'
+					'\t\t'
+					'No such <target> \'%s\'. '
+					'Type \'%s\' to learn more.'
+				, arg_target,
+				self.__class__.get_short_command()
+			)
 			return
 
 		arg_killer_name = None
@@ -184,17 +216,21 @@ class CommandHandlerImage(CommandHandlerBase):
 			if arg_killer_name is not None:
 				killers = get_all_killer_names()
 				if arg_killer_name not in killers:
-					print(f'No such <killer_name> \'{arg_killer_name}\'.'
-						'\n\nAvailable killers:\n\t'
-						+ '\n\t'.join(killers))
+					logger.log(
+						'\t=> Bad parameter:\n'
+							'\t\t'
+							'No such <killer_name> \'%s\'.'
+						'\n\n'
+							'\t\t'
+							'Available killers:'
+								'\n\t\t\t%s'
+						, arg_killer_name,
+						'\n\t\t\t'.join(killers)
+					)
 					return
 
 		return [arg_type, arg_target, arg_killer_name]
 
 	def run(self):
-		if self.help(): return
-
-		sanitized_arg = self.sanitize_arg()
-		if sanitized_arg is None: return
-
+		sanitized_arg = super().run()
 		self.class_mapping[sanitized_arg[0]][sanitized_arg[1]](sanitized_arg[2])

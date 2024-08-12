@@ -1,53 +1,69 @@
 from .CommandHandlerBase import CommandHandlerBase
 from config.ConfigLoaderSettings import SETTINGS
 from core.BloodwebHandler import BloodwebHandler
+from utils.logger import logger
 
 class CommandHandlerSetPrestigeLimit(CommandHandlerBase):
-	def help(self):
-		if self.args: return False
+	@staticmethod
+	def get_full_command(): pass
 
-		print('=> Limits how many prestiges the system will attempt to grind.')
+	@staticmethod
+	def get_short_command():
+		return '-p'
 
-		print('\n')
+	@staticmethod
+	def get_help_message():
+		return (
+			'\n'
+			'[cmd] {short_command}: Limits how many prestiges the system will attempt to grind.'
+			'\n'
+				'\t>> Syntax:'
+					'\n\t\t{short_command} <prestige>'
+			'\n\n'
+				'\t>> Usage:'
+					'\n\t\t{short_command} 1'
+		).format(
+			short_command=CommandHandlerSetPrestigeLimit.get_short_command()
+		)
 
-		print('Syntax:'
-			'\n\t--p <prestiges>')
-
-		print('\n')
-
-		print('Usage:'
-			'\n\t--p 1')
-
-		return True
+	@staticmethod
+	def get_argument_parameter_info():
+		return {
+			'type': int,
+			'nargs': '*'
+		}
 
 	def sanitize_arg(self):
+		super().sanitize_arg()
+
 		arg_prestiges = self.args[0]
 		try:
 			arg_prestiges = int(arg_prestiges)
 
-			if arg_prestiges < 1:
+			if arg_prestiges < 1 or len(self.args) > 1:
 				raise
 
 			if SETTINGS.get('use_bloodweb_level_controller') is False:
-				print(
-					f'Command \'--p\' cannot be used: '
-					'setting \'use_bloodweb_level_controller\' is False'
+				logger.log(
+					'\t=> Bad configuration:\n'
+						'\t\t'
+						'Command \'%s\' cannot be used because '
+						'the setting \'use_bloodweb_level_controller\' is disabled.'
+					, self.__class__.get_short_command()
 				)
 				return
 
 			return [arg_prestiges]
 		except:
-			print(
-				f'Invalid <prestiges> \'{arg_prestiges}\'. '
-				'The prestige should be a positive number.'
+			logger.log(
+				'\t=> Bad parameter:\n'
+					'\t\t'
+					'Invalid <prestiges> \'%s\'. '
+					'The prestige should be one positive number.'
+				, arg_prestiges
 			)
 			return
 
 	def run(self):
-		if self.help(): return
-
-		sanitized_arg = self.sanitize_arg()
-		if sanitized_arg is None:
-			exit()
-
+		sanitized_arg = super().run()
 		BloodwebHandler.set_maximum_prestiges(sanitized_arg[0])
