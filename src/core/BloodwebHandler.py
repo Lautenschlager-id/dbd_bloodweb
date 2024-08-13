@@ -78,10 +78,10 @@ class BloodwebHandler:
 
 		self.region_bloodweb = CoordinateController(REGION_BLOODWEB)
 		self.region_bloodweb.set_action_rectangle(
-			x=260,
-			y=160,
-			width=850,
-			height=780
+			x=280,
+			y=165,
+			width=810,
+			height=795
 		)
 
 		self.region_level = CoordinateController(REGION_LEVEL)
