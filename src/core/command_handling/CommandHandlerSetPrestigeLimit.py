@@ -17,7 +17,7 @@ class CommandHandlerSetPrestigeLimit(CommandHandlerBase):
 			'{short_command}: Limits how many prestiges the system will attempt to grind.'
 			'\n'
 				'\t>> Syntax:'
-					'\n\t\t{short_command} <prestige>'
+					'\n\t\t{short_command} <prestiges>'
 			'\n\n'
 				'\t>> Usage:'
 					'\n\t\t{short_command} 1'

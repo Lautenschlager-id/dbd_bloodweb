@@ -22,6 +22,7 @@ class BloodwebHandler:
 	average_distance_between_two_nodes = None
 
 	maximum_prestiges = -1
+	maximum_levels = -1
 
 	grind_strategy = {
 		GRIND_STRATEGY.PRIORITY_THEN_CLOSER_TO_CENTER.value: lambda match, distance_fn: (
@@ -66,6 +67,15 @@ class BloodwebHandler:
 			, maximum_prestiges
 		)
 		cls.maximum_prestiges = maximum_prestiges
+
+	@classmethod
+	def set_maximum_levels(cls, maximum_levels):
+		logger.init(
+			'bloodweb'
+			, 'Set maximum levels on this run to <{}>'
+			, maximum_levels
+		)
+		cls.maximum_levels = maximum_levels
 
 	def __new__(cls, *args, **kwargs):
 		if cls._initialized is False:
@@ -200,13 +210,9 @@ class BloodwebHandler:
 				return
 
 			else:
-				self.maximum_prestiges -= 1
-				if self.maximum_prestiges == 0:
-					logger.init(
-						'limit'
-						, 'System has hit the set maximum prestiges.'
-					)
-					exit()
+				self._check_maximum_prestige()
+
+		self._check_maximum_level()
 
 		sleep(4.5)
 		self._check_bloodweb_level_metadata()
@@ -247,7 +253,6 @@ class BloodwebHandler:
 		self.nodes = nodes
 
 	def _click(self, x, y):
-		return
 		# sometimes the bloodweb doesn't handle the click, thus clicking thrice to guarantee
 		for _ in range(3):
 			pyautogui.mouseDown(x, y)
@@ -307,3 +312,27 @@ class BloodwebHandler:
 			'Bloodweb level will be captured again after <{}> levels'
 			, self.get_bloodweb_level_after_x_levels
 		)
+
+	def _check_maximum_prestige(self):
+		self.maximum_prestiges -= 1
+
+		if self.maximum_prestiges != 0:
+			return
+
+		logger.init(
+			'limit'
+			, 'System has hit the set maximum prestiges.'
+		)
+		exit()
+
+	def _check_maximum_level(self):
+		self.maximum_levels -= 1
+
+		if self.maximum_levels != 0:
+			return
+
+		logger.init(
+			'limit'
+			, 'System has hit the set maximum levels.'
+		)
+		exit()
