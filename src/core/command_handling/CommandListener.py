@@ -59,5 +59,5 @@ class CommandListener:
 			help=CommandHandlerSetLevelLimit.get_help_message()
 		)
 
-		setting_parameters = SETTINGS.get('parameters') + sys.argv
+		setting_parameters = SETTINGS.get('parameters') + sys.argv[1:]
 		return parser.parse_args(args=setting_parameters)

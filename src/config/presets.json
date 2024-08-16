@@ -160,6 +160,31 @@
 			"map: cookbook"
 		]
 	},
+	"ghost_face": {
+		"match": [
+			"purple addon: driver",
+			"purple addon: sheath",
+			"green addon: wallet",
+			"offer: bloody party",
+			"offer: ward",
+			["map: rpd badge", 0.672],
+			"map: beef",
+			"map: airlock",
+			"red offer: mori",
+			"map: cookbook",
+			"map: jigsaw",
+			"map: marys letter",
+			"map: shattered glasses",
+			"map: shattered bottle",
+			"map: hawkins",
+			["purple offer: oak", 0.758]
+		],
+		"ignore": [
+			"brown offer: *",
+			"yellow offer: *",
+			"offer: cut coin"
+		]
+	},
 	"twins": {
 		"match": [
 			"red addon: cloth",
