@@ -9,6 +9,10 @@ class ConfigLoaderSettings(ConfigLoader):
 		return {
 		    'type': 'object',
 		    'properties': {
+		    	'parameters': {
+		    		'type': 'array',
+		    		'default': []
+		    	},
 		        'default_matching_threshold': {
 		            'type': 'number',
 		            'minimum': 0,

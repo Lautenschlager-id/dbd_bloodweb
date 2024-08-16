@@ -41,11 +41,12 @@ class CommandHandlerBase(ABC):
 
 		logger.init(
 			'cmd'
-			, 'Running command \'{}\''
+			, 'Running command \'{}\' with args \'{}\''
 			, (
 				self.__class__.get_full_command()
 				or self.__class__.get_short_command()
 			)
+			, ' '.join([str(arg) for arg in self.args])
 		)
 
 		sanitized_arg = self.sanitize_arg()

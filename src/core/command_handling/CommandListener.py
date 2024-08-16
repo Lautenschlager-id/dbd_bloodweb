@@ -4,6 +4,7 @@ from .CommandHandlerImage import CommandHandlerImage
 from .CommandHandlerGrind import CommandHandlerGrind
 from .CommandHandlerSetPrestigeLimit import CommandHandlerSetPrestigeLimit
 from .CommandHandlerSetLevelLimit import CommandHandlerSetLevelLimit
+from config.ConfigLoaderSettings import SETTINGS
 
 class CommandListener:
 	def execute(self):
@@ -57,4 +58,5 @@ class CommandListener:
 			help=CommandHandlerSetLevelLimit.get_help_message()
 		)
 
-		return parser.parse_args()
+		setting_parameters = SETTINGS.get('parameters') or None
+		return parser.parse_args(args=setting_parameters)

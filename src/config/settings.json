@@ -1,4 +1,6 @@
 {
+	"parameters": ["-r", "survivor"],
+
 	"default_matching_threshold": 0.75,
 	"default_ignore_threshold": 0.78,
 

@@ -212,7 +212,8 @@ class BloodwebHandler:
 			else:
 				self._check_maximum_prestige()
 
-		self._check_maximum_level()
+		if level_up is False:
+			self._check_maximum_level()
 
 		sleep(4.5)
 		self._check_bloodweb_level_metadata()
@@ -253,6 +254,7 @@ class BloodwebHandler:
 		self.nodes = nodes
 
 	def _click(self, x, y):
+		return
 		# sometimes the bloodweb doesn't handle the click, thus clicking thrice to guarantee
 		for _ in range(3):
 			pyautogui.mouseDown(x, y)
