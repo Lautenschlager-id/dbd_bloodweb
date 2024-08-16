@@ -1,13 +1,13 @@
 from fnmatch import fnmatch
 
-from .image_processing.ImageProcessorAddon import ImageProcessorAddon
-from .image_processing.ImageProcessorItem import ImageProcessorItem
-from .image_processing.ImageProcessorOffering import ImageProcessorOffering
-from .image_processing.ImageProcessorPerk import ImageProcessorPerk
 from .MatchingListTextProcessor import MatchingListTextProcessor
 from .Resource import Resource
 from config.ConfigLoaderPresets import PRESETS
 from config.ConfigLoaderSettings import SETTINGS
+from core.image_processing.ImageProcessorAddon import ImageProcessorAddon
+from core.image_processing.ImageProcessorItem import ImageProcessorItem
+from core.image_processing.ImageProcessorOffering import ImageProcessorOffering
+from core.image_processing.ImageProcessorPerk import ImageProcessorPerk
 from utils.enums import (
 	ADDON_TYPE,
 	FILE_EXTENSION,

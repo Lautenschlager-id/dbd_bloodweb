@@ -1,6 +1,7 @@
 import re
 import unicodedata
 
+from utils.functions import set_text_to_camel_case
 from utils.logger import logger
 
 class MatchingListTextProcessor:
@@ -62,7 +63,7 @@ class MatchingListTextProcessor:
 		color = '*' if color is None else f'template_{color}'
 
 		description = self._replace_special_characters_with_wildcard(
-			self._set_text_to_camel_case(description)
+			set_text_to_camel_case(description)
 		)
 
 		return f'*{color}*{resource_prefix}*{description}*'
@@ -89,10 +90,6 @@ class MatchingListTextProcessor:
 		logger.result('Preset paths processed successfully!')
 
 		return self.entry_list
-
-	def _set_text_to_camel_case(self, content):
-		words = re.split(r'[\s_]+', content)
-		return words[0].lower() + ''.join(word.capitalize() for word in words[1:])
 
 	def _replace_special_characters_with_wildcard(self, content):
 		normalized_text = unicodedata.normalize('NFD', content)

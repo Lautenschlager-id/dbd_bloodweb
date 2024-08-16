@@ -1,7 +1,7 @@
 import multiprocessing
 
 from .ConfigLoader import ConfigLoader
-from core.MatchingListTextProcessor import MatchingListTextProcessor
+from core.bloodweb_grinding.MatchingListTextProcessor import MatchingListTextProcessor
 from utils.enums import CONFIG_DIRECTORY
 
 class ConfigLoaderPresets(ConfigLoader):

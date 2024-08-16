@@ -4,8 +4,8 @@ from pathlib import Path
 import os
 import re
 
-from .ImageMagickWrapper import ImageMagickWrapper
 from utils.enums import FILE_EXTENSION, RESOURCE_DIRECTORY
+from utils.ImageMagickWrapper import ImageMagickWrapper
 from utils.logger import logger
 
 class ImageProcessorBase(ABC):

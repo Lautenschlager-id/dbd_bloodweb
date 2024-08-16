@@ -1,6 +1,6 @@
 from .CommandHandlerBase import CommandHandlerBase
 from config.ConfigLoaderSettings import SETTINGS
-from core.BloodwebHandler import BloodwebHandler
+from core.bloodweb_grinding.BloodwebHandler import BloodwebHandler
 from utils.logger import logger
 
 class CommandHandlerSetPrestigeLimit(CommandHandlerBase):

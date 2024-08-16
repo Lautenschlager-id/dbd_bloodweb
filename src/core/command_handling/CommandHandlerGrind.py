@@ -1,8 +1,8 @@
 from .CommandHandlerBase import CommandHandlerBase
 from config.ConfigLoaderPresets import PRESETS
-from core.BloodwebHandler import BloodwebHandler
-from core.ImageMatcher import ImageMatcher
-from core.ResourceHandler import ResourceHandler
+from core.bloodweb_grinding.BloodwebHandler import BloodwebHandler
+from core.bloodweb_grinding.ImageMatcher import ImageMatcher
+from core.bloodweb_grinding.ResourceHandler import ResourceHandler
 from utils.enums import IMAGE_PROCESSING_PARAMETER_TARGET
 from utils.logger import logger
 
