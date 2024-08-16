@@ -254,7 +254,6 @@ class BloodwebHandler:
 		self.nodes = nodes
 
 	def _click(self, x, y):
-		return
 		# sometimes the bloodweb doesn't handle the click, thus clicking thrice to guarantee
 		for _ in range(3):
 			pyautogui.mouseDown(x, y)
