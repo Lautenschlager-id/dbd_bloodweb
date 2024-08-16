@@ -121,6 +121,8 @@ class BloodwebHandler:
 		)
 
 		(screenshot_path, _) = self.region_bloodweb.take_screenshot(result_directory)
+		# helps identifying when the screenshot was taken
+		pyautogui.moveTo(self.region_bloodweb.x, self.region_bloodweb.height)
 
 		matched_bloodweb_nodes = ImageMatcher(
 			image_source=screenshot_path,
