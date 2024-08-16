@@ -1,4 +1,5 @@
 from argparse import ArgumentParser
+import sys
 
 from .CommandHandlerImage import CommandHandlerImage
 from .CommandHandlerGrind import CommandHandlerGrind
@@ -58,5 +59,5 @@ class CommandListener:
 			help=CommandHandlerSetLevelLimit.get_help_message()
 		)
 
-		setting_parameters = SETTINGS.get('parameters') or None
+		setting_parameters = SETTINGS.get('parameters') + sys.argv
 		return parser.parse_args(args=setting_parameters)
