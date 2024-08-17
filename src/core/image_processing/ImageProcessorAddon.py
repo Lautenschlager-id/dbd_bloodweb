@@ -1,3 +1,5 @@
+from sys import exit
+
 from .ImageProcessorBase import ImageProcessorBase
 from utils.enums import ADDON_TYPE, RESOURCE_DIRECTORY
 from utils.functions import get_all_killer_names

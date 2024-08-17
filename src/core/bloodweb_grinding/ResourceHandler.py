@@ -1,4 +1,5 @@
 from fnmatch import fnmatch
+from sys import exit
 
 from .MatchingListTextProcessor import MatchingListTextProcessor
 from .Resource import Resource

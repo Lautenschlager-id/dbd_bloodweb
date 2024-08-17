@@ -2,6 +2,7 @@ import math
 import pyautogui
 import pytesseract
 import re
+from sys import exit
 from time import sleep
 
 from .ImageMatcher import ImageMatcher

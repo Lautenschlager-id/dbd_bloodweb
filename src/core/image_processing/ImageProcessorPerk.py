@@ -1,3 +1,5 @@
+from sys import exit
+
 from .ImageProcessorBase import ImageProcessorBase
 from utils.enums import PERK_TYPE, RESOURCE_DIRECTORY
 from utils.logger import logger
