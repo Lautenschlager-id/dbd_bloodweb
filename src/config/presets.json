@@ -182,7 +182,8 @@
 		"ignore": [
 			"brown offer: *",
 			"yellow offer: *",
-			"offer: cut coin"
+			"offer: cut coin",
+			"red addon: tape"
 		]
 	},
 	"twins": {

@@ -2,7 +2,7 @@ import multiprocessing
 
 from .ConfigLoader import ConfigLoader
 from core.bloodweb_grinding.MatchingListTextProcessor import MatchingListTextProcessor
-from utils.enums import CONFIG_DIRECTORY
+from utils.enums import CONFIG_DIRECTORY, IMAGE_PROCESSING_PARAMETER_TARGET
 
 class ConfigLoaderPresets(ConfigLoader):
 	@property
@@ -73,6 +73,7 @@ class ConfigLoaderPresets(ConfigLoader):
 					'additionalProperties': False
 				},
 			},
+			'required': [IMAGE_PROCESSING_PARAMETER_TARGET.survivor.name],
 			'additionalProperties': False
 		}
 

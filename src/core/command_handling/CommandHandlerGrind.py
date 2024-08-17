@@ -4,6 +4,7 @@ from core.bloodweb_grinding.BloodwebHandler import BloodwebHandler
 from core.bloodweb_grinding.ImageMatcher import ImageMatcher
 from core.bloodweb_grinding.ResourceHandler import ResourceHandler
 from utils.enums import IMAGE_PROCESSING_PARAMETER_TARGET
+from utils.functions import get_list_value
 from utils.logger import logger
 
 class CommandHandlerGrind(CommandHandlerBase):
@@ -21,7 +22,8 @@ class CommandHandlerGrind(CommandHandlerBase):
 			'{full_command}: Identifies and grinds bloodweb nodes displayed in the screen.'
 			'\n'
 				'\t>> Syntax:'
-					'\n\t\t{full_command} <preset>'
+					'\n\t\t{full_command} <survivor|killer_name>'
+					'\n\t\t{full_command} <survivor|killer_name> <custom_preset_name>'
 			'\n\n'
 				'\t>> Available presets:'
 					'\n\t\t{presets}'
@@ -29,6 +31,7 @@ class CommandHandlerGrind(CommandHandlerBase):
 				'\t>> Usage:'
 					'\n\t\t{full_command} survivor'
 					'\n\t\t{full_command} trapper'
+					'\n\t\t{full_command} trapper custom_basement_preset'
 		).format(
 			full_command=CommandHandlerGrind.get_full_command(),
 			presets='\n\t\t'.join(PRESETS.get_keys())
@@ -45,12 +48,16 @@ class CommandHandlerGrind(CommandHandlerBase):
 		super().sanitize_arg()
 
 		arg_preset = self.args[0]
-		if arg_preset not in PRESETS.get_keys():
+		arg_custom_preset = get_list_value(self.args, 1)
+
+		target_preset = arg_custom_preset or arg_preset
+
+		if target_preset not in PRESETS.get_keys():
 			logger.result('Bad parameter:')
 			logger.detail(
 				'No such <preset> \'{}\'. '
 				'Type \'{}\' to learn more.'
-				, arg_preset
+				, target_preset
 				, self.__class__.get_short_command()
 			)
 			return
@@ -60,7 +67,7 @@ class CommandHandlerGrind(CommandHandlerBase):
 			killer_name = arg_preset
 			arg_preset = IMAGE_PROCESSING_PARAMETER_TARGET.killer.name
 
-		return [arg_preset, killer_name]
+		return [arg_preset, killer_name, target_preset]
 
 	def run(self):
 		sanitized_arg = super().run()

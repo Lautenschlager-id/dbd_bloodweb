@@ -22,7 +22,7 @@ class ResourceHandler:
 	def __init__(self, type, killer_name=None, preset_name=None):
 		self.type = type
 		self.killer_name = killer_name
-		self.preset_name = preset_name # todo
+		self.preset_name = preset_name
 
 		self.is_survivor = type in [
 			ADDON_TYPE.SURVIVOR.value,
@@ -45,9 +45,10 @@ class ResourceHandler:
 
 		logger.init(
 			'resource',
-			'Selected resources for preset <{}, {}>:'
+			'Selected resources for preset <{}, {}, {}>:'
 			, self.type
 			, self.killer_name
+			, self.preset_name
 		)
 
 		logger.action('[')
@@ -100,9 +101,10 @@ class ResourceHandler:
 
 		if not preset:
 			logger.result(
-				'Missing preset for <{}, {}>:'
+				'Missing preset for <{}, {}, {}>:'
 				, self.type
 				, self.killer_name
+				, self.preset_name
 			)
 			exit()
 
