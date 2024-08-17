@@ -186,6 +186,24 @@
 			"red addon: tape"
 		]
 	},
+	"demogorgon": {
+		"match": [
+			"red addon: leprose",
+			"red addon: moss",
+			"addon: whistle",
+			"addon: glasses",
+			"offer: bloody party",
+			"offer: ward",
+			"map: marys letter",
+			["map: rpd badge", 0.672],
+			["purple offer: oak", 0.758]
+		],
+		"ignore": [
+			"brown offer: *",
+			"yellow offer: *",
+			"offer: cut coin"
+		]
+	},
 	"twins": {
 		"match": [
 			"red addon: cloth",
@@ -237,6 +255,24 @@
 			"red offer: mori",
 			"offer: ward",
 			["purple offer: oak", 0.758]
+		],
+		"ignore": [
+			"brown offer: *",
+			"yellow offer: *",
+			"offer: cut coin"
+		]
+	},
+	"singularity": {
+		"match": [
+			"addon: soma",
+			"addon: construction",
+			"red addon: *",
+			"addon: manifest",
+			"offer: bloody party",
+			"red offer: mori",
+			"offer: ward",
+			["purple offer: oak", 0.758],
+			["map: rpd badge", 0.672]
 		],
 		"ignore": [
 			"brown offer: *",
