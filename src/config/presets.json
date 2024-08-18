@@ -262,6 +262,23 @@
 			"offer: cut coin"
 		]
 	},
+	"skull_merchant": {
+		"match": [
+			"red addon: expired",
+			"red addon: manuscript",
+			"addon: readout",
+			"addon: lighting",
+			"offer: bloody party",
+			"red offer: mori",
+			"offer: ward",
+			["purple offer: oak", 0.758]
+		],
+		"ignore": [
+			"brown offer: *",
+			"yellow offer: *",
+			"offer: cut coin"
+		]
+	},
 	"singularity": {
 		"match": [
 			"addon: soma",

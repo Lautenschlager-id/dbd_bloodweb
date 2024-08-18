@@ -581,9 +581,9 @@ $ cd bloodweb
 $ cd src
 ```
 
-2. Execute `main.py`
+2. Execute `main.py` with the desired command
 ```bash
-$ python main.py
+$ python main.py -r survivor
 ```
 
 ## Collaborate
