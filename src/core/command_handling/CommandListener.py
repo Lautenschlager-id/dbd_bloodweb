@@ -1,10 +1,11 @@
 from argparse import ArgumentParser
 import sys
 
-from .CommandHandlerImage import CommandHandlerImage
+from .CommandHandlerDownloadNewContent import CommandHandlerDownloadNewContent
 from .CommandHandlerGrind import CommandHandlerGrind
-from .CommandHandlerSetPrestigeLimit import CommandHandlerSetPrestigeLimit
+from .CommandHandlerImage import CommandHandlerImage
 from .CommandHandlerSetLevelLimit import CommandHandlerSetLevelLimit
+from .CommandHandlerSetPrestigeLimit import CommandHandlerSetPrestigeLimit
 from config.ConfigLoaderSettings import SETTINGS
 
 class CommandListener:
@@ -13,6 +14,8 @@ class CommandListener:
 
 		if args.image is not None:
 			CommandHandlerImage(args.image).run()
+		elif args.download is not None:
+			CommandHandlerDownloadNewContent(args.download).run()
 		else:
 			if args.p is not None:
 				CommandHandlerSetPrestigeLimit(args.p).run()
@@ -57,6 +60,15 @@ class CommandListener:
 			type=argument_parameter_info['type'],
 			nargs=argument_parameter_info['nargs'],
 			help=CommandHandlerSetLevelLimit.get_help_message()
+		)
+
+		argument_parameter_info = CommandHandlerDownloadNewContent.get_argument_parameter_info()
+		parser.add_argument(
+			CommandHandlerDownloadNewContent.get_short_command(),
+			CommandHandlerDownloadNewContent.get_full_command(),
+			type=argument_parameter_info['type'],
+			nargs=argument_parameter_info['nargs'],
+			help=CommandHandlerDownloadNewContent.get_help_message()
 		)
 
 		setting_parameters = SETTINGS.get('parameters') + sys.argv[1:]

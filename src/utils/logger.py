@@ -50,14 +50,19 @@ class Logger:
 
         logging.getLogger().addHandler(logging.StreamHandler())
         self.logger = logging.getLogger()
+        self.supress_init = []
 
     def get_result_folder(self):
         return self._result_folder
 
     def init(self, *args, **kwargs):
         kwargs['mode'] = 'module'
-        kwargs['module_title'] = args[0]
-        return self._log(*args[1:], **kwargs)
+
+        module_title = args[0]
+        kwargs['module_title'] = module_title
+
+        if module_title not in self.supress_init:
+            return self._log(*args[1:], **kwargs)
 
     def action(self, *args, **kwargs):
         kwargs['mode'] = 'action'
@@ -70,6 +75,9 @@ class Logger:
     def detail(self, *args, **kwargs):
         kwargs['mode'] = 'detail'
         return self._log(*args, **kwargs)
+
+    def supress(self, init):
+        self.supress_init.append(init)
 
     def _log(self, *args, **kwargs):
         # parameters

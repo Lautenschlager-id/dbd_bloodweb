@@ -46,9 +46,13 @@ def get_last_directory(parent_directory):
 	last_directory = max(directories, key=lambda dir: dir.stat().st_ctime)
 	return last_directory
 
-def set_text_to_camel_case(content):
+def set_text_to_camel_case(content, separator=''):
 		words = re.split(r'[\s_]+', content)
-		return words[0].lower() + ''.join(word.capitalize() for word in words[1:])
+		return words[0].lower() + separator.join(word.capitalize() for word in words[1:])
+
+def set_text_to_pascal_case(content, separator=''):
+	words = re.split(r'[^a-z\d]', content.lower())
+	return separator.join(word.capitalize() for word in words if word)
 
 def take_screenshot(region=None, save_path=None):
 	screenshot = pyautogui.screenshot(region=region)

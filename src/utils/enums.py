@@ -109,3 +109,7 @@ class GRIND_STRATEGY(CustomEnum):
 	PRIORITY = 'priority'
 	PRIORITY_THEN_CLOSER_TO_CENTER = 'priority_then_closer_to_center'
 	PRIORITY_THEN_FURTHER_TO_CENTER = 'priority_then_further_to_center'
+
+class ICON_TYPE(CustomEnum):
+	PERK = 'perk'
+	ADDON = 'addon'
