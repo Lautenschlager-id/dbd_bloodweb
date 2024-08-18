@@ -44,6 +44,26 @@ $ pip install -r requirements.txt
 				<ul>
 					<li><i>Example: [ "-r", "survivor" ]</i></li>
 				</ul>
+				Note that running a command through the terminal will expand, and may override, the ones in settings.
+				<ul>
+					<li>
+						<i>Example:</i>
+						<ul>
+							<li>
+								If the setting is <code>["-r", "survivor"]</code> and the terminal parameter is <code>-p 1</code>:
+								<ul>
+									<li>Final result will be equivalent to <code>-r survivor -p 1</code></li>
+								</ul>
+							</li>
+							<li>
+								If the setting is <code>["-r", "survivor"]</code> and the terminal parameter is <code>-r trapper -p 1</code>:
+								<ul>
+									<li>Final result will be equivalent to <code>-r trapper -p 1</code></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
 			</td>
 		</tr>
 		<tr>
@@ -363,7 +383,195 @@ $ pip install -r requirements.txt
 	</li>
 </ul>
 
+## Commands
 
+### [cmd] Grind Bloodweb
+
+Identifies and grinds bloodweb nodes displayed in the screen.
+
+<table>
+	<thead>
+		<tr>
+			<th>Command</th>
+			<th>Syntax</th>
+			<th>Usage</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+				<li><code>--run</code></li>
+				<li><code>-r</code></li>
+			</td>
+			<td>
+				<li><code>--run</code> <code>survivor|killer_name</code></li>
+                <li><code>--run</code> <code>survivor|killer_name</code> <code>custom_preset_name</code></li>
+			</td>
+			<td>
+				<li><code>--run survivor</code></li>
+                <li><code>--run trapper</code></li>
+                <li><code>--run trapper custom_basement_preset</code></li>
+            </td>
+		</tr>
+	</tbody>
+</table>
+
+#### [sub-cmd] Limit Grinding Level
+
+Limits how many levels the system will attempt to grind.
+<li>Levels are detected when the system clicks the bloodweb's center node.</li>
+
+<table>
+	<thead>
+		<tr>
+			<th>Command</th>
+			<th>Syntax</th>
+			<th>Usage</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+				<li><code>-l</code></li>
+			</td>
+			<td>
+				<li><code>-l</code> <code>levels</code></li>
+			</td>
+			<td>
+                <li><code>-l 50</code></li>
+            </td>
+		</tr>
+	</tbody>
+</table>
+
+#### [sub-cmd] Limit Grinding Prestige
+
+Limits how many prestiges the system will attempt to grind.
+<li>Prestiges are detected after the system clicks the bloodweb's center node in level 50.</li>
+<li>This command requires the setting <code>use_bloodweb_level_controller</code> to be on.</li>
+
+<table>
+	<thead>
+		<tr>
+			<th>Command</th>
+			<th>Syntax</th>
+			<th>Usage</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+				<li><code>-p</code></li>
+			</td>
+			<td>
+				<li><code>-p</code> <code>prestiges</code></li>
+			</td>
+			<td>
+                <li><code>-p 1</code></li>
+            </td>
+		</tr>
+	</tbody>
+</table>
+
+### [cmd] Image Processing
+
+Process raw images to be used in the grinding system.
+<br/>
+If you are not trying to change resolutions, then probably you should not be using this command as long as `/image/processed/` is populated.
+
+<table>
+	<thead>
+		<tr>
+			<th>Command</th>
+			<th>Syntax</th>
+			<th>Usage</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+				<li><code>--image</code></li>
+				<li><code>-i</code></li>
+			</td>
+			<td>
+				<li><code>--image</code> <code>type</code></li>
+                <li><code>--image</code> <code>type</code> <code>target</code></li>
+                <li><code>--image</code> <code>type</code> <code>target</code> <code>killer_name</code></li>
+			</td>
+			<td>
+				<li><code>--image addon killer</code></li>
+                <li><code>--image addon killer trapper</code></li>
+                <li><code>--image perk survivor</code></li>
+                <li><code>--image all</code></li>
+            </td>
+		</tr>
+	</tbody>
+</table>
+
+<table>
+	<tr>
+		<td>
+			<table>
+				<thead>
+					<tr>
+						<th>Type</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<tr>
+							<td><code>all</code></td>
+							<td>Process all images</td>
+						</tr>
+						<tr>
+							<td><code>addon</code></td>
+							<td>Process addon images</td>
+						</tr>
+						<tr>
+							<td><code>item</code></td>
+							<td>Process item images</td>
+						</tr>
+						<tr>
+							<td><code>offering</code></td>
+							<td>Process offer images</td>
+						</tr>
+						<tr>
+							<td><code>perk</code></td>
+							<td>Process perk images</td>
+						</tr>
+					</tr>
+				</tbody>
+			</table>
+		</td>
+		<td>
+			<table>
+				<thead>
+					<tr>
+						<th>Target</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<tr>
+							<td><code>all</code></td>
+							<td>Process for all killers and survivors</td>
+						</tr>
+						<tr>
+							<td><code>killer</code></td>
+							<td>Process for all killers or specified killer</td>
+						</tr>
+						<tr>
+							<td><code>survivor</code></td>
+							<td>Process for survivors</td>
+						</tr>
+					</tr>
+				</tbody>
+			</table>
+		</td>
+	</tr>
+</table>
 
 ## How to use
 
@@ -390,26 +598,3 @@ $ git checkout -b feature_name
 ```
 
 3. Open up a Pull Request
-
-
-## Development details
-
-
-
-
-
-# recall
-template = 1 to 6, 1=brown, 6=event;
-icon = main image, not the background
-background = template image, e.g. template_1 = brown bg
-
-_evaluate_custom_resource_icon_template = reuse originals from one specific template_ but keep generating for other templates too
-e.g. for perks, images are in template_1, then it pulls the icon from template_1, but uses background etc from template_N
-
-
-match_list matches
-ignore_list also matches, but blocks that space from being matched on match_list items
-
-
-
-
