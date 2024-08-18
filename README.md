@@ -1,7 +1,9 @@
 # Dead By Daylight's Automatic Bloodweb Grinder
 
 Choose which addons, items, offerings, or even perks you'd like to grind from a specific character in Dead By Daylight and the Bloodweb Grinder will automatically grind the bloodwebs for you.
-<br/>
+<br/><br/>
+**Currently only works on resolution `1920x1080` and when the game's window is positioned at the left-most side of the screen.**
+<br/><br/>
 <br/>
 **Use at your own risk.**
 
@@ -252,6 +254,115 @@ $ pip install -r requirements.txt
 		</tr>
 	</tbody>
 </table>
+
+2. All presets are placed in `/src/config/presets.json`
+<ul>
+	<li>A preset is an object with  addons, items, offerings, and/or perks you expect the system to grind for you.</li>
+	<li>By default, there should be a preset named <code>survivor</code> that targets all survivors, and presets named after each killer targeting them and possibly their exclusive addons.</li>
+	<li>Preset names must be simple texts with letters or underscores (_):
+		<ul>
+			<li><i>Example:</i> <code>ghost_face</code>, <code>trapper</code>, ...</li>
+		</ul>
+		You can also create custom presets that are not named after any survivor or killer, facilitating grinding different items depending on your needs:
+		<ul>
+			<li><i>Example:</i> <code>basement</code> aiming basement addons for trapper, <code>flashlight</code> aiming flashlights and batteries, ...</li>
+		</ul>
+	</li>
+	<li>A preset is expected to have the field <code>match</code>, holding the items that must be grinded in the bloodweb.</li>
+	<li>
+		A preset optionally may include the field <code>ignore</code>, holding the items that must be ignored in the bloodweb.
+		<br/>
+		This is only useful when you notice some unexpected items are being selected because the system recognizes it as one of the items that should be grinded,
+		usually because of the similarity between the images.
+	</li>
+	<li>
+		The items of a preset should be denoted as case-insensitive strings following one of the formats below:
+		<ul>
+			<li>
+				<code>color</code> <code>object</code>: <code>identifier</code>
+			</li>
+			<li>
+				<code>object</code>: <code>identifier</code>
+			</li>
+		</ul>
+		<table>
+			<tr>
+				<td>
+					<table>
+						<thead>
+							<tr><th>Color</th></tr>
+						</thead>
+						<tbody>
+							<tr><td>brown</td></tr>
+							<tr><td>yellow</td></tr>
+							<tr><td>green</td></tr>
+							<tr><td>purple</td></tr>
+							<tr><td>red</td></tr>
+							<tr><td>orange</td></tr>
+						</tbody>
+					</table>
+				</td>
+				<td>
+					<table>
+						<thead>
+							<tr><th>Object</th></tr>
+						</thead>
+						<tbody>
+							<tr><td>addon</td></tr>
+							<tr><td>item</td></tr>
+							<tr><td>offer</td><td>offering</td></tr>
+							<tr><td>perk</td></tr>
+							<tr><td>map</td><td>realm</td><td>level</td></tr>
+						</tbody>
+					</table>
+				</td>
+			</tr>
+		</table>
+		<ul>
+			<li>
+				<i>Example:</i>
+				<table>
+					<thead>
+						<tr>
+							<th>Indentifier</th>
+							<th>What matches?</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><code>red offer: ebony memento mori</code></td>
+							<td>Matches the red offering 'ebony memento mori'</td>
+						</tr>
+						<tr>
+							<td><code>red offering: ebony*mori</code></td>
+							<td>Matches the red offering 'ebony memento mori'</td>
+						</tr>
+						<tr>
+							<td><code>red offer: mori</code></td>
+							<td>Matches the red offering 'ebony memento mori'</td>
+						</tr>
+						<tr>
+							<td><code>offering: mori</code></td>
+							<td>Matches all offerings with the text 'mori'</td>
+						</tr>
+						<tr>
+							<td><code>addon: *</code></td>
+							<td>Matches all addons</td>
+						</tr>
+					</tbody>
+				</table>
+			</li>
+		</ul>
+		If the specified identifier requires a custom threshold, that's also possible by making the value a list of two values:
+			the first being the identifier string,
+			and the second being the custom threshold:
+		<ul>
+			<li><code>"red offer: mori",</code></li>
+			<li><code>[ "red offer: mori", 0.67 ],</code></li>
+		</ul>
+	</li>
+</ul>
+
 
 
 ## How to use
