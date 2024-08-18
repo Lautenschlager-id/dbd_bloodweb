@@ -51,6 +51,10 @@ class CoordinateController:
 			self.y + y
 		)
 
+	def get_distance_from_center_with_absolute_coordinates(self, x, y):
+		(x, y) = self.get_absolute_coordinate(x, y)
+		return self.get_distance_from_center(x, y)
+
 	def take_screenshot(self, save_directory=None, log_level=1):
 		logger.action(
 			'Taking screenshot of \'{}\''

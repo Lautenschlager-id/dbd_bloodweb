@@ -10,7 +10,7 @@
 	"disable_addon_grinding": false,
 	"disable_item_grinding": false,
 	"disable_offering_grinding": false,
-	"disable_perk_grinding": false,
+	"disable_perk_grinding": true,
 
 	"log_ignored_matches": false
 }

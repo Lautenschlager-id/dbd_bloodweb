@@ -251,7 +251,7 @@ class BloodwebHandler:
 		nodes.sort(key=lambda match:
 			BloodwebHandler.strategy_lambda(
 				match,
-				self.region_bloodweb.get_distance_from_center
+				self.region_bloodweb.get_distance_from_center_with_absolute_coordinates
 			)
 		)
 		self.nodes = nodes
