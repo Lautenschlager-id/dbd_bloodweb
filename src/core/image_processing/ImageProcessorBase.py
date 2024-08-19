@@ -7,6 +7,7 @@ import re
 from utils.enums import FILE_EXTENSION, RESOURCE_DIRECTORY
 from utils.ImageMagickWrapper import ImageMagickWrapper
 from utils.logger import logger
+from utils.multithread import multithreaded_execute
 
 class ImageProcessorBase(ABC):
 	RE_TEMPLATE_ID = re.compile(r'template_(\d)')
@@ -99,25 +100,10 @@ class ImageProcessorBase(ABC):
 		else:
 			custom_template_id_list = [None]
 
-		with ProcessPoolExecutor() as executor:
-			futures = []
-
-			for file in self.path_resource_icon_base.rglob(
-				FILE_EXTENSION.RAW_RESOURCE.as_unix_filename_pattern
-			):
-				for template_id in custom_template_id_list:
-					futures.append(
-						executor.submit(self.process_image, file, template_id)
-					)
-
-			for future in as_completed(futures):
-				try:
-					result = future.result()
-				except Exception as exception:
-					logger.result(
-						'Threaded task generated an exception: {}'
-						, exception
-					)
+		multithreaded_execute(
+			self._process_all_images,
+			custom_template_id_list=custom_template_id_list
+		)
 
 		logger.result('Processed all images!')
 
@@ -176,3 +162,12 @@ class ImageProcessorBase(ABC):
 			RESOURCE_DIRECTORY.PROCESSED_RESOURCE.value
 		)
 		os.makedirs(output_dir, exist_ok=True)
+
+	def _process_all_images(self, executor, futures, custom_template_id_list):
+		for file in self.path_resource_icon_base.rglob(
+			FILE_EXTENSION.RAW_RESOURCE.as_unix_filename_pattern
+		):
+			for template_id in custom_template_id_list:
+				futures.append(
+					executor.submit(self.process_image, file, template_id)
+				)

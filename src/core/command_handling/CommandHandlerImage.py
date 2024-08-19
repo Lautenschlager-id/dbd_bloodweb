@@ -67,7 +67,7 @@ class CommandHandlerImage(CommandHandlerBase):
 	@staticmethod
 	def get_help_message():
 		return (
-			'{full_command}: Process raw images to be used in the grinding system.'
+			'{full_command}: Processes raw images to be used in the grinding system.'
 			'\n'
 				'\t>> Syntax:'
 					'\n\t\t{full_command} <type>'

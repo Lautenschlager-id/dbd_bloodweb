@@ -23,7 +23,6 @@ class Icon:
 			)
 			exit()
 
-		self.icon = icon
 		self.type = type
 
 		self.source = icon.get('data-src')
@@ -34,7 +33,7 @@ class Icon:
 
 		self.is_addon = type == ICON_TYPE.ADDON.value
 		if self.is_addon:
-			self.rarity = self.search_rarity()
+			self.rarity = self.search_rarity(icon)
 
 	def __str__(self):
 		if self.is_addon:
@@ -42,8 +41,8 @@ class Icon:
 		else:
 			return f'Icon(name={self.name}, type={self.type})'
 
-	def search_rarity(self):
-		rarity_div = self.icon.find_parent('div').find_parent('div').find()
+	def search_rarity(self, icon):
+		rarity_div = icon.find_parent('div').find_parent('div').find()
 		rarity = rarity_div.get('class')[-1]
 
 		mapped_rarity = self.rarity_map.get(rarity)

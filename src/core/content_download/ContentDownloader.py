@@ -8,6 +8,7 @@ from core.image_processing.ImageProcessorPerk import ImageProcessorPerk
 from utils.enums import ADDON_TYPE, ICON_TYPE, PERK_TYPE
 from utils.functions import set_text_to_pascal_case
 from utils.logger import logger
+from utils.multithread import multithreaded_execute
 
 class ContentDownloader:
 	content_url = 'https://deadbydaylight.fandom.com/wiki/{}'
@@ -25,32 +26,9 @@ class ContentDownloader:
 		self.is_killer = False
 
 	def download(self):
-		logger.supress('image')
-
-		perks, addons = self.search_icons()
-
-		logger.action(
-			'Downloading perks ({})'
-			, len(perks)
-			, breakline=True
-		)
-
-		for icon in perks:
-			self._download_perk(icon)
-
-		logger.action(
-			'Downloading addons ({})'
-			, len(addons)
-			, breakline=True
-		)
-
-		for icon in addons:
-			self._download_addons(icon)
-
-		logger.result(
-			'Downloads concluded successfully.'
-			, breakline=True
-		)
+		(perks, addons) = self.search_icons()
+		multithreaded_execute(self._download_all_perks, perks_list=perks)
+		multithreaded_execute(self._download_all_addons, addons_list=addons)
 
 	def search_icons(self):
 		logger.action('Capturing icons:')
@@ -149,7 +127,33 @@ class ContentDownloader:
 		icons = table.select('tr > th:first-of-type div:last-of-type a img.lazyload')
 		return [ Icon(icon, type) for icon in icons ]
 
+	def _download_all_perks(self, executor, futures, perks_list):
+		logger.action(
+			'Downloading perks ({})'
+			, len(perks_list)
+			, breakline=True
+		)
+
+		for icon in perks_list:
+			futures.append(
+				executor.submit(self._download_perk, icon)
+			)
+
+	def _download_all_addons(self, executor, futures, addons_list):
+		logger.action(
+			'Downloading addons ({})'
+			, len(addons_list)
+			, breakline=True
+		)
+
+		for icon in addons_list:
+			futures.append(
+				executor.submit(self._download_addon, icon)
+			)
+
 	def _download_perk(self, icon):
+		logger.supress('image')
+
 		path_resource_icon_base = ImageProcessorPerk(
 			PERK_TYPE.KILLER.value
 			if self.is_killer
@@ -158,7 +162,9 @@ class ContentDownloader:
 
 		icon.save_in_local_path(path_resource_icon_base)
 
-	def _download_addons(self, icon):
+	def _download_addon(self, icon):
+		logger.supress('image')
+
 		content_name = self._sanitize_name()
 
 		path_resource_icon_base = ImageProcessorAddon(

@@ -50,7 +50,7 @@ class Logger:
 
         logging.getLogger().addHandler(logging.StreamHandler())
         self.logger = logging.getLogger()
-        self.supress_init = []
+        self.supress_init = {}
 
     def get_result_folder(self):
         return self._result_folder
@@ -77,7 +77,7 @@ class Logger:
         return self._log(*args, **kwargs)
 
     def supress(self, init):
-        self.supress_init.append(init)
+        self.supress_init[init] = True
 
     def _log(self, *args, **kwargs):
         # parameters

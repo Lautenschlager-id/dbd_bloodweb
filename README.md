@@ -475,7 +475,7 @@ Limits how many prestiges the system will attempt to grind.
 
 ### [cmd] Image Processing
 
-Process raw images to be used in the grinding system.
+Processes raw images to be used in the grinding system.
 <br/>
 If you are not trying to change resolutions, then probably you should not be using this command as long as `/image/processed/` is populated.
 
@@ -573,6 +573,38 @@ If you are not trying to change resolutions, then probably you should not be usi
 	</tr>
 </table>
 
+### [cmd] Download content from new survivor / killer
+
+Downloads perks and addons from a new survivor/killer.
+<br/>
+The content is pulled from the Dead By Daylight's Fandom Wiki.
+
+<table>
+	<thead>
+		<tr>
+			<th>Command</th>
+			<th>Syntax</th>
+			<th>Usage</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+				<li><code>--download</code></li>
+				<li><code>-d</code></li>
+			</td>
+			<td>
+                <li><code>--download</code> <code>survivor_name|killer_name</code></li>
+			</td>
+			<td>
+				<li><code>--download ace visconti</code></li>
+                <li><code>--download the skull merchant</code></li>
+                <li><code>--download skull merchant</code></li>
+            </td>
+		</tr>
+	</tbody>
+</table>
+
 ## How to use
 
 1. Get to the folder `/src/`
@@ -584,6 +616,23 @@ $ cd src
 2. Execute `main.py` with the desired command
 ```bash
 $ python main.py -r survivor
+```
+
+### When a new survivor or killer is introduced to the game
+
+1. Get to the folder `/src/`
+```bash
+$ cd bloodweb
+$ cd src
+```
+
+2. Execute `main.py` with the following commands
+```bash
+$ python main.py -d new_survivor_name
+$ python main.py -d new_killer_name
+$ python main.py -i perk survivor
+$ python main.py -i perk killer
+$ python main.py -i addon killer new_killer_name
 ```
 
 ## Collaborate
