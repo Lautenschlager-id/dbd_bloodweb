@@ -28,7 +28,7 @@ class ImageMatcher:
 		)
 
 		self.result_directory = result_directory
-		self.log_ignored_matches = SETTINGS.get('log_ignored_matches')
+		self.log_skipped_matches = SETTINGS.get('log_skipped_matches')
 
 	def match_with_resource(self, resource, matched_locations, lock):
 		width, height = resource.width, resource.height
@@ -64,7 +64,7 @@ class ImageMatcher:
 					x1=x1, y1=y1,
 					x2=x2, y2=y2,
 					match_threshold=match_result[y1, x1],
-					ignore=resource.ignore,
+					skip=resource.skip,
 					image_source=self.image_source
 				)
 			)
@@ -100,9 +100,9 @@ class ImageMatcher:
 			, log_level=2
 		)
 
-		matched_locations_no_ignore = []
+		matched_locations_no_skip = []
 		for match in matched_locations:
-			if not match.ignore or self.log_ignored_matches:
+			if not match.skip or self.log_skipped_matches:
 				logger.detail(
 					str(match)
 					, log_level=3
@@ -110,8 +110,8 @@ class ImageMatcher:
 
 			match.paint()
 
-			if not match.ignore:
-				matched_locations_no_ignore.append(match)
+			if not match.skip:
+				matched_locations_no_skip.append(match)
 
 		logger.action(
 			']'
@@ -120,6 +120,6 @@ class ImageMatcher:
 
 		cv2.imwrite(self.result_directory + MATCH.FILENAME.value, self.image_source)
 
-		return matched_locations_no_ignore
+		return matched_locations_no_skip
 
 

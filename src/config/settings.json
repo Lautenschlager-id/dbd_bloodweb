@@ -1,16 +1,16 @@
 {
 	"parameters": ["-r", "survivor", "-p", "1"],
 
-	"default_matching_threshold": 0.75,
-	"default_ignore_threshold": 0.78,
+	"default_match_and_grind_threshold": 0.75,
+	"default_match_and_skip_threshold": 0.78,
 
 	"grind_strategy": "default",
 	"use_bloodweb_level_controller": true,
 
-	"disable_addon_grinding": false,
-	"disable_item_grinding": false,
-	"disable_offering_grinding": false,
-	"disable_perk_grinding": true,
+	"disable_addon_resources": false,
+	"disable_item_resources": false,
+	"disable_offering_resources": false,
+	"disable_perk_resources": true,
 
-	"log_ignored_matches": false
+	"log_skipped_matches": false
 }

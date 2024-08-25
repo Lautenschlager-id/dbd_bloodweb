@@ -9,7 +9,7 @@ class Match:
 		x1, y1,
 		x2, y2,
 		match_threshold,
-		ignore,
+		skip,
 		image_source
 	):
 		self.resource = resource
@@ -23,11 +23,11 @@ class Match:
 		self.center_y = (y1 + y2) / 2
 
 		self.match_threshold = match_threshold
-		self.ignore = ignore
+		self.skip = skip
 		self.image_source = image_source
 
 	def __str__(self):
-		return f'{"Ignored" if self.ignore else ""}Match(name={self.resource.path.name}, threshold={self.match_threshold:.5f}, position=[({self.x1}, {self.y1}), ({self.x2}, {self.y2})])'
+		return f'{"Skipped" if self.skip else ""}Match(name={self.resource.path.name}, threshold={self.match_threshold:.5f}, position=[({self.x1}, {self.y1}), ({self.x2}, {self.y2})])'
 
 	def paint(self):
 		cv2.rectangle(
@@ -36,7 +36,7 @@ class Match:
 			(self.x2, self.y2),
 			(
 				PAINT.RED.value
-				if self.ignore
+				if self.skip
 				else PAINT.GREEN.value
 			),
 			PAINT.THICKNESS.value

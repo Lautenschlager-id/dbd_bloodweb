@@ -34,9 +34,9 @@ class ResourceHandler:
 		self.paths = None
 		self.resources = None
 
-		self.match_list = None
-		self.ignore_list = None
-		self.match_exception_list = None
+		self.match_and_grind_list = None
+		self.match_and_skip_list = None
+		self.wildcard_exception_list = None
 
 	def initialize(self):
 		self._set_processed_paths()
@@ -70,20 +70,20 @@ class ResourceHandler:
 	def _set_processed_paths(self):
 		paths = []
 
-		if not SETTINGS.get('disable_offering_grinding'):
+		if not SETTINGS.get('disable_offering_resources'):
 			paths.append(
 				ImageProcessorOffering(IMAGE_PROCESSING_PARAMETER_TARGET.all.name)
 					.path_resource_icon_processed
 			)
 			paths.append(ImageProcessorOffering(self.type).path_resource_icon_processed)
 
-		if not SETTINGS.get('disable_item_grinding') and self.is_survivor:
+		if not SETTINGS.get('disable_item_resources') and self.is_survivor:
 			paths.append(ImageProcessorItem().path_resource_icon_processed)
 
-		if not SETTINGS.get('disable_perk_grinding'):
+		if not SETTINGS.get('disable_perk_resources'):
 			paths.append(ImageProcessorPerk(self.type).path_resource_icon_processed)
 
-		if not SETTINGS.get('disable_addon_grinding'):
+		if not SETTINGS.get('disable_addon_resources'):
 			if self.is_survivor:
 				paths.append(ImageProcessorAddon(self.type).path_resource_icon_processed)
 			else:
@@ -110,22 +110,22 @@ class ResourceHandler:
 			)
 			exit()
 
-		match_list = preset['match']
-		ignore_list = preset.get('ignore', [])
-		match_exception_list = preset.get('match_exception', [])
+		match_and_grind_list = preset['match_and_grind']
+		match_and_skip_list = preset.get('match_and_skip', [])
+		wildcard_exception_list = preset.get('wildcard_exception', [])
 
-		self.match_list = (
-			MatchingListTextProcessor(match_list)
+		self.match_and_grind_list = (
+			MatchingListTextProcessor(match_and_grind_list)
 				.get_data_from_all_identifiers()
 		)
 
-		self.ignore_list = (
-			MatchingListTextProcessor(ignore_list)
+		self.match_and_skip_list = (
+			MatchingListTextProcessor(match_and_skip_list)
 				.get_data_from_all_identifiers()
 		)
 
-		self.match_exception_list = (
-			MatchingListTextProcessor(match_exception_list)
+		self.wildcard_exception_list = (
+			MatchingListTextProcessor(wildcard_exception_list)
 				.get_data_from_all_identifiers()
 		)
 
@@ -144,7 +144,7 @@ class ResourceHandler:
 		# Blocks the 'identified_files' for certain patterns
 		# E.g.: match: *, exception: abc = matches all (*), except (abc)
 		self._filter_paths_with_presets(
-			preset_list=self.match_exception_list,
+			preset_list=self.wildcard_exception_list,
 			ref_files_to_iter=files,
 			ref_identified_files_against_duplicates=identified_files,
 			ref_resources=None
@@ -152,7 +152,7 @@ class ResourceHandler:
 
 		# List of items to be compared and considered
 		self._filter_paths_with_presets(
-			preset_list=self.match_list,
+			preset_list=self.match_and_grind_list,
 			ref_files_to_iter=files,
 			ref_identified_files_against_duplicates=identified_files,
 			ref_resources=resources
@@ -160,12 +160,12 @@ class ResourceHandler:
 
 		# List of items to be compared but not considered
 		self._filter_paths_with_presets(
-			preset_list=self.ignore_list,
+			preset_list=self.match_and_skip_list,
 			ref_files_to_iter=files,
 			ref_identified_files_against_duplicates=identified_files,
 			ref_resources=resources,
 			priority=-1,
-			ignore=True
+			skip=True
 		)
 
 		self.resources = resources
@@ -176,7 +176,7 @@ class ResourceHandler:
 		ref_identified_files_against_duplicates,
 		ref_resources=None,
 		priority=None,
-		ignore=False,
+		skip=False,
 	):
 		should_exit = False
 
@@ -201,7 +201,7 @@ class ResourceHandler:
 								path=file,
 								priority=priority or index,
 								threshold=threshold,
-								ignore=ignore
+								skip=skip
 							)
 						)
 

@@ -1,6 +1,6 @@
 {
 	"survivor": {
-		"match": [
+		"match_and_grind": [
 			"purple item: flashlight",
 			"green item: flashlight",
 			"yellow item: flashlight",
@@ -30,7 +30,7 @@
 			"addon: bandages",
 			"addon: swivel"
 		],
-		"ignore": [
+		"match_and_skip": [
 			"brown item: worn out tools",
 			["brown addon: power bulb", 0.79],
 			"brown offer: *",
@@ -40,7 +40,7 @@
 		]
 	},
 	"nurse": {
-		"match": [
+		"match_and_grind": [
 			"addon: ataxic respiration",
 			"addon: catatonic boys treasure",
 			"offer: bloody party",
@@ -49,7 +49,7 @@
 		]
 	},
 	"huntress": {
-		"match": [
+		"match_and_grind": [
 			"purple addon: glowing",
 			"addon: wooden fox",
 			"green addon: rose root",
@@ -61,14 +61,14 @@
 			["map: rpd badge", 0.6785],
 			["purple offer: oak", 0.758]
 		],
-		"ignore": [
+		"match_and_skip": [
 			"brown offer: *",
 			"yellow offer: *",
 			"offer: cut coin"
 		]
 	},
 	"shape": {
-		"match": [
+		"match_and_grind": [
 			"red addon: tombstone",
 			"red addon: tuft",
 			"purple addon: scratched mirror",
@@ -84,14 +84,14 @@
 			"map: jigsaw",
 			["purple offer: oak", 0.758]
 		],
-		"ignore": [
+		"match_and_skip": [
 			"brown offer: *",
 			"yellow offer: *",
 			"offer: cut coin"
 		]
 	},
 	"hag": {
-		"match": [
+		"match_and_grind": [
 			"addon: rusty shackles",
 			"map: marys letter",
 			["addon: scarred hand", 0.8],
@@ -105,14 +105,14 @@
 			["purple offer: oak", 0.758],
 			"offer: ward"
 		],
-		"ignore": [
+		"match_and_skip": [
 			"brown offer: *",
 			"yellow offer: *",
 			"offer: cut coin"
 		]
 	},
 	"doctor": {
-		"match": [
+		"match_and_grind": [
 			"purple addon: discipline",
 			["green addon: discipline", 0.88],
 			"red addon: queen",
@@ -121,14 +121,14 @@
 			"offer: ward",
 			["purple offer: oak", 0.758]
 		],
-		"ignore": [
+		"match_and_skip": [
 			"brown offer: *",
 			"yellow offer: *",
 			"offer: cut coin"
 		]
 	},
 	"clown": {
-		"match": [
+		"match_and_grind": [
 			"addon: cigar box",
 			"red addon: redhead",
 			"addon: flask of bleach",
@@ -137,14 +137,14 @@
 			"offer: ward",
 			["purple offer: oak", 0.758]
 		],
-		"ignore": [
+		"match_and_skip": [
 			"brown offer: *",
 			"yellow offer: *",
 			"offer: cut coin"
 		]
 	},
 	"nightmare": {
-		"match": [
+		"match_and_grind": [
 			"red addon: brush",
 			"red addon: box",
 			"purple addon: pill bottle",
@@ -154,7 +154,7 @@
 			"offer: ward",
 			["purple offer: oak", 0.758]
 		],
-		"ignore": [
+		"match_and_skip": [
 			"brown offer: *",
 			"yellow offer: *",
 			"offer: cut coin",
@@ -162,7 +162,7 @@
 		]
 	},
 	"pig": {
-		"match": [
+		"match_and_grind": [
 			"red addon: amanda",
 			"purple addon: *",
 			"red addon: video",
@@ -172,18 +172,18 @@
 			"map: marys letter",
 			["purple offer: oak", 0.758]
 		],
-		"ignore": [
+		"match_and_skip": [
 			"brown offer: *",
 			"yellow offer: *",
 			"offer: cut coin"
 		],
-		"match_exception": [
+		"wildcard_exception": [
 			"brown offer: reagent",
 			"yellow offer: reagent"
 		]
 	},
 	"ghost_face": {
-		"match": [
+		"match_and_grind": [
 			"purple addon: driver",
 			"purple addon: sheath",
 			"green addon: wallet",
@@ -201,7 +201,7 @@
 			"map: hawkins",
 			["purple offer: oak", 0.758]
 		],
-		"ignore": [
+		"match_and_skip": [
 			"brown offer: *",
 			"yellow offer: *",
 			"offer: cut coin",
@@ -209,7 +209,7 @@
 		]
 	},
 	"demogorgon": {
-		"match": [
+		"match_and_grind": [
 			"red addon: leprose",
 			"red addon: moss",
 			"addon: whistle",
@@ -220,14 +220,14 @@
 			["map: rpd badge", 0.672],
 			["purple offer: oak", 0.758]
 		],
-		"ignore": [
+		"match_and_skip": [
 			"brown offer: *",
 			"yellow offer: *",
 			"offer: cut coin"
 		]
 	},
 	"twins": {
-		"match": [
+		"match_and_grind": [
 			"red addon: cloth",
 			"addon: forest stew",
 			"red addon: pendant",
@@ -241,7 +241,7 @@
 			"map: marys letter",
 			["purple offer: oak", 0.758]
 		],
-		"ignore": [
+		"match_and_skip": [
 			"brown offer: *",
 			"yellow offer: *",
 			"offer: cut coin",
@@ -250,7 +250,7 @@
 		]
 	},
 	"artist": {
-		"match": [
+		"match_and_grind": [
 			"addon: hands",
 			"red addon: rot",
 			"addon: grief",
@@ -260,14 +260,14 @@
 			"offer: ward",
 			["purple offer: oak", 0.758]
 		],
-		"ignore": [
+		"match_and_skip": [
 			"brown offer: *",
 			"yellow offer: *",
 			"offer: cut coin"
 		]
 	},
 	"onryo": {
-		"match": [
+		"match_and_grind": [
 			"red addon: remote control",
 			"addon: photo",
 			"addon: fingernails",
@@ -278,14 +278,14 @@
 			"offer: ward",
 			"red offer: mori"
 		],
-		"ignore": [
+		"match_and_skip": [
 			"brown offer: *",
 			"yellow offer: *",
 			"offer: cut coin"
 		]
 	},
 	"dredge": {
-		"match": [
+		"match_and_grind": [
 			"addon: lavalier",
 			"addon: boat key",
 			"red addon: wooden",
@@ -296,14 +296,14 @@
 			"offer: ward",
 			["purple offer: oak", 0.758]
 		],
-		"ignore": [
+		"match_and_skip": [
 			"brown offer: *",
 			"yellow offer: *",
 			"offer: cut coin"
 		]
 	},
 	"skull_merchant": {
-		"match": [
+		"match_and_grind": [
 			"red addon: expired",
 			"red addon: manuscript",
 			"addon: readout",
@@ -313,14 +313,14 @@
 			"offer: ward",
 			["purple offer: oak", 0.758]
 		],
-		"ignore": [
+		"match_and_skip": [
 			"brown offer: *",
 			"yellow offer: *",
 			"offer: cut coin"
 		]
 	},
 	"singularity": {
-		"match": [
+		"match_and_grind": [
 			"addon: soma",
 			"addon: construction",
 			"red addon: *",
@@ -331,7 +331,7 @@
 			["purple offer: oak", 0.758],
 			["map: rpd badge", 0.672]
 		],
-		"ignore": [
+		"match_and_skip": [
 			"brown offer: *",
 			"yellow offer: *",
 			"offer: cut coin"

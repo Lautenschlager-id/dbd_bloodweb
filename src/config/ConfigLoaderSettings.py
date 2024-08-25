@@ -13,17 +13,17 @@ class ConfigLoaderSettings(ConfigLoader):
 		    		'type': 'array',
 		    		'default': []
 		    	},
-		        'default_matching_threshold': {
+		        'default_match_and_grind_threshold': {
 		            'type': 'number',
 		            'minimum': 0,
 		            'maximum': 1,
 		            'default': 0.75
 		        },
-		        'default_ignore_threshold': {
+		        'default_match_and_skip_threshold': {
 		            'type': 'number',
 		            'minimum': 0,
 		            'maximum': 1,
-		            # it's best if it's > default_matching_threshold
+		            # it's best if it's > default_match_and_grind_threshold
 		            'default': 0.78
 		        },
 		        'grind_strategy': {
@@ -35,23 +35,23 @@ class ConfigLoaderSettings(ConfigLoader):
 		            'type': 'boolean',
 		            'default': True
 		        },
-		        'disable_addon_grinding': {
+		        'disable_addon_resources': {
 		            'type': 'boolean',
 		            'default': False
 		        },
-		        'disable_item_grinding': {
+		        'disable_item_resources': {
 		            'type': 'boolean',
 		            'default': False
 		        },
-		        'disable_offering_grinding': {
+		        'disable_offering_resources': {
 		            'type': 'boolean',
 		            'default': False
 		        },
-		        'disable_perk_grinding': {
+		        'disable_perk_resources': {
 		            'type': 'boolean',
 		            'default': True
 		        },
-		        'log_ignored_matches': {
+		        'log_skipped_matches': {
 		            'type': 'boolean',
 		            'default': False
 		        }

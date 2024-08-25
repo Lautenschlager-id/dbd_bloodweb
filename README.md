@@ -68,7 +68,7 @@ $ pip install -r requirements.txt
 		</tr>
 		<tr>
 			<td>
-				<code>default_matching_threshold</code>
+				<code>default_match_and_grind_threshold</code>
 			</td>
 			<td>
 				A number in the interval [0,1] that represents OpenCV's image matching threshold.
@@ -84,7 +84,7 @@ $ pip install -r requirements.txt
 		</tr>
 		<tr>
 			<td>
-				<code>default_ignore_threshold</code>
+				<code>default_match_and_skip_threshold</code>
 			</td>
 			<td>
 				A number in the interval [0,1] that represents OpenCV's image matching threshold.
@@ -219,7 +219,7 @@ $ pip install -r requirements.txt
 		</tr>
 		<tr>
 			<td>
-				<code>disable_addon_grinding</code>
+				<code>disable_addon_resources</code>
 			</td>
 			<td>
 				Whether all addon images should be ignored.
@@ -230,7 +230,7 @@ $ pip install -r requirements.txt
 		</tr>
 		<tr>
 			<td>
-				<code>disable_item_grinding</code>
+				<code>disable_item_resources</code>
 			</td>
 			<td>
 				Whether all item images should be ignored.
@@ -241,7 +241,7 @@ $ pip install -r requirements.txt
 		</tr>
 		<tr>
 			<td>
-				<code>disable_offering_grinding</code>
+				<code>disable_offering_resources</code>
 			</td>
 			<td>
 				Whether all offering images should be ignored.
@@ -252,7 +252,7 @@ $ pip install -r requirements.txt
 		</tr>
 		<tr>
 			<td>
-				<code>disable_perk_grinding</code>
+				<code>disable_perk_resources</code>
 			</td>
 			<td>
 				Whether all perk images should be ignored.
@@ -263,7 +263,7 @@ $ pip install -r requirements.txt
 		</tr>
 		<tr>
 			<td>
-				<code>log_ignored_matches</code>
+				<code>log_skipped_matches</code>
 			</td>
 			<td>
 				Whether ignored matches should be logged in <code>log.txt</code>.
@@ -288,21 +288,21 @@ $ pip install -r requirements.txt
 			<li><i>Example:</i> <code>basement</code> aiming basement addons for trapper, <code>flashlight</code> aiming flashlights and batteries, ...</li>
 		</ul>
 	</li>
-	<li>A preset is expected to have the field <code>match</code>, holding the items that must be grinded in the bloodweb.</li>
+	<li>A preset is expected to have the field <code>match_and_grind</code>, holding the items that must be grinded in the bloodweb.</li>
 	<li>
-		A preset optionally may include the field <code>ignore</code>, holding the items that must be ignored in the bloodweb.
+		A preset optionally may include the field <code>match_and_skip</code>, holding the items that must be ignored in the bloodweb.
 		<br/>
 		This is only useful when you notice some unexpected items are being selected because the system recognizes it as one of the items that should be grinded,
 		usually because of the similarity between the images.
 	</li>
 	<li>
-		A preset optionally may include the field <code>match_exception</code>, holding the items that must not be matched during the file filtering.
+		A preset optionally may include the field <code>wildcard_exception</code>, holding the items that must not be matched during the file filtering.
 		<br/>
-		This is only useful  to add exceptions to star identifiers from either <code>match</code> or <code>ignore</code>.
+		This is only useful  to add exceptions to star identifiers from either <code>match_and_grind</code> or <code>match_and_skip</code>.
 		<br/>
-		For example, if one of them includes the record <code>offer: *</code>, that is going to include all offerings. Let's say you want <u>all but one</u>. This <u>one</u> goes in <code>match_exception</code>.
+		For example, if one of them includes the record <code>offer: *</code>, that is going to include all offerings. Let's say you want <u>all but one</u>. This <u>one</u> goes in <code>wildcard_exception</code>.
 		<br/>
-		That is, <code>match</code> = <code>offer: *</code>, <code>match_exception</code> = <code>offer: reagent</code>, will match all offerings, except reagents (those won't even be included in the filterable filenames).
+		That is, <code>match_and_grind</code> = <code>offer: *</code>, <code>wildcard_exception</code> = <code>offer: reagent</code>, will match all offerings, except reagents (those won't even be included in the filterable filenames).
 	</li>
 	<li>
 		The items of a preset should be denoted as case-insensitive strings following one of the formats below:

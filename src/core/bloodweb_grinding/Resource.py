@@ -8,7 +8,7 @@ class Resource:
         path=None,
         priority=None,
         threshold=None,
-        ignore=None
+        skip=None
     ):
         self.path = Path(path)
 
@@ -18,15 +18,15 @@ class Resource:
         self.grayed_image = grayed_image
 
         self.priority = priority
-        self.ignore = ignore
+        self.skip = skip
 
         self.threshold = threshold or (
-            SETTINGS.get('default_ignore_threshold') if ignore
-            else SETTINGS.get('default_matching_threshold')
+            SETTINGS.get('default_match_and_skip_threshold') if skip
+            else SETTINGS.get('default_match_and_grind_threshold')
         )
 
     def __str__(self):
-        if self.ignore:
-            return f'Resource(path={self.path.name}, priority={self.priority}, threshold={self.threshold}, ignore={self.ignore})'
+        if self.skip:
+            return f'Resource(path={self.path.name}, priority={self.priority}, threshold={self.threshold}, skip={self.skip})'
         else:
             return f'Resource(path={self.path.name}, width={self.width}, height={self.height}, threshold={self.threshold}, priority={self.priority})'

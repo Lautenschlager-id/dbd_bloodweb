@@ -43,11 +43,11 @@ class ConfigLoaderPresets(ConfigLoader):
 				'^[a-z0-9_]+$': {
 					'type': 'object',
 					'properties': {
-						'match': obj_structure,
-						'ignore': obj_structure,
-						'match_exception': obj_structure
+						'match_and_grind': obj_structure,
+						'match_and_skip': obj_structure,
+						'wildcard_exception': obj_structure
 					},
-					'required': ['match'],
+					'required': ['match_and_grind'],
 					'additionalProperties': False
 				},
 			},
