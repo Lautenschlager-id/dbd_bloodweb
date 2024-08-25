@@ -51,7 +51,6 @@ class OFFERING_TYPE(CustomEnum):
 	KILLER = 'killer'
 	SURVIVOR = 'survivor'
 
-
 class PERK_TYPE(CustomEnum):
 	KILLER = 'killer'
 	SURVIVOR = 'survivor'

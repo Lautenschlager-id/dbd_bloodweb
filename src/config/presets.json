@@ -18,6 +18,7 @@
 			"green item: medkit",
 			"yellow item: aid kit",
 			"map: jigsaw",
+			"green offer: envelope",
 			"map: shattered glasses",
 			["brown addon: battery", 0.762],
 			["red addon: bulb", 0.78],
@@ -160,6 +161,25 @@
 			"map: cookbook"
 		]
 	},
+	"pig": {
+		"match": [
+			"red addon: amanda",
+			"purple addon: *",
+			"red addon: video",
+			"purple offer: reagent",
+			"offer: bloody party",
+			"offer: ward",
+			"map: marys letter",
+			["purple offer: oak", 0.758],
+			"yellow offer: reagent",
+			"brown offer: reagent"
+		],
+		"ignore": [
+			"brown offer: *",
+			"yellow offer: *",
+			"offer: cut coin"
+		]
+	},
 	"ghost_face": {
 		"match": [
 			"purple addon: driver",
@@ -237,6 +257,24 @@
 			"red offer: mori",
 			"offer: ward",
 			["purple offer: oak", 0.758]
+		],
+		"ignore": [
+			"brown offer: *",
+			"yellow offer: *",
+			"offer: cut coin"
+		]
+	},
+	"onryo": {
+		"match": [
+			"red addon: remote control",
+			"addon: photo",
+			"addon: fingernails",
+			"addon: comb",
+			"addon: pinwheel",
+			["purple offer: oak", 0.758],
+			"offer: bloody party",
+			"offer: ward",
+			"red offer: mori"
 		],
 		"ignore": [
 			"brown offer: *",
