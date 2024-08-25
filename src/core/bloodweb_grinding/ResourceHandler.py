@@ -36,6 +36,7 @@ class ResourceHandler:
 
 		self.match_list = None
 		self.ignore_list = None
+		self.match_exception_list = None
 
 	def initialize(self):
 		self._set_processed_paths()
@@ -111,15 +112,21 @@ class ResourceHandler:
 
 		match_list = preset['match']
 		ignore_list = preset.get('ignore', [])
+		match_exception_list = preset.get('match_exception', [])
 
 		self.match_list = (
 			MatchingListTextProcessor(match_list)
-				.convert_all_lines_to_unix_file_name()
+				.get_data_from_all_identifiers()
 		)
 
 		self.ignore_list = (
 			MatchingListTextProcessor(ignore_list)
-				.convert_all_lines_to_unix_file_name()
+				.get_data_from_all_identifiers()
+		)
+
+		self.match_exception_list = (
+			MatchingListTextProcessor(match_exception_list)
+				.get_data_from_all_identifiers()
 		)
 
 	def _set_resources_based_on_presets(self):
@@ -134,18 +141,29 @@ class ResourceHandler:
 		resources = []
 		identified_files = {}
 
+		# Blocks the 'identified_files' for certain patterns
+		# E.g.: match: *, exception: abc = matches all (*), except (abc)
 		self._filter_paths_with_presets(
-			preset_list=self.match_list,
-			ref_resources=resources,
-			ref_files_to_iter=files,
-			ref_identified_files_against_duplicates=identified_files
-		)
-
-		self._filter_paths_with_presets(
-			preset_list=self.ignore_list,
-			ref_resources=resources,
+			preset_list=self.match_exception_list,
 			ref_files_to_iter=files,
 			ref_identified_files_against_duplicates=identified_files,
+			ref_resources=None
+		)
+
+		# List of items to be compared and considered
+		self._filter_paths_with_presets(
+			preset_list=self.match_list,
+			ref_files_to_iter=files,
+			ref_identified_files_against_duplicates=identified_files,
+			ref_resources=resources
+		)
+
+		# List of items to be compared but not considered
+		self._filter_paths_with_presets(
+			preset_list=self.ignore_list,
+			ref_files_to_iter=files,
+			ref_identified_files_against_duplicates=identified_files,
+			ref_resources=resources,
 			priority=-1,
 			ignore=True
 		)
@@ -154,22 +172,19 @@ class ResourceHandler:
 
 	def _filter_paths_with_presets(self,
 		preset_list,
-		ref_resources,
 		ref_files_to_iter,
 		ref_identified_files_against_duplicates,
+		ref_resources=None,
 		priority=None,
-		ignore=False
+		ignore=False,
 	):
 		should_exit = False
 
 		for index in range(len(preset_list)):
 			preset = preset_list[index]
 
-			pattern, threshold = None, None
-			if isinstance(preset, list):
-				pattern, threshold = preset
-			else:
-				pattern = preset
+			pattern = preset.pattern
+			threshold = preset.threshold
 
 			matched_at_least_once = False
 			for file in ref_files_to_iter:
@@ -180,14 +195,15 @@ class ResourceHandler:
 					matched_at_least_once = True
 					ref_identified_files_against_duplicates[file] = True
 
-					ref_resources.append(
-						Resource(
-							path=file,
-							priority=priority or index,
-							threshold=threshold,
-							ignore=ignore
+					if ref_resources is not None:
+						ref_resources.append(
+							Resource(
+								path=file,
+								priority=priority or index,
+								threshold=threshold,
+								ignore=ignore
+							)
 						)
-					)
 
 			if not matched_at_least_once:
 				logger.result(

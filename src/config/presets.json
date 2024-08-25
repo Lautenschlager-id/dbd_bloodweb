@@ -178,6 +178,10 @@
 			"brown offer: *",
 			"yellow offer: *",
 			"offer: cut coin"
+		],
+		"match_exception": [
+			"brown offer: reagent",
+			"yellow offer: reagent"
 		]
 	},
 	"ghost_face": {

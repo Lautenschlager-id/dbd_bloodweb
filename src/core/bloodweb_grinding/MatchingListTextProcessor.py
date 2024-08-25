@@ -2,6 +2,7 @@ import re
 from sys import exit
 import unicodedata
 
+from .FilenamePattern import FilenamePattern
 from utils.functions import set_text_to_camel_case
 from utils.logger import logger
 
@@ -37,26 +38,26 @@ class MatchingListTextProcessor:
 	def __init__(self, entry_list):
 		self.entry_list = entry_list
 
-	def convert_line_to_unix_file_name(self, line):
+	def get_pattern_from_identifier(self, identifier):
 		# purple item: flashlight -> template_4*IconItems_*flashlight*
 		# item: flashlight -> IconItems_*flashlight*
 
-		valid_line = self.RE_ENTRY_TEXT.search(line.lower())
-		if not valid_line:
+		valid_identifier = self.RE_ENTRY_TEXT.search(identifier.lower())
+		if not valid_identifier:
 			logger.result(
-				'Got invalid line \'{}\''
-				, line
+				'Got invalid identifier \'{}\''
+				, identifier
 			)
 			exit()
 
-		(color, type, description) = valid_line.groups()
+		(color, type, description) = valid_identifier.groups()
 
 		resource_prefix = self.RESOURCE_PREFIX.get(type)
 		if not resource_prefix:
 			logger.result(
-				'Got invalid type \'{}\' at line \'{}\''
+				'Got invalid type \'{}\' at identifier \'{}\''
 				, type
-				, line
+				, identifier
 			)
 			exit()
 
@@ -66,31 +67,29 @@ class MatchingListTextProcessor:
 		description = self._replace_special_characters_with_wildcard(
 			set_text_to_camel_case(description)
 		)
-
 		return f'*{color}*{resource_prefix}*{description}*'
 
-	def convert_all_lines_to_unix_file_name(self):
+
+	def get_data_from_all_identifiers(self):
 		logger.init(
 			'text'
 			, 'Processing preset paths'
 		)
 
-		for index in range(len(self.entry_list)):
-			preset = self.entry_list[index]
+		pattern_list = []
 
-			is_list = isinstance(preset, list)
+		for entry in self.entry_list:
+			pattern = FilenamePattern(entry)
 
-			line = preset[0] if is_list else preset
-			unix_file_name = self.convert_line_to_unix_file_name(line)
+			pattern.pattern = self.get_pattern_from_identifier(
+				pattern.identifier
+			)
 
-			if is_list:
-				preset[0] = unix_file_name
-			else:
-				self.entry_list[index] = unix_file_name
+			pattern_list.append(pattern)
 
 		logger.result('Preset paths processed successfully!')
 
-		return self.entry_list
+		return pattern_list
 
 	def _replace_special_characters_with_wildcard(self, content):
 		normalized_text = unicodedata.normalize('NFD', content)

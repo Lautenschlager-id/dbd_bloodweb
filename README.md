@@ -296,6 +296,15 @@ $ pip install -r requirements.txt
 		usually because of the similarity between the images.
 	</li>
 	<li>
+		A preset optionally may include the field <code>match_exception</code>, holding the items that must not be matched during the file filtering.
+		<br/>
+		This is only useful when to add exceptions to star identifiers from either <code>match</code> or <code>ignore</code>.
+		<br/>
+		For example, if one of them includes the record <code>offer: *</code>, that is going to include all offerings. Let's say you want <u>all but one</u>. This <u>one</u> goes in <code>match_exception</code>.
+		<br/>
+		That is, <code>match</code> = <code>offer: *</code>, <code>match_exception</code> = <code>offer: reagent</code>, will match all offerings, except reagents (those won't even be included in the filterable filenames).
+	</li>
+	<li>
 		The items of a preset should be denoted as case-insensitive strings following one of the formats below:
 		<ul>
 			<li>

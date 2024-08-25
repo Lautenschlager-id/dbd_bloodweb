@@ -8,66 +8,44 @@ class ConfigLoaderPresets(ConfigLoader):
 	@property
 	def data_schema(self):
 		str_pattern = MatchingListTextProcessor.RE_ENTRY_TEXT.pattern
+
+		obj_structure = {
+			'type': 'array',
+			'items': {
+				'oneOf': [
+					{
+						'type': 'string',
+						'pattern': str_pattern
+					},
+					{
+						'type': 'array',
+						'prefixItems': [
+							{
+								'type': 'string',
+								'pattern': str_pattern
+							},
+							{
+								'type': 'number',
+								'minimum': 0,
+								'maximum': 1
+							}
+						],
+						'minItems': 2,
+						'maxItems': 2
+					}
+				]
+			}
+		}
+
 		return {
 			'type': 'object',
 			'patternProperties': {
 				'^[a-z0-9_]+$': {
 					'type': 'object',
 					'properties': {
-						'match': {
-							'type': 'array',
-							'items': {
-								'oneOf': [
-									{
-										'type': 'string',
-										'pattern': str_pattern
-									},
-									{
-										'type': 'array',
-										'prefixItems': [
-											{
-												'type': 'string',
-												'pattern': str_pattern
-											},
-											{
-												'type': 'number',
-												'minimum': 0,
-												'maximum': 1
-											}
-										],
-										'minItems': 2,
-										'maxItems': 2
-									}
-								]
-							}
-						},
-						'ignore': {
-							'type': 'array',
-							'items': {
-								'oneOf': [
-									{
-										'type': 'string',
-										'pattern': str_pattern
-									},
-									{
-										'type': 'array',
-										'prefixItems': [
-											{
-												'type': 'string',
-												'pattern': str_pattern
-											},
-											{
-												'type': 'number',
-												'minimum': 0,
-												'maximum': 1
-											}
-										],
-										'minItems': 2,
-										'maxItems': 2
-									}
-								]
-							}
-						}
+						'match': obj_structure,
+						'ignore': obj_structure,
+						'match_exception': obj_structure
 					},
 					'required': ['match'],
 					'additionalProperties': False
