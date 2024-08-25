@@ -170,9 +170,7 @@
 			"offer: bloody party",
 			"offer: ward",
 			"map: marys letter",
-			["purple offer: oak", 0.758],
-			"yellow offer: reagent",
-			"brown offer: reagent"
+			["purple offer: oak", 0.758]
 		],
 		"ignore": [
 			"brown offer: *",
