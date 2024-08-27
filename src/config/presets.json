@@ -249,6 +249,24 @@
 			"map: cookbook"
 		]
 	},
+	"nemesis": {
+		"match_and_grind": [
+			"addon: sample",
+			"addon: serotonin",
+			"addon: parasite",
+			"addon: ribbon",
+			"addon: shattered",
+			"red offer: mori",
+			"offer: bloody party",
+			"offer: ward",
+			["purple offer: oak", 0.758]
+		],
+		"match_and_skip": [
+			"brown offer: *",
+			"yellow offer: *",
+			"offer: cut coin"
+		]
+	},
 	"artist": {
 		"match_and_grind": [
 			"addon: hands",
@@ -330,6 +348,26 @@
 			"offer: ward",
 			["purple offer: oak", 0.758],
 			["map: rpd badge", 0.672]
+		],
+		"match_and_skip": [
+			"brown offer: *",
+			"yellow offer: *",
+			"offer: cut coin"
+		]
+	},
+	"dark_lord": {
+		"match_and_grind": [
+			"red addon: ring",
+			"red addon: shield",
+			"purple addon: lapis",
+			"green addon: feather",
+			"green addon: watch",
+			"yellow addon: ticket",
+			"yellow addon: boots",
+			"offer: bloody party",
+			"red offer: mori",
+			"offer: ward",
+			["purple offer: oak", 0.758]
 		],
 		"match_and_skip": [
 			"brown offer: *",
