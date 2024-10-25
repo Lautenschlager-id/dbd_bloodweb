@@ -1,6 +1,8 @@
 {
 	"survivor": {
 		"match_and_grind": [
+			["orange item: wisp", 0.67],
+			["orange addon: serum", 0.67],
 			"purple item: flashlight",
 			"green item: flashlight",
 			"yellow item: flashlight",
@@ -15,15 +17,16 @@
 			"purple item: engineers toolbox",
 			"green item: mechanics toolbox",
 			"red addon: new part",
+			"green offer: envelope",
 			"green item: medkit",
 			"yellow item: aid kit",
 			"map: jigsaw",
-			"green offer: envelope",
 			"map: shattered glasses",
 			["brown addon: battery", 0.762],
 			["red addon: bulb", 0.78],
 			"red addon: gel",
 			"offer: oak",
+			["orange addon: bulb", 0.67],
 			"addon: sapphire lens",
 			"addon: halogen",
 			"yellow addon: wire spool",
@@ -37,6 +40,23 @@
 			"yellow offer: *",
 			"addon: abdominal dressing",
 			"addon: sponge"
+		]
+	},
+	"trapper": {
+		"match_and_grind": [
+			"red addon: bloody",
+			"red addon: stone",
+			"purple addon: stone",
+			"purple addon: tension",
+			"purple addon: sack",
+			"offer: bloody party",
+			"offer: ward",
+			["purple offer: oak", 0.758]
+		],
+		"match_and_skip": [
+			"brown offer: *",
+			"yellow offer: *",
+			"offer: cut coin"
 		]
 	},
 	"nurse": {
@@ -77,6 +97,7 @@
 			"purple addon: vanity mirror",
 			"purple addon: tombstone piece",
 			"green addon: memorial",
+			"purple offer: reagent",
 			"offer: bloody party",
 			"green addon: jewellery box",
 			"offer: ward",
@@ -249,6 +270,38 @@
 			"map: cookbook"
 		]
 	},
+	"trickster": {
+		"match_and_grind": [
+			"addon: trick blades",
+			"addon: edge of revival",
+			"addon: cut thru",
+			"addon: photocard",
+			"offer: bloody party",
+			["purple offer: oak", 0.758],
+			"offer: ward"
+		],
+		"match_and_skip": [
+			"brown offer: *",
+			"yellow offer: *",
+			"offer: cut coin"
+		]
+	},
+	"cenobite": {
+		"match_and_grind": [
+			"red addon: fang",
+			"red addon: lament",
+			"addon: lens",
+			"addon: tooth",
+			"offer: bloody party",
+			["purple offer: oak", 0.758],
+			"offer: ward"
+		],
+		"match_and_skip": [
+			"brown offer: *",
+			"yellow offer: *",
+			"offer: cut coin"
+		]
+	},
 	"nemesis": {
 		"match_and_grind": [
 			"addon: sample",
@@ -357,11 +410,12 @@
 	},
 	"dark_lord": {
 		"match_and_grind": [
-			"red addon: ring",
-			"red addon: shield",
+			"purple addon: medusa",
 			"purple addon: lapis",
+			"green addon: echo",
 			"green addon: feather",
-			"green addon: watch",
+			"green addon: sunglass",
+			"red addon: *",
 			"yellow addon: ticket",
 			"yellow addon: boots",
 			"offer: bloody party",
