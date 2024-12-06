@@ -1,8 +1,6 @@
 {
 	"survivor": {
 		"match_and_grind": [
-			["orange item: wisp", 0.67],
-			["orange addon: serum", 0.67],
 			"purple item: flashlight",
 			"green item: flashlight",
 			"yellow item: flashlight",
@@ -26,7 +24,6 @@
 			["red addon: bulb", 0.78],
 			"red addon: gel",
 			"offer: oak",
-			["orange addon: bulb", 0.67],
 			"addon: sapphire lens",
 			"addon: halogen",
 			"yellow addon: wire spool",
@@ -49,6 +46,41 @@
 			"purple addon: stone",
 			"purple addon: tension",
 			"purple addon: sack",
+			"map: marys letter",
+			"map: alien flora",
+			"offer: ward",
+			["purple offer: oak", 0.758],
+			"offer: bloody party"
+		],
+		"match_and_skip": [
+			"brown offer: *",
+			"yellow offer: *",
+			"offer: cut coin"
+		]
+	},
+	"wraith": {
+		"match_and_grind": [
+			"purple addon: swift",
+			"purple addon: shadow",
+			"purple addon: windstorm",
+			"purple addon: seeing",
+			"red addon: coxcombed",
+			"offer: bloody party",
+			"offer: ward",
+			["purple offer: oak", 0.758]
+		],
+		"match_and_skip": [
+			"brown offer: *",
+			"yellow offer: *",
+			"offer: cut coin"
+		]
+	},
+	"hillbilly": {
+		"match_and_grind": [
+			"purple addon: slippers",
+			"purple addon: chains",
+			"purple addon: boots",
+			"green addon: thompsons",
 			"offer: bloody party",
 			"offer: ward",
 			["purple offer: oak", 0.758]
@@ -63,8 +95,8 @@
 		"match_and_grind": [
 			"addon: ataxic respiration",
 			"addon: catatonic boys treasure",
-			"offer: bloody party",
 			"offer: ward",
+			"offer: bloody party",
 			["purple offer: oak", 0.758]
 		]
 	},
@@ -89,8 +121,8 @@
 	},
 	"shape": {
 		"match_and_grind": [
-			"red addon: tombstone",
 			"red addon: tuft",
+			"red addon: tombstone",
 			"purple addon: scratched mirror",
 			"map: marys letter",
 			"map: shattered glasses",
@@ -138,8 +170,8 @@
 			["green addon: discipline", 0.88],
 			"red addon: queen",
 			"red addon: king",
-			"offer: bloody party",
 			"offer: ward",
+			"offer: bloody party",
 			["purple offer: oak", 0.758]
 		],
 		"match_and_skip": [
@@ -154,8 +186,8 @@
 			"red addon: redhead",
 			"addon: flask of bleach",
 			"purple addon: gin bottle",
-			"offer: bloody party",
 			"offer: ward",
+			"offer: bloody party",
 			["purple offer: oak", 0.758]
 		],
 		"match_and_skip": [
@@ -171,8 +203,8 @@
 			"purple addon: pill bottle",
 			"map: jigsaw",
 			["map: rpd badge", 0.672],
-			"offer: bloody party",
 			"offer: ward",
+			"offer: bloody party",
 			["purple offer: oak", 0.758]
 		],
 		"match_and_skip": [
@@ -188,8 +220,8 @@
 			"purple addon: *",
 			"red addon: video",
 			"purple offer: reagent",
-			"offer: bloody party",
 			"offer: ward",
+			"offer: bloody party",
 			"map: marys letter",
 			["purple offer: oak", 0.758]
 		],
@@ -203,13 +235,28 @@
 			"yellow offer: reagent"
 		]
 	},
+	"plague": {
+		"match_and_grind": [
+			"red addon: seal",
+			"red addon: incense",
+			"addon: devotee",
+			"offer: ward",
+			"offer: bloody party",
+			["purple offer: oak", 0.758]
+		],
+		"match_and_skip": [
+			"brown offer: *",
+			"yellow offer: *",
+			"offer: cut coin"
+		]
+	},
 	"ghost_face": {
 		"match_and_grind": [
 			"purple addon: driver",
 			"purple addon: sheath",
 			"green addon: wallet",
-			"offer: bloody party",
 			"offer: ward",
+			"offer: bloody party",
 			["map: rpd badge", 0.672],
 			"map: beef",
 			"map: airlock",
@@ -235,10 +282,26 @@
 			"red addon: moss",
 			"addon: whistle",
 			"addon: glasses",
-			"offer: bloody party",
 			"offer: ward",
+			"offer: bloody party",
 			"map: marys letter",
 			["map: rpd badge", 0.672],
+			["purple offer: oak", 0.758]
+		],
+		"match_and_skip": [
+			"brown offer: *",
+			"yellow offer: *",
+			"offer: cut coin"
+		]
+	},
+	"blight": {
+		"match_and_grind": [
+			"purple addon: ring",
+			"addon: crow",
+			"green addon: compound",
+			"addon: rat",
+			"offer: ward",
+			"offer: bloody party",
 			["purple offer: oak", 0.758]
 		],
 		"match_and_skip": [
@@ -310,8 +373,8 @@
 			"addon: ribbon",
 			"addon: shattered",
 			"red offer: mori",
-			"offer: bloody party",
 			"offer: ward",
+			"offer: bloody party",
 			["purple offer: oak", 0.758]
 		],
 		"match_and_skip": [
@@ -326,9 +389,9 @@
 			"red addon: rot",
 			"addon: grief",
 			"addon: bell",
+			"offer: ward",
 			"offer: bloody party",
 			"red offer: mori",
-			"offer: ward",
 			["purple offer: oak", 0.758]
 		],
 		"match_and_skip": [
@@ -345,8 +408,8 @@
 			"addon: comb",
 			"addon: pinwheel",
 			["purple offer: oak", 0.758],
-			"offer: bloody party",
 			"offer: ward",
+			"offer: bloody party",
 			"red offer: mori"
 		],
 		"match_and_skip": [
@@ -362,9 +425,23 @@
 			"red addon: wooden",
 			"addon: doll",
 			"addon: skull",
+			"offer: ward",
 			"offer: bloody party",
 			"red offer: mori",
+			["purple offer: oak", 0.758]
+		],
+		"match_and_skip": [
+			"brown offer: *",
+			"yellow offer: *",
+			"offer: cut coin"
+		]
+	},
+	"knight": {
+		"match_and_grind": [
+			"addon: banner",
+			"addon: contract",
 			"offer: ward",
+			"red offer: mori",
 			["purple offer: oak", 0.758]
 		],
 		"match_and_skip": [
@@ -379,9 +456,9 @@
 			"red addon: manuscript",
 			"addon: readout",
 			"addon: lighting",
+			"offer: ward",
 			"offer: bloody party",
 			"red offer: mori",
-			"offer: ward",
 			["purple offer: oak", 0.758]
 		],
 		"match_and_skip": [
@@ -396,9 +473,9 @@
 			"addon: construction",
 			"red addon: *",
 			"addon: manifest",
+			"offer: ward",
 			"offer: bloody party",
 			"red offer: mori",
-			"offer: ward",
 			["purple offer: oak", 0.758],
 			["map: rpd badge", 0.672]
 		],
@@ -418,9 +495,27 @@
 			"red addon: *",
 			"yellow addon: ticket",
 			"yellow addon: boots",
+			"offer: ward",
 			"offer: bloody party",
 			"red offer: mori",
+			["purple offer: oak", 0.758]
+		],
+		"match_and_skip": [
+			"brown offer: *",
+			"yellow offer: *",
+			"offer: cut coin"
+		]
+	},
+	"houndmaster": {
+		"match_and_grind": [
+			"addon: leather",
+			"addon: gunpowder",
+			"addon: pins",
+			"addon: map",
+			"addon: snapper",
 			"offer: ward",
+			"offer: bloody party",
+			"red offer: mori",
 			["purple offer: oak", 0.758]
 		],
 		"match_and_skip": [
