@@ -99,7 +99,7 @@ class BloodwebHandler:
 		self.region_level.set_action_rectangle(
 			x=380,
 			y=90,
-			width=300,
+			width=330,
 			height=30
 		)
 
