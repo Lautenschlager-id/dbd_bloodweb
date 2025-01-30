@@ -98,9 +98,9 @@ class BloodwebHandler:
 		self.region_level = CoordinateController(REGION_LEVEL)
 		self.region_level.set_action_rectangle(
 			x=380,
-			y=70,
+			y=90,
 			width=300,
-			height=40
+			height=30
 		)
 
 		self.captured_bloodweb_level = None

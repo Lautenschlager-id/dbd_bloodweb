@@ -198,20 +198,18 @@
 	},
 	"nightmare": {
 		"match_and_grind": [
-			"red addon: brush",
-			"red addon: box",
-			"purple addon: pill bottle",
-			"map: jigsaw",
-			["map: rpd badge", 0.672],
+			"addon: bottle",
+			"addon: photo",
+			"addon: swing",
+			"purple addon: block",
+			"red addon: paint",
 			"offer: ward",
-			"offer: bloody party",
 			["purple offer: oak", 0.758]
 		],
 		"match_and_skip": [
 			"brown offer: *",
 			"yellow offer: *",
-			"offer: cut coin",
-			"map: cookbook"
+			"offer: cut coin"
 		]
 	},
 	"pig": {
@@ -286,6 +284,22 @@
 			"offer: bloody party",
 			"map: marys letter",
 			["map: rpd badge", 0.672],
+			["purple offer: oak", 0.758]
+		],
+		"match_and_skip": [
+			"brown offer: *",
+			"yellow offer: *",
+			"offer: cut coin"
+		]
+	},
+	"oni": {
+		"match_and_grind": [
+			"red addon: family",
+			"purple addon: hull",
+			"red addon: glove",
+			"addon: crutch",
+			"offer: ward",
+			"offer: bloody party",
 			["purple offer: oak", 0.758]
 		],
 		"match_and_skip": [
@@ -436,6 +450,22 @@
 			"offer: cut coin"
 		]
 	},
+	"mastermind": {
+		"match_and_grind": [
+			"addon: gloves",
+			"addon: egg",
+			"red addon: photo",
+			"offer: ward",
+			"offer: bloody party",
+			"red offer: mori",
+			["purple offer: oak", 0.758]
+		],
+		"match_and_skip": [
+			"brown offer: *",
+			"yellow offer: *",
+			"offer: cut coin"
+		]
+	},
 	"knight": {
 		"match_and_grind": [
 			"addon: banner",
@@ -508,11 +538,10 @@
 	},
 	"houndmaster": {
 		"match_and_grind": [
+			"addon: wheel",
+			"addon: marlin",
 			"addon: leather",
 			"addon: gunpowder",
-			"addon: pins",
-			"addon: map",
-			"addon: snapper",
 			"offer: ward",
 			"offer: bloody party",
 			"red offer: mori",
