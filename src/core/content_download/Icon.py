@@ -1,6 +1,8 @@
 import requests
 import os
+import re
 from sys import exit
+from urllib.parse import urljoin
 
 from utils.enums import FILE_EXTENSION, ICON_TYPE
 from utils.logger import logger
@@ -14,7 +16,7 @@ class Icon:
 		"ultra-rare-item-element": 5
 	}
 
-	def __init__(self, icon, type):
+	def __init__(self, icon, type, _base_url):
 		if not ICON_TYPE.any_matching(type):
 			logger.result(
 				'Invalid icon type \'{}\''
@@ -25,9 +27,14 @@ class Icon:
 
 		self.type = type
 
-		self.source = icon.get('data-src')
+		self.source = icon.get('src')
+		if (_base_url):
+			self.source = urljoin(_base_url, self.source)
 
-		file_name = self.source.split('/')[-3][:-4]
+		file_name = self.source.split('/')[-1]
+		file_name = '_'.join(re.split(r'[_?.]', file_name)[2:-2])
+		file_name = file_name[0].upper() . file_name[1:]
+
 		self.name = file_name
 		self.file_name = f'{file_name}{FILE_EXTENSION.RAW_RESOURCE}'
 

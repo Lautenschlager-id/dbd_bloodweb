@@ -11,7 +11,8 @@ from utils.logger import logger
 from utils.multithread import multithreaded_execute
 
 class ContentDownloader:
-	content_url = 'https://deadbydaylight.fandom.com/wiki/{}'
+	base_url = 'https://deadbydaylight.wiki.gg/'
+	content_url = '{}/wiki/{}'.format(base_url, '{}')
 
 	def __init__(self, content_name):
 		self.content_name = set_text_to_pascal_case(content_name, separator=' ')
@@ -124,8 +125,8 @@ class ContentDownloader:
 
 	def _search_icons_from_section(self, section, type):
 		table = section.find_next('table')
-		icons = table.select('tr > th:first-of-type div:last-of-type a img.lazyload')
-		return [ Icon(icon, type) for icon in icons ]
+		icons = table.select('tr > th:first-of-type div:last-of-type a img[loading=lazy]')
+		return [ Icon(icon, type, self.base_url) for icon in icons ]
 
 	def _download_all_perks(self, executor, futures, perks_list):
 		logger.action(

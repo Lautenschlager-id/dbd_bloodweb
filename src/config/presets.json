@@ -5,30 +5,26 @@
 			"green item: flashlight",
 			"yellow item: flashlight",
 			"addon: styptic",
-			"red addon: syringe",
-			"purple item: medkit",
-			["green addon: battery", 0.762],
 			"offer: bloody party",
+			"red addon: syringe",
+			["green addon: battery", 0.762],
+			"purple item: medkit",
 			["yellow addon: battery", 0.762],
 			"addon: sapphire lens",
-			"offer: ward",
 			"offer: escape cake",
+			"offer: ward",
 			"purple item: engineers toolbox",
 			"green item: mechanics toolbox",
 			"red addon: new part",
-			"green offer: envelope",
+			"addon: halogen",
 			"green item: medkit",
-			"yellow item: aid kit",
+			"green offer: envelope",
 			"map: jigsaw",
 			"map: shattered glasses",
 			["brown addon: battery", 0.762],
 			["red addon: bulb", 0.78],
 			"red addon: gel",
-			"offer: oak",
-			"addon: halogen",
-			"yellow addon: wire spool",
-			"addon: bandages",
-			"addon: swivel"
+			"offer: oak"
 		],
 		"match_and_skip": [
 			"brown item: worn out tools",
@@ -170,6 +166,20 @@
 			["green addon: discipline", 0.88],
 			"red addon: queen",
 			"red addon: king",
+			"offer: ward",
+			"offer: bloody party",
+			["purple offer: oak", 0.758]
+		],
+		"match_and_skip": [
+			"brown offer: *",
+			"yellow offer: *",
+			"offer: cut coin"
+		]
+	},
+	"cannibal": {
+		"match_and_grind": [
+			"purple addon: chilli",
+			"green addon: begrimed",
 			"offer: ward",
 			"offer: bloody party",
 			["purple offer: oak", 0.758]
