@@ -562,5 +562,20 @@
 			"yellow offer: *",
 			"offer: cut coin"
 		]
-	}
+	},
+	"ghoul": {
+		"match_and_grind": [
+			"addon: centipede",
+			"addon: patch",
+			"addon: aogiri",
+			"offer: bloody party",
+			"offer: ward",
+			["purple offer: oak", 0.758]
+		],
+		"match_and_skip": [
+			"brown offer: *",
+			"yellow offer: *",
+			"offer: cut coin"
+		]
+	},
 }
