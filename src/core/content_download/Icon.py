@@ -33,7 +33,7 @@ class Icon:
 
 		file_name = self.source.split('/')[-1]
 		file_name = '_'.join(re.split(r'[_?.]', file_name)[2:-2])
-		file_name = file_name[0].upper() . file_name[1:]
+		file_name = file_name[0].upper() + file_name[1:]
 
 		self.name = file_name
 		self.file_name = f'{file_name}{FILE_EXTENSION.RAW_RESOURCE}'
