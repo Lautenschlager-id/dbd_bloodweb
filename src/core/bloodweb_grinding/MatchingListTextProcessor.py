@@ -9,8 +9,8 @@ from utils.logger import logger
 class MatchingListTextProcessor:
 	TEMPLATE_COLOR = {
 		"brown": 1,
-		"yellow": 2,
-		"green": 3,
+		"green": 2,
+		"blue": 3,
 		"purple": 4,
 		"red": 5,
 		"orange": 6,

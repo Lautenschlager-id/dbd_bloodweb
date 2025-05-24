@@ -2,23 +2,23 @@
 	"survivor": {
 		"match_and_grind": [
 			"purple item: flashlight",
+			"blue item: flashlight",
 			"green item: flashlight",
-			"yellow item: flashlight",
 			"addon: styptic",
 			"offer: bloody party",
 			"red addon: syringe",
-			["green addon: battery", 0.762],
+			["blue addon: battery", 0.762],
 			"purple item: medkit",
-			["yellow addon: battery", 0.762],
+			["green addon: battery", 0.762],
 			"addon: sapphire lens",
 			"offer: escape cake",
 			"offer: ward",
 			"purple item: engineers toolbox",
-			"green item: mechanics toolbox",
+			"blue item: mechanics toolbox",
 			"red addon: new part",
 			"addon: halogen",
-			"green item: medkit",
-			"green offer: envelope",
+			"blue item: medkit",
+			"blue offer: envelope",
 			"map: jigsaw",
 			"map: shattered glasses",
 			["brown addon: battery", 0.762],
@@ -30,7 +30,7 @@
 			"brown item: worn out tools",
 			["brown addon: power bulb", 0.79],
 			"brown offer: *",
-			"yellow offer: *",
+			"green offer: *",
 			"addon: abdominal dressing",
 			"addon: sponge"
 		]
@@ -50,7 +50,7 @@
 		],
 		"match_and_skip": [
 			"brown offer: *",
-			"yellow offer: *",
+			"green offer: *",
 			"offer: cut coin"
 		]
 	},
@@ -67,7 +67,7 @@
 		],
 		"match_and_skip": [
 			"brown offer: *",
-			"yellow offer: *",
+			"green offer: *",
 			"offer: cut coin"
 		]
 	},
@@ -76,14 +76,14 @@
 			"purple addon: slippers",
 			"purple addon: chains",
 			"purple addon: boots",
-			"green addon: thompsons",
+			"blue addon: thompsons",
 			"offer: bloody party",
 			"offer: ward",
 			["purple offer: oak", 0.758]
 		],
 		"match_and_skip": [
 			"brown offer: *",
-			"yellow offer: *",
+			"green offer: *",
 			"offer: cut coin"
 		]
 	},
@@ -100,9 +100,9 @@
 		"match_and_grind": [
 			"purple addon: glowing",
 			"addon: wooden fox",
-			"green addon: rose root",
+			"blue addon: rose root",
 			"red addon: head",
-			"green addon: flower",
+			"blue addon: flower",
 			"offer: bloody party",
 			"map: marys letter",
 			"offer: ward",
@@ -111,7 +111,7 @@
 		],
 		"match_and_skip": [
 			"brown offer: *",
-			"yellow offer: *",
+			"green offer: *",
 			"offer: cut coin"
 		]
 	},
@@ -124,10 +124,10 @@
 			"map: shattered glasses",
 			"purple addon: vanity mirror",
 			"purple addon: tombstone piece",
-			"green addon: memorial",
+			"blue addon: memorial",
 			"purple offer: reagent",
 			"offer: bloody party",
-			"green addon: jewellery box",
+			"blue addon: jewellery box",
 			"offer: ward",
 			["map: rpd badge", 0.6785],
 			"map: jigsaw",
@@ -135,7 +135,7 @@
 		],
 		"match_and_skip": [
 			"brown offer: *",
-			"yellow offer: *",
+			"green offer: *",
 			"offer: cut coin"
 		]
 	},
@@ -156,14 +156,14 @@
 		],
 		"match_and_skip": [
 			"brown offer: *",
-			"yellow offer: *",
+			"green offer: *",
 			"offer: cut coin"
 		]
 	},
 	"doctor": {
 		"match_and_grind": [
 			"purple addon: discipline",
-			["green addon: discipline", 0.88],
+			["blue addon: discipline", 0.88],
 			"red addon: queen",
 			"red addon: king",
 			"offer: ward",
@@ -172,21 +172,21 @@
 		],
 		"match_and_skip": [
 			"brown offer: *",
-			"yellow offer: *",
+			"green offer: *",
 			"offer: cut coin"
 		]
 	},
 	"cannibal": {
 		"match_and_grind": [
 			"purple addon: chilli",
-			"green addon: begrimed",
+			"blue addon: begrimed",
 			"offer: ward",
 			"offer: bloody party",
 			["purple offer: oak", 0.758]
 		],
 		"match_and_skip": [
 			"brown offer: *",
-			"yellow offer: *",
+			"green offer: *",
 			"offer: cut coin"
 		]
 	},
@@ -202,7 +202,7 @@
 		],
 		"match_and_skip": [
 			"brown offer: *",
-			"yellow offer: *",
+			"green offer: *",
 			"offer: cut coin"
 		]
 	},
@@ -218,7 +218,7 @@
 		],
 		"match_and_skip": [
 			"brown offer: *",
-			"yellow offer: *",
+			"green offer: *",
 			"offer: cut coin"
 		]
 	},
@@ -235,12 +235,12 @@
 		],
 		"match_and_skip": [
 			"brown offer: *",
-			"yellow offer: *",
+			"green offer: *",
 			"offer: cut coin"
 		],
 		"wildcard_exception": [
 			"brown offer: reagent",
-			"yellow offer: reagent"
+			"green offer: reagent"
 		]
 	},
 	"plague": {
@@ -254,7 +254,7 @@
 		],
 		"match_and_skip": [
 			"brown offer: *",
-			"yellow offer: *",
+			"green offer: *",
 			"offer: cut coin"
 		]
 	},
@@ -262,7 +262,7 @@
 		"match_and_grind": [
 			"purple addon: driver",
 			"purple addon: sheath",
-			"green addon: wallet",
+			"blue addon: wallet",
 			"offer: ward",
 			"offer: bloody party",
 			["map: rpd badge", 0.672],
@@ -279,7 +279,7 @@
 		],
 		"match_and_skip": [
 			"brown offer: *",
-			"yellow offer: *",
+			"green offer: *",
 			"offer: cut coin",
 			"red addon: tape"
 		]
@@ -298,7 +298,7 @@
 		],
 		"match_and_skip": [
 			"brown offer: *",
-			"yellow offer: *",
+			"green offer: *",
 			"offer: cut coin"
 		]
 	},
@@ -314,7 +314,7 @@
 		],
 		"match_and_skip": [
 			"brown offer: *",
-			"yellow offer: *",
+			"green offer: *",
 			"offer: cut coin"
 		]
 	},
@@ -322,7 +322,7 @@
 		"match_and_grind": [
 			"purple addon: ring",
 			"addon: crow",
-			"green addon: compound",
+			"blue addon: compound",
 			"addon: rat",
 			"offer: ward",
 			"offer: bloody party",
@@ -330,7 +330,7 @@
 		],
 		"match_and_skip": [
 			"brown offer: *",
-			"yellow offer: *",
+			"green offer: *",
 			"offer: cut coin"
 		]
 	},
@@ -351,7 +351,7 @@
 		],
 		"match_and_skip": [
 			"brown offer: *",
-			"yellow offer: *",
+			"green offer: *",
 			"offer: cut coin",
 			"addon: tiny fingernail",
 			"map: cookbook"
@@ -369,7 +369,7 @@
 		],
 		"match_and_skip": [
 			"brown offer: *",
-			"yellow offer: *",
+			"green offer: *",
 			"offer: cut coin"
 		]
 	},
@@ -385,7 +385,7 @@
 		],
 		"match_and_skip": [
 			"brown offer: *",
-			"yellow offer: *",
+			"green offer: *",
 			"offer: cut coin"
 		]
 	},
@@ -403,7 +403,7 @@
 		],
 		"match_and_skip": [
 			"brown offer: *",
-			"yellow offer: *",
+			"green offer: *",
 			"offer: cut coin"
 		]
 	},
@@ -420,7 +420,7 @@
 		],
 		"match_and_skip": [
 			"brown offer: *",
-			"yellow offer: *",
+			"green offer: *",
 			"offer: cut coin"
 		]
 	},
@@ -438,7 +438,7 @@
 		],
 		"match_and_skip": [
 			"brown offer: *",
-			"yellow offer: *",
+			"green offer: *",
 			"offer: cut coin"
 		]
 	},
@@ -456,7 +456,7 @@
 		],
 		"match_and_skip": [
 			"brown offer: *",
-			"yellow offer: *",
+			"green offer: *",
 			"offer: cut coin"
 		]
 	},
@@ -472,7 +472,7 @@
 		],
 		"match_and_skip": [
 			"brown offer: *",
-			"yellow offer: *",
+			"green offer: *",
 			"offer: cut coin"
 		]
 	},
@@ -486,7 +486,7 @@
 		],
 		"match_and_skip": [
 			"brown offer: *",
-			"yellow offer: *",
+			"green offer: *",
 			"offer: cut coin"
 		]
 	},
@@ -503,7 +503,7 @@
 		],
 		"match_and_skip": [
 			"brown offer: *",
-			"yellow offer: *",
+			"green offer: *",
 			"offer: cut coin"
 		]
 	},
@@ -521,7 +521,7 @@
 		],
 		"match_and_skip": [
 			"brown offer: *",
-			"yellow offer: *",
+			"green offer: *",
 			"offer: cut coin"
 		]
 	},
@@ -529,12 +529,12 @@
 		"match_and_grind": [
 			"purple addon: medusa",
 			"purple addon: lapis",
-			"green addon: echo",
-			"green addon: feather",
-			"green addon: sunglass",
+			"blue addon: echo",
+			"blue addon: feather",
+			"blue addon: sunglass",
 			"red addon: *",
-			"yellow addon: ticket",
-			"yellow addon: boots",
+			"green addon: ticket",
+			"green addon: boots",
 			"offer: ward",
 			"offer: bloody party",
 			"red offer: mori",
@@ -542,7 +542,7 @@
 		],
 		"match_and_skip": [
 			"brown offer: *",
-			"yellow offer: *",
+			"green offer: *",
 			"offer: cut coin"
 		]
 	},
@@ -559,7 +559,7 @@
 		],
 		"match_and_skip": [
 			"brown offer: *",
-			"yellow offer: *",
+			"green offer: *",
 			"offer: cut coin"
 		]
 	},
@@ -574,7 +574,7 @@
 		],
 		"match_and_skip": [
 			"brown offer: *",
-			"yellow offer: *",
+			"green offer: *",
 			"offer: cut coin"
 		]
 	}
