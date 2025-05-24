@@ -127,7 +127,7 @@ $ pip install -r requirements.txt
 									Example grinding:
 									<ol>
 										<li>Syringes</li>
-										<li>Green Batteries</li>
+										<li>Blue Batteries</li>
 									</ol>
 									<img src='https://i.imgur.com/Mpcu63g.png' height='500' alt='example' />
 								</details>
@@ -144,7 +144,7 @@ $ pip install -r requirements.txt
 									Example grinding:
 									<ol>
 										<li>Syringes</li>
-										<li>Green Batteries</li>
+										<li>Blue Batteries</li>
 									</ol>
 									<img src='https://i.imgur.com/df2bvL1.png' height='500' alt='example' />
 								</details>
@@ -159,7 +159,7 @@ $ pip install -r requirements.txt
 									Example grinding:
 									<ol>
 										<li>Syringes</li>
-										<li>Green Batteries</li>
+										<li>Blue Batteries</li>
 									</ol>
 									<img src='https://i.imgur.com/6DojKfa.png' height='500' alt='example' />
 								</details>
@@ -174,7 +174,7 @@ $ pip install -r requirements.txt
 									Example grinding:
 									<ol>
 										<li>Syringes</li>
-										<li>Green Batteries</li>
+										<li>Blue Batteries</li>
 									</ol>
 									<img src='https://i.imgur.com/7CfntNb.png' height='500' alt='example' />
 								</details>
@@ -191,7 +191,7 @@ $ pip install -r requirements.txt
 									Example grinding:
 									<ol>
 										<li>Syringes</li>
-										<li>Green Batteries</li>
+										<li>Blue Batteries</li>
 									</ol>
 									<img src='https://i.imgur.com/df2bvL1.png' height='500' alt='example' />
 								</details>
@@ -323,8 +323,8 @@ $ pip install -r requirements.txt
 						</thead>
 						<tbody>
 							<tr><td>brown</td></tr>
-							<tr><td>yellow</td></tr>
 							<tr><td>green</td></tr>
+							<tr><td>blue</td></tr>
 							<tr><td>purple</td></tr>
 							<tr><td>red</td></tr>
 							<tr><td>orange</td></tr>
