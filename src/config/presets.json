@@ -96,25 +96,6 @@
 			["purple offer: oak", 0.758]
 		]
 	},
-	"huntress": {
-		"match_and_grind": [
-			"purple addon: glowing",
-			"addon: wooden fox",
-			"blue addon: rose root",
-			"red addon: head",
-			"blue addon: flower",
-			"offer: bloody party",
-			"map: marys letter",
-			"offer: ward",
-			["map: rpd badge", 0.6785],
-			["purple offer: oak", 0.758]
-		],
-		"match_and_skip": [
-			"brown offer: *",
-			"green offer: *",
-			"offer: cut coin"
-		]
-	},
 	"shape": {
 		"match_and_grind": [
 			"red addon: tuft",
@@ -190,14 +171,17 @@
 			"offer: cut coin"
 		]
 	},
-	"clown": {
+	"huntress": {
 		"match_and_grind": [
-			"addon: cigar box",
-			"red addon: redhead",
-			"addon: flask of bleach",
-			"purple addon: gin bottle",
-			"offer: ward",
+			"purple addon: glowing",
+			"addon: wooden fox",
+			"blue addon: rose root",
+			"red addon: head",
+			"blue addon: flower",
 			"offer: bloody party",
+			"map: marys letter",
+			"offer: ward",
+			["map: rpd badge", 0.6785],
 			["purple offer: oak", 0.758]
 		],
 		"match_and_skip": [
@@ -243,6 +227,51 @@
 			"green offer: reagent"
 		]
 	},
+	"clown": {
+		"match_and_grind": [
+			"addon: cigar box",
+			"red addon: redhead",
+			"addon: flask of bleach",
+			"purple addon: gin bottle",
+			"offer: ward",
+			"offer: bloody party",
+			["purple offer: oak", 0.758]
+		],
+		"match_and_skip": [
+			"brown offer: *",
+			"green offer: *",
+			"offer: cut coin"
+		]
+	},
+	"spirit": {
+		"match_and_grind": [
+			"addon: furin",
+			"red addon: *",
+			"offer: ward",
+			"offer: bloody party",
+			["purple offer: oak", 0.758]
+		],
+		"match_and_skip": [
+			"brown offer: *",
+			"green offer: *",
+			"offer: cut coin"
+		]
+	},
+	"legion": {
+		"match_and_grind": [
+			"addon: juli",
+			"addon: sunglasses",
+			"red addon: button",
+			"offer: ward",
+			"offer: bloody party",
+			["purple offer: oak", 0.758]
+		],
+		"match_and_skip": [
+			"brown offer: *",
+			"green offer: *",
+			"offer: cut coin"
+		]
+	},
 	"plague": {
 		"match_and_grind": [
 			"red addon: seal",
@@ -268,7 +297,7 @@
 			["map: rpd badge", 0.672],
 			"map: beef",
 			"map: airlock",
-			"red offer: mori",
+			"offer: mori",
 			"map: cookbook",
 			"map: jigsaw",
 			"map: marys letter",
@@ -308,6 +337,35 @@
 			"purple addon: hull",
 			"red addon: glove",
 			"addon: crutch",
+			"offer: ward",
+			"offer: bloody party",
+			["purple offer: oak", 0.758]
+		],
+		"match_and_skip": [
+			"brown offer: *",
+			"green offer: *",
+			"offer: cut coin"
+		]
+	},
+	"deathslinger": {
+		"match_and_grind": [
+			"addon: prison chain",
+			"addon: keys",
+			"offer: ward",
+			"offer: bloody party",
+			["purple offer: oak", 0.758]
+		],
+		"match_and_skip": [
+			"brown offer: *",
+			"green offer: *",
+			"offer: cut coin"
+		]
+	},
+	"executioner": {
+		"match_and_grind": [
+			"addon: burning",
+			"addon: foot",
+			"addon: goblet",
 			"offer: ward",
 			"offer: bloody party",
 			["purple offer: oak", 0.758]
@@ -373,6 +431,24 @@
 			"offer: cut coin"
 		]
 	},
+	"nemesis": {
+		"match_and_grind": [
+			"addon: sample",
+			"addon: serotonin",
+			"addon: parasite",
+			"addon: ribbon",
+			"addon: shattered",
+			"offer: mori",
+			"offer: ward",
+			"offer: bloody party",
+			["purple offer: oak", 0.758]
+		],
+		"match_and_skip": [
+			"brown offer: *",
+			"green offer: *",
+			"offer: cut coin"
+		]
+	},
 	"cenobite": {
 		"match_and_grind": [
 			"red addon: fang",
@@ -389,24 +465,6 @@
 			"offer: cut coin"
 		]
 	},
-	"nemesis": {
-		"match_and_grind": [
-			"addon: sample",
-			"addon: serotonin",
-			"addon: parasite",
-			"addon: ribbon",
-			"addon: shattered",
-			"red offer: mori",
-			"offer: ward",
-			"offer: bloody party",
-			["purple offer: oak", 0.758]
-		],
-		"match_and_skip": [
-			"brown offer: *",
-			"green offer: *",
-			"offer: cut coin"
-		]
-	},
 	"artist": {
 		"match_and_grind": [
 			"addon: hands",
@@ -415,7 +473,7 @@
 			"addon: bell",
 			"offer: ward",
 			"offer: bloody party",
-			"red offer: mori",
+			"offer: mori",
 			["purple offer: oak", 0.758]
 		],
 		"match_and_skip": [
@@ -434,7 +492,7 @@
 			["purple offer: oak", 0.758],
 			"offer: ward",
 			"offer: bloody party",
-			"red offer: mori"
+			"offer: mori"
 		],
 		"match_and_skip": [
 			"brown offer: *",
@@ -451,7 +509,7 @@
 			"addon: skull",
 			"offer: ward",
 			"offer: bloody party",
-			"red offer: mori",
+			"offer: mori",
 			["purple offer: oak", 0.758]
 		],
 		"match_and_skip": [
@@ -467,7 +525,7 @@
 			"red addon: photo",
 			"offer: ward",
 			"offer: bloody party",
-			"red offer: mori",
+			"offer: mori",
 			["purple offer: oak", 0.758]
 		],
 		"match_and_skip": [
@@ -481,7 +539,7 @@
 			"addon: banner",
 			"addon: contract",
 			"offer: ward",
-			"red offer: mori",
+			"offer: mori",
 			["purple offer: oak", 0.758]
 		],
 		"match_and_skip": [
@@ -498,7 +556,7 @@
 			"addon: lighting",
 			"offer: ward",
 			"offer: bloody party",
-			"red offer: mori",
+			"offer: mori",
 			["purple offer: oak", 0.758]
 		],
 		"match_and_skip": [
@@ -515,9 +573,67 @@
 			"addon: manifest",
 			"offer: ward",
 			"offer: bloody party",
-			"red offer: mori",
+			"offer: mori",
 			["purple offer: oak", 0.758],
 			["map: rpd badge", 0.672]
+		],
+		"match_and_skip": [
+			"brown offer: *",
+			"green offer: *",
+			"offer: cut coin"
+		]
+	},
+	"xenomorph": {
+		"match_and_grind": [
+			"addon: bolt",
+			"red addon: *",
+			"offer: ward",
+			"offer: bloody party",
+			["purple offer: oak", 0.758]
+		],
+		"match_and_skip": [
+			"brown offer: *",
+			"green offer: *",
+			"offer: cut coin"
+		]
+	},
+	"good_guy": {
+		"match_and_grind": [
+			"addon: yardstick",
+			"addon: rat poison",
+			"red addon: *",
+			"offer: ward",
+			"offer: bloody party",
+			["purple offer: oak", 0.758]
+		],
+		"match_and_skip": [
+			"brown offer: *",
+			"green offer: *",
+			"offer: cut coin"
+		]
+	},
+	"unknown": {
+		"match_and_grind": [
+			"addon: article",
+			"addon: box",
+			"offer: ward",
+			"offer: bloody party",
+			["purple offer: oak", 0.758]
+		],
+		"match_and_skip": [
+			"brown offer: *",
+			"green offer: *",
+			"offer: cut coin"
+		]
+	},
+	"lich": {
+		"match_and_grind": [
+			"addon: pearl",
+			"green addon: spell",
+			"red addon: *",
+			"offer: ward",
+			"offer: bloody party",
+			["purple offer: oak", 0.758]
 		],
 		"match_and_skip": [
 			"brown offer: *",
@@ -537,7 +653,7 @@
 			"green addon: boots",
 			"offer: ward",
 			"offer: bloody party",
-			"red offer: mori",
+			"offer: mori",
 			["purple offer: oak", 0.758]
 		],
 		"match_and_skip": [
@@ -554,7 +670,7 @@
 			"addon: gunpowder",
 			"offer: ward",
 			"offer: bloody party",
-			"red offer: mori",
+			"offer: mori",
 			["purple offer: oak", 0.758]
 		],
 		"match_and_skip": [
