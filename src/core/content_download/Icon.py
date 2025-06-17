@@ -13,7 +13,7 @@ class Icon:
 		"uncommon-item-element": 2,
 		"rare-item-element": 3,
 		"very-rare-item-element": 4,
-		"ultra-rare-item-element": 5
+		"visceral-item-element": 5
 	}
 
 	def __init__(self, icon, type, _base_url):
@@ -32,7 +32,7 @@ class Icon:
 			self.source = urljoin(_base_url, self.source)
 
 		file_name = self.source.split('/')[-1]
-		file_name = '_'.join(re.split(r'[_?.]', file_name)[2:-2])
+		file_name = '_'.join(re.split(r'[_?.]', file_name)[0:-2])
 		file_name = file_name[0].upper() + file_name[1:]
 
 		self.name = file_name

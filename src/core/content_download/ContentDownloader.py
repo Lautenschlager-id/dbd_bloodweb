@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
 from sys import exit
+import traceback
 
 from .Icon import Icon
 from core.image_processing.ImageProcessorAddon import ImageProcessorAddon
@@ -41,9 +42,9 @@ class ContentDownloader:
 			perks_list = self._search_perks()
 		except Exception as exception:
 			logger.result(
-				'Could not capture the expected 3 perks for \'{}\': {}'
+				'Could not capture the expected 3 perks for \'{}\':\n{}'
 				, self.content_name
-				, exception
+				, traceback.format_exc()
 				, log_level=2
 			)
 			exit()

@@ -1,5 +1,5 @@
 {
-	"parameters": ["-r", "survivor", "-p", "1"],
+	"parameters": ["-r", "survivor", "-p", "5"],
 
 	"default_match_and_grind_threshold": 0.75,
 	"default_match_and_skip_threshold": 0.78,
