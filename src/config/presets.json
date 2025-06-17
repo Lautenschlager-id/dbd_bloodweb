@@ -1,11 +1,11 @@
 {
 	"survivor": {
 		"match_and_grind": [
+			"offer: bloody party",
 			"purple item: flashlight",
 			"blue item: flashlight",
 			"green item: flashlight",
 			"addon: styptic",
-			"offer: bloody party",
 			"red addon: syringe",
 			["blue addon: battery", 0.762],
 			"purple item: medkit",
@@ -684,6 +684,24 @@
 			"addon: centipede",
 			"addon: patch",
 			"addon: aogiri",
+			"offer: bloody party",
+			"offer: ward",
+			["purple offer: oak", 0.758]
+		],
+		"match_and_skip": [
+			"brown offer: *",
+			"green offer: *",
+			"offer: cut coin"
+		]
+	},
+	"animatronic": {
+		"match_and_grind": [
+			"red addon: *",
+			"addon: bag",
+			"addon: hook",
+			"addon: guitar",
+			"addon: drawing",
+			"addon: badge",
 			"offer: bloody party",
 			"offer: ward",
 			["purple offer: oak", 0.758]
