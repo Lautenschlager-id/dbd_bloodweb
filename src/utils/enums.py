@@ -65,6 +65,7 @@ class IMAGE_PROCESSING_PARAMETER(CustomEnum):
 	item = 'Process item images'
 	offering = 'Process offer images'
 	perk = 'Process perk images'
+	box = 'Process mystery box images'
 
 class IMAGE_PROCESSING_PARAMETER_TARGET(CustomEnum):
 	all = 'Process for all killers and survivors'

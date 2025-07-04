@@ -3,6 +3,7 @@ from core.image_processing.ImageProcessorAddon import ImageProcessorAddon
 from core.image_processing.ImageProcessorItem import ImageProcessorItem
 from core.image_processing.ImageProcessorOffering import ImageProcessorOffering
 from core.image_processing.ImageProcessorPerk import ImageProcessorPerk
+from core.image_processing.ImageProcessorBox import ImageProcessorBox
 from utils.enums import (
 	ADDON_TYPE,
 	IMAGE_PROCESSING_PARAMETER,
@@ -53,6 +54,11 @@ class CommandHandlerImage(CommandHandlerBase):
 			IMAGE_PROCESSING_PARAMETER_TARGET.killer.name: [
 				PERK_TYPE.KILLER,
 			]
+		},
+		IMAGE_PROCESSING_PARAMETER.box.name: {
+			'class': ImageProcessorBox,
+			IMAGE_PROCESSING_PARAMETER_TARGET.all.name: None,
+			'': [None]
 		}
 	}
 
@@ -70,6 +76,7 @@ class CommandHandlerImage(CommandHandlerBase):
 			'{full_command}: Processes raw images to be used in the grinding system.'
 			'\n'
 				'\t>> Syntax:'
+					'\n\t\t{full_command}'
 					'\n\t\t{full_command} <type>'
 					'\n\t\t{full_command} <type> <target>'
 					'\n\t\t{full_command} <type> <target> <killer_name>'
