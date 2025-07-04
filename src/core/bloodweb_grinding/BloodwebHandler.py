@@ -217,8 +217,11 @@ class BloodwebHandler:
 
 		if level_up is False:
 			self._check_maximum_level()
+			# speed up animations
+			sleep(.3)
+			self._click(center_x, center_y)
 
-		sleep(4.5)
+		sleep(4)
 		self._check_bloodweb_level_metadata()
 
 	def get_bloodweb_level(self):

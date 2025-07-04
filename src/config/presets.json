@@ -1,6 +1,7 @@
 {
 	"survivor": {
 		"match_and_grind": [
+			"orange offer: scream pie",
 			"offer: bloody party",
 			"purple item: flashlight",
 			"blue item: flashlight",
@@ -12,15 +13,11 @@
 			["green addon: battery", 0.762],
 			"addon: sapphire lens",
 			"offer: escape cake",
-			"offer: ward",
 			"purple item: engineers toolbox",
 			"blue item: mechanics toolbox",
 			"red addon: new part",
 			"addon: halogen",
-			"blue item: medkit",
 			"blue offer: envelope",
-			"map: jigsaw",
-			"map: shattered glasses",
 			["brown addon: battery", 0.762],
 			["red addon: bulb", 0.78],
 			"red addon: gel",
@@ -701,7 +698,6 @@
 			"addon: hook",
 			"addon: guitar",
 			"addon: drawing",
-			"addon: badge",
 			"offer: bloody party",
 			"offer: ward",
 			["purple offer: oak", 0.758]
