@@ -263,6 +263,17 @@ $ pip install -r requirements.txt
 		</tr>
 		<tr>
 			<td>
+				<code>disable_box_resources</code>
+			</td>
+			<td>
+				Whether all mystery box images should be ignored.
+				<ul>
+					<li>Default: false</li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td>
 				<code>log_skipped_matches</code>
 			</td>
 			<td>
@@ -277,7 +288,7 @@ $ pip install -r requirements.txt
 
 2. All presets are placed in `/src/config/presets.json`
 <ul>
-	<li>A preset is an object with  addons, items, offerings, and/or perks you expect the system to grind for you.</li>
+	<li>A preset is an object with  addons, items, offerings, boxes, and/or perks you expect the system to grind for you.</li>
 	<li>By default, there should be a preset named <code>survivor</code> that targets all survivors, and presets named after each killer targeting them and possibly their exclusive addons.</li>
 	<li>Preset names must be simple texts with letters or underscores (_):
 		<ul>
@@ -342,6 +353,7 @@ $ pip install -r requirements.txt
 							<tr><td>offer</td><td>offering</td></tr>
 							<tr><td>perk</td></tr>
 							<tr><td>map</td><td>realm</td><td>level</td></tr>
+							<tr><td>event</td></tr>
 						</tbody>
 					</table>
 				</td>
@@ -548,6 +560,10 @@ If you are not trying to change resolutions, then probably you should not be usi
 						<tr>
 							<td><code>perk</code></td>
 							<td>Process perk images</td>
+						</tr>
+						<tr>
+							<td><code>box</code></td>
+							<td>Process mystery box images</td>
 						</tr>
 					</tr>
 				</tbody>

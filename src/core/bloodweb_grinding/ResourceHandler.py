@@ -9,6 +9,7 @@ from core.image_processing.ImageProcessorAddon import ImageProcessorAddon
 from core.image_processing.ImageProcessorItem import ImageProcessorItem
 from core.image_processing.ImageProcessorOffering import ImageProcessorOffering
 from core.image_processing.ImageProcessorPerk import ImageProcessorPerk
+from core.image_processing.ImageProcessorBox import ImageProcessorBox
 from utils.enums import (
 	ADDON_TYPE,
 	FILE_EXTENSION,
@@ -95,6 +96,9 @@ class ResourceHandler:
 					ImageProcessorAddon(self.type, self.killer_name)
 						.path_resource_icon_processed
 				)
+		
+		if not SETTINGS.get('disable_box_resources'):
+			paths.append(ImageProcessorBox().path_resource_icon_processed)
 
 		self.paths = paths
 

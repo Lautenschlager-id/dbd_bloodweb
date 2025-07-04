@@ -51,6 +51,10 @@ class ConfigLoaderSettings(ConfigLoader):
 		            'type': 'boolean',
 		            'default': True
 		        },
+				'disable_box_resources': {
+		            'type': 'boolean',
+		            'default': True
+		        },
 		        'log_skipped_matches': {
 		            'type': 'boolean',
 		            'default': False

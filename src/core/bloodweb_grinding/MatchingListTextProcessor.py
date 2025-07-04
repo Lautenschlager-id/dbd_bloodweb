@@ -28,6 +28,12 @@ class MatchingListTextProcessor:
 		"map": "maps*IconFavors_",
 		"realm": "maps*IconFavors_",
 		"level": "maps*IconFavors_",
+
+		"event": "events*IconFavors_",
+
+		"box": "IconBox_",
+		"mystery": "IconBox_",
+		"mystery_box": "IconBox_",
 	}
 
 	FNMATCH_ANY_CHAR = '[!:]'

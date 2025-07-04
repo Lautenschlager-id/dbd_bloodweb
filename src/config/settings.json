@@ -11,6 +11,7 @@
 	"disable_item_resources": false,
 	"disable_offering_resources": false,
 	"disable_perk_resources": true,
+	"disable_box_resources": false,
 
 	"log_skipped_matches": false
 }
