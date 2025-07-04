@@ -1,7 +1,7 @@
 {
 	"survivor": {
 		"match_and_grind": [
-			"event: pie",
+			["event: pie", 0.728],
 			"orange box: anniversary",
 			"offer: bloody party",
 			"purple item: flashlight",
@@ -35,6 +35,8 @@
 	},
 	"trapper": {
 		"match_and_grind": [
+			["event: pie", 0.728],
+			"orange box: anniversary",
 			"red addon: bloody",
 			"red addon: stone",
 			"purple addon: stone",
@@ -54,6 +56,8 @@
 	},
 	"wraith": {
 		"match_and_grind": [
+			["event: pie", 0.728],
+			"orange box: anniversary",
 			"purple addon: swift",
 			"purple addon: shadow",
 			"purple addon: windstorm",
@@ -71,6 +75,8 @@
 	},
 	"hillbilly": {
 		"match_and_grind": [
+			["event: pie", 0.728],
+			"orange box: anniversary",
 			"purple addon: slippers",
 			"purple addon: chains",
 			"purple addon: boots",
@@ -87,6 +93,8 @@
 	},
 	"nurse": {
 		"match_and_grind": [
+			["event: pie", 0.728],
+			"orange box: anniversary",
 			"addon: ataxic respiration",
 			"addon: catatonic boys treasure",
 			"offer: ward",
@@ -96,6 +104,8 @@
 	},
 	"shape": {
 		"match_and_grind": [
+			["event: pie", 0.728],
+			"orange box: anniversary",
 			"red addon: tuft",
 			"red addon: tombstone",
 			"purple addon: scratched mirror",
@@ -120,6 +130,8 @@
 	},
 	"hag": {
 		"match_and_grind": [
+			["event: pie", 0.728],
+			"orange box: anniversary",
 			"addon: rusty shackles",
 			"map: marys letter",
 			["addon: scarred hand", 0.8],
@@ -141,6 +153,8 @@
 	},
 	"doctor": {
 		"match_and_grind": [
+			["event: pie", 0.728],
+			"orange box: anniversary",
 			"purple addon: discipline",
 			["blue addon: discipline", 0.88],
 			"red addon: queen",
@@ -157,6 +171,8 @@
 	},
 	"cannibal": {
 		"match_and_grind": [
+			["event: pie", 0.728],
+			"orange box: anniversary",
 			"purple addon: chilli",
 			"blue addon: begrimed",
 			"offer: ward",
@@ -171,6 +187,8 @@
 	},
 	"huntress": {
 		"match_and_grind": [
+			["event: pie", 0.728],
+			"orange box: anniversary",
 			"purple addon: glowing",
 			"addon: wooden fox",
 			"blue addon: rose root",
@@ -190,6 +208,8 @@
 	},
 	"nightmare": {
 		"match_and_grind": [
+			["event: pie", 0.728],
+			"orange box: anniversary",
 			"addon: bottle",
 			"addon: photo",
 			"addon: swing",
@@ -206,6 +226,8 @@
 	},
 	"pig": {
 		"match_and_grind": [
+			["event: pie", 0.728],
+			"orange box: anniversary",
 			"red addon: amanda",
 			"purple addon: *",
 			"red addon: video",
@@ -227,6 +249,8 @@
 	},
 	"clown": {
 		"match_and_grind": [
+			["event: pie", 0.728],
+			"orange box: anniversary",
 			"addon: cigar box",
 			"red addon: redhead",
 			"addon: flask of bleach",
@@ -243,6 +267,8 @@
 	},
 	"spirit": {
 		"match_and_grind": [
+			["event: pie", 0.728],
+			"orange box: anniversary",
 			"addon: furin",
 			"red addon: *",
 			"offer: ward",
@@ -257,6 +283,8 @@
 	},
 	"legion": {
 		"match_and_grind": [
+			["event: pie", 0.728],
+			"orange box: anniversary",
 			"addon: juli",
 			"addon: sunglasses",
 			"red addon: button",
@@ -272,6 +300,8 @@
 	},
 	"plague": {
 		"match_and_grind": [
+			["event: pie", 0.728],
+			"orange box: anniversary",
 			"red addon: seal",
 			"red addon: incense",
 			"addon: devotee",
@@ -287,6 +317,8 @@
 	},
 	"ghost_face": {
 		"match_and_grind": [
+			["event: pie", 0.728],
+			"orange box: anniversary",
 			"purple addon: driver",
 			"purple addon: sheath",
 			"blue addon: wallet",
@@ -313,6 +345,8 @@
 	},
 	"demogorgon": {
 		"match_and_grind": [
+			["event: pie", 0.728],
+			"orange box: anniversary",
 			"red addon: leprose",
 			"red addon: moss",
 			"addon: whistle",
@@ -331,6 +365,8 @@
 	},
 	"oni": {
 		"match_and_grind": [
+			["event: pie", 0.728],
+			"orange box: anniversary",
 			"red addon: family",
 			"purple addon: hull",
 			"red addon: glove",
@@ -347,6 +383,8 @@
 	},
 	"deathslinger": {
 		"match_and_grind": [
+			["event: pie", 0.728],
+			"orange box: anniversary",
 			"addon: prison chain",
 			"addon: keys",
 			"offer: ward",
@@ -361,6 +399,8 @@
 	},
 	"executioner": {
 		"match_and_grind": [
+			["event: pie", 0.728],
+			"orange box: anniversary",
 			"addon: burning",
 			"addon: foot",
 			"addon: goblet",
@@ -376,6 +416,8 @@
 	},
 	"blight": {
 		"match_and_grind": [
+			["event: pie", 0.728],
+			"orange box: anniversary",
 			"purple addon: ring",
 			"addon: crow",
 			"blue addon: compound",
@@ -392,6 +434,8 @@
 	},
 	"twins": {
 		"match_and_grind": [
+			["event: pie", 0.728],
+			"orange box: anniversary",
 			"red addon: cloth",
 			"addon: forest stew",
 			"red addon: pendant",
@@ -415,6 +459,8 @@
 	},
 	"trickster": {
 		"match_and_grind": [
+			["event: pie", 0.728],
+			"orange box: anniversary",
 			"addon: trick blades",
 			"addon: edge of revival",
 			"addon: cut thru",
@@ -431,6 +477,8 @@
 	},
 	"nemesis": {
 		"match_and_grind": [
+			["event: pie", 0.728],
+			"orange box: anniversary",
 			"addon: sample",
 			"addon: serotonin",
 			"addon: parasite",
@@ -449,6 +497,8 @@
 	},
 	"cenobite": {
 		"match_and_grind": [
+			["event: pie", 0.728],
+			"orange box: anniversary",
 			"red addon: fang",
 			"red addon: lament",
 			"addon: lens",
@@ -465,6 +515,8 @@
 	},
 	"artist": {
 		"match_and_grind": [
+			["event: pie", 0.728],
+			"orange box: anniversary",
 			"addon: hands",
 			"red addon: rot",
 			"addon: grief",
@@ -482,6 +534,8 @@
 	},
 	"onryo": {
 		"match_and_grind": [
+			["event: pie", 0.728],
+			"orange box: anniversary",
 			"red addon: remote control",
 			"addon: photo",
 			"addon: fingernails",
@@ -500,6 +554,8 @@
 	},
 	"dredge": {
 		"match_and_grind": [
+			["event: pie", 0.728],
+			"orange box: anniversary",
 			"addon: lavalier",
 			"addon: boat key",
 			"red addon: wooden",
@@ -518,6 +574,8 @@
 	},
 	"mastermind": {
 		"match_and_grind": [
+			["event: pie", 0.728],
+			"orange box: anniversary",
 			"addon: gloves",
 			"addon: egg",
 			"red addon: photo",
@@ -534,6 +592,8 @@
 	},
 	"knight": {
 		"match_and_grind": [
+			["event: pie", 0.728],
+			"orange box: anniversary",
 			"addon: banner",
 			"addon: contract",
 			"offer: ward",
@@ -548,6 +608,8 @@
 	},
 	"skull_merchant": {
 		"match_and_grind": [
+			["event: pie", 0.728],
+			"orange box: anniversary",
 			"red addon: expired",
 			"red addon: manuscript",
 			"addon: readout",
@@ -565,6 +627,8 @@
 	},
 	"singularity": {
 		"match_and_grind": [
+			["event: pie", 0.728],
+			"orange box: anniversary",
 			"addon: soma",
 			"addon: construction",
 			"red addon: *",
@@ -583,6 +647,8 @@
 	},
 	"xenomorph": {
 		"match_and_grind": [
+			["event: pie", 0.728],
+			"orange box: anniversary",
 			"addon: bolt",
 			"red addon: *",
 			"offer: ward",
@@ -597,6 +663,8 @@
 	},
 	"good_guy": {
 		"match_and_grind": [
+			["event: pie", 0.728],
+			"orange box: anniversary",
 			"addon: yardstick",
 			"addon: rat poison",
 			"red addon: *",
@@ -612,6 +680,8 @@
 	},
 	"unknown": {
 		"match_and_grind": [
+			["event: pie", 0.728],
+			"orange box: anniversary",
 			"addon: article",
 			"addon: box",
 			"offer: ward",
@@ -626,6 +696,8 @@
 	},
 	"lich": {
 		"match_and_grind": [
+			["event: pie", 0.728],
+			"orange box: anniversary",
 			"addon: pearl",
 			"green addon: spell",
 			"red addon: *",
@@ -641,6 +713,8 @@
 	},
 	"dark_lord": {
 		"match_and_grind": [
+			["event: pie", 0.728],
+			"orange box: anniversary",
 			"purple addon: medusa",
 			"purple addon: lapis",
 			"blue addon: echo",
@@ -662,6 +736,8 @@
 	},
 	"houndmaster": {
 		"match_and_grind": [
+			["event: pie", 0.728],
+			"orange box: anniversary",
 			"addon: wheel",
 			"addon: marlin",
 			"addon: leather",
@@ -679,6 +755,8 @@
 	},
 	"ghoul": {
 		"match_and_grind": [
+			["event: pie", 0.728],
+			"orange box: anniversary",
 			"addon: centipede",
 			"addon: patch",
 			"addon: aogiri",
@@ -694,6 +772,8 @@
 	},
 	"animatronic": {
 		"match_and_grind": [
+			["event: pie", 0.728],
+			"orange box: anniversary",
 			"red addon: *",
 			"addon: bag",
 			"addon: hook",
