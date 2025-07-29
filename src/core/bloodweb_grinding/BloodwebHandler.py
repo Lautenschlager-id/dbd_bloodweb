@@ -178,7 +178,7 @@ class BloodwebHandler:
 		delay_until_next_node = (
 			self.region_bloodweb.get_distance_from_center(click_x, click_y)
 			/ self.average_distance_between_two_nodes
-		) * 0.250
+		) * 0.210
 
 		logger.action(
 			'Clicking on \'{}\' at ({:.0f}, {:.0f}) with delay of ~{:.3f}s'

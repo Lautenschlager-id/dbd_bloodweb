@@ -1,27 +1,23 @@
 {
 	"survivor": {
 		"match_and_grind": [
-			["event: pie", 0.728],
-			"orange box: anniversary",
 			"offer: bloody party",
 			"purple item: flashlight",
 			"blue item: flashlight",
 			"green item: flashlight",
 			"addon: styptic",
+			"addon: sapphire lens",
 			"red addon: syringe",
 			["blue addon: battery", 0.762],
-			"purple item: medkit",
 			["green addon: battery", 0.762],
-			"addon: sapphire lens",
 			"offer: escape cake",
 			"purple item: engineers toolbox",
 			"blue item: mechanics toolbox",
 			"red addon: new part",
 			"addon: halogen",
-			"blue offer: envelope",
+			"red offer: stamp",
+			"red offer: potent",
 			["brown addon: battery", 0.762],
-			["red addon: bulb", 0.78],
-			"red addon: gel",
 			"offer: oak"
 		],
 		"match_and_skip": [
@@ -36,15 +32,12 @@
 	"trapper": {
 		"match_and_grind": [
 			["event: pie", 0.728],
-			"orange box: anniversary",
 			"red addon: bloody",
 			"red addon: stone",
 			"purple addon: stone",
 			"purple addon: tension",
 			"purple addon: sack",
-			"map: marys letter",
-			"map: alien flora",
-			"offer: ward",
+			"purple offer: ward",
 			["purple offer: oak", 0.758],
 			"offer: bloody party"
 		],
@@ -57,14 +50,13 @@
 	"wraith": {
 		"match_and_grind": [
 			["event: pie", 0.728],
-			"orange box: anniversary",
 			"purple addon: swift",
 			"purple addon: shadow",
 			"purple addon: windstorm",
 			"purple addon: seeing",
 			"red addon: coxcombed",
 			"offer: bloody party",
-			"offer: ward",
+			"purple offer: ward",
 			["purple offer: oak", 0.758]
 		],
 		"match_and_skip": [
@@ -76,13 +68,12 @@
 	"hillbilly": {
 		"match_and_grind": [
 			["event: pie", 0.728],
-			"orange box: anniversary",
 			"purple addon: slippers",
 			"purple addon: chains",
 			"purple addon: boots",
 			"blue addon: thompsons",
 			"offer: bloody party",
-			"offer: ward",
+			"purple offer: ward",
 			["purple offer: oak", 0.758]
 		],
 		"match_and_skip": [
@@ -94,10 +85,9 @@
 	"nurse": {
 		"match_and_grind": [
 			["event: pie", 0.728],
-			"orange box: anniversary",
 			"addon: ataxic respiration",
 			"addon: catatonic boys treasure",
-			"offer: ward",
+			"purple offer: ward",
 			"offer: bloody party",
 			["purple offer: oak", 0.758]
 		]
@@ -105,21 +95,16 @@
 	"shape": {
 		"match_and_grind": [
 			["event: pie", 0.728],
-			"orange box: anniversary",
 			"red addon: tuft",
 			"red addon: tombstone",
 			"purple addon: scratched mirror",
-			"map: marys letter",
-			"map: shattered glasses",
 			"purple addon: vanity mirror",
 			"purple addon: tombstone piece",
 			"blue addon: memorial",
 			"purple offer: reagent",
 			"offer: bloody party",
 			"blue addon: jewellery box",
-			"offer: ward",
-			["map: rpd badge", 0.6785],
-			"map: jigsaw",
+			"purple offer: ward",
 			["purple offer: oak", 0.758]
 		],
 		"match_and_skip": [
@@ -131,17 +116,13 @@
 	"hag": {
 		"match_and_grind": [
 			["event: pie", 0.728],
-			"orange box: anniversary",
 			"addon: rusty shackles",
-			"map: marys letter",
 			["addon: scarred hand", 0.8],
 			"addon: mint rag",
 			"addon: swamp orchid necklet",
 			"addon: cracked turtle egg",
 			"addon: dried cicada",
-			["map: rpd badge", 0.6785],
 			"offer: bloody party",
-			"map: jigsaw",
 			["purple offer: oak", 0.758],
 			"offer: ward"
 		],
@@ -154,12 +135,11 @@
 	"doctor": {
 		"match_and_grind": [
 			["event: pie", 0.728],
-			"orange box: anniversary",
 			"purple addon: discipline",
 			["blue addon: discipline", 0.88],
 			"red addon: queen",
 			"red addon: king",
-			"offer: ward",
+			"purple offer: ward",
 			"offer: bloody party",
 			["purple offer: oak", 0.758]
 		],
@@ -172,10 +152,9 @@
 	"cannibal": {
 		"match_and_grind": [
 			["event: pie", 0.728],
-			"orange box: anniversary",
 			"purple addon: chilli",
 			"blue addon: begrimed",
-			"offer: ward",
+			"purple offer: ward",
 			"offer: bloody party",
 			["purple offer: oak", 0.758]
 		],
@@ -188,16 +167,13 @@
 	"huntress": {
 		"match_and_grind": [
 			["event: pie", 0.728],
-			"orange box: anniversary",
 			"purple addon: glowing",
 			"addon: wooden fox",
 			"blue addon: rose root",
 			"red addon: head",
 			"blue addon: flower",
 			"offer: bloody party",
-			"map: marys letter",
-			"offer: ward",
-			["map: rpd badge", 0.6785],
+			"purple offer: ward",
 			["purple offer: oak", 0.758]
 		],
 		"match_and_skip": [
@@ -209,13 +185,12 @@
 	"nightmare": {
 		"match_and_grind": [
 			["event: pie", 0.728],
-			"orange box: anniversary",
 			"addon: bottle",
 			"addon: photo",
 			"addon: swing",
 			"purple addon: block",
 			"red addon: paint",
-			"offer: ward",
+			"purple offer: ward",
 			["purple offer: oak", 0.758]
 		],
 		"match_and_skip": [
@@ -227,14 +202,12 @@
 	"pig": {
 		"match_and_grind": [
 			["event: pie", 0.728],
-			"orange box: anniversary",
 			"red addon: amanda",
 			"purple addon: *",
 			"red addon: video",
 			"purple offer: reagent",
-			"offer: ward",
+			"purple offer: ward",
 			"offer: bloody party",
-			"map: marys letter",
 			["purple offer: oak", 0.758]
 		],
 		"match_and_skip": [
@@ -250,12 +223,11 @@
 	"clown": {
 		"match_and_grind": [
 			["event: pie", 0.728],
-			"orange box: anniversary",
 			"addon: cigar box",
 			"red addon: redhead",
 			"addon: flask of bleach",
 			"purple addon: gin bottle",
-			"offer: ward",
+			"purple offer: ward",
 			"offer: bloody party",
 			["purple offer: oak", 0.758]
 		],
@@ -268,10 +240,9 @@
 	"spirit": {
 		"match_and_grind": [
 			["event: pie", 0.728],
-			"orange box: anniversary",
 			"addon: furin",
 			"red addon: *",
-			"offer: ward",
+			"purple offer: ward",
 			"offer: bloody party",
 			["purple offer: oak", 0.758]
 		],
@@ -284,11 +255,10 @@
 	"legion": {
 		"match_and_grind": [
 			["event: pie", 0.728],
-			"orange box: anniversary",
 			"addon: juli",
 			"addon: sunglasses",
 			"red addon: button",
-			"offer: ward",
+			"purple offer: ward",
 			"offer: bloody party",
 			["purple offer: oak", 0.758]
 		],
@@ -301,11 +271,10 @@
 	"plague": {
 		"match_and_grind": [
 			["event: pie", 0.728],
-			"orange box: anniversary",
 			"red addon: seal",
 			"red addon: incense",
 			"addon: devotee",
-			"offer: ward",
+			"purple offer: ward",
 			"offer: bloody party",
 			["purple offer: oak", 0.758]
 		],
@@ -318,22 +287,11 @@
 	"ghost_face": {
 		"match_and_grind": [
 			["event: pie", 0.728],
-			"orange box: anniversary",
 			"purple addon: driver",
 			"purple addon: sheath",
 			"blue addon: wallet",
-			"offer: ward",
+			"purple offer: ward",
 			"offer: bloody party",
-			["map: rpd badge", 0.672],
-			"map: beef",
-			"map: airlock",
-			"offer: mori",
-			"map: cookbook",
-			"map: jigsaw",
-			"map: marys letter",
-			"map: shattered glasses",
-			"map: shattered bottle",
-			"map: hawkins",
 			["purple offer: oak", 0.758]
 		],
 		"match_and_skip": [
@@ -346,15 +304,12 @@
 	"demogorgon": {
 		"match_and_grind": [
 			["event: pie", 0.728],
-			"orange box: anniversary",
 			"red addon: leprose",
 			"red addon: moss",
 			"addon: whistle",
 			"addon: glasses",
-			"offer: ward",
+			"purple offer: ward",
 			"offer: bloody party",
-			"map: marys letter",
-			["map: rpd badge", 0.672],
 			["purple offer: oak", 0.758]
 		],
 		"match_and_skip": [
@@ -366,12 +321,11 @@
 	"oni": {
 		"match_and_grind": [
 			["event: pie", 0.728],
-			"orange box: anniversary",
 			"red addon: family",
 			"purple addon: hull",
 			"red addon: glove",
 			"addon: crutch",
-			"offer: ward",
+			"purple offer: ward",
 			"offer: bloody party",
 			["purple offer: oak", 0.758]
 		],
@@ -384,10 +338,9 @@
 	"deathslinger": {
 		"match_and_grind": [
 			["event: pie", 0.728],
-			"orange box: anniversary",
 			"addon: prison chain",
 			"addon: keys",
-			"offer: ward",
+			"purple offer: ward",
 			"offer: bloody party",
 			["purple offer: oak", 0.758]
 		],
@@ -400,11 +353,10 @@
 	"executioner": {
 		"match_and_grind": [
 			["event: pie", 0.728],
-			"orange box: anniversary",
 			"addon: burning",
 			"addon: foot",
 			"addon: goblet",
-			"offer: ward",
+			"purple offer: ward",
 			"offer: bloody party",
 			["purple offer: oak", 0.758]
 		],
@@ -417,12 +369,11 @@
 	"blight": {
 		"match_and_grind": [
 			["event: pie", 0.728],
-			"orange box: anniversary",
 			"purple addon: ring",
 			"addon: crow",
 			"blue addon: compound",
 			"addon: rat",
-			"offer: ward",
+			"purple offer: ward",
 			"offer: bloody party",
 			["purple offer: oak", 0.758]
 		],
@@ -435,7 +386,6 @@
 	"twins": {
 		"match_and_grind": [
 			["event: pie", 0.728],
-			"orange box: anniversary",
 			"red addon: cloth",
 			"addon: forest stew",
 			"red addon: pendant",
@@ -443,24 +393,19 @@
 			"addon: perfume",
 			"addon: rattle",
 			"offer: bloody party",
-			"map: jigsaw",
-			"offer: ward",
-			["map: rpd badge", 0.672],
-			"map: marys letter",
+			"purple offer: ward",
 			["purple offer: oak", 0.758]
 		],
 		"match_and_skip": [
 			"brown offer: *",
 			"green offer: *",
 			"offer: cut coin",
-			"addon: tiny fingernail",
-			"map: cookbook"
+			"addon: tiny fingernail"
 		]
 	},
 	"trickster": {
 		"match_and_grind": [
 			["event: pie", 0.728],
-			"orange box: anniversary",
 			"addon: trick blades",
 			"addon: edge of revival",
 			"addon: cut thru",
@@ -478,14 +423,12 @@
 	"nemesis": {
 		"match_and_grind": [
 			["event: pie", 0.728],
-			"orange box: anniversary",
 			"addon: sample",
 			"addon: serotonin",
 			"addon: parasite",
 			"addon: ribbon",
 			"addon: shattered",
-			"offer: mori",
-			"offer: ward",
+			"purple offer: ward",
 			"offer: bloody party",
 			["purple offer: oak", 0.758]
 		],
@@ -498,7 +441,6 @@
 	"cenobite": {
 		"match_and_grind": [
 			["event: pie", 0.728],
-			"orange box: anniversary",
 			"red addon: fang",
 			"red addon: lament",
 			"addon: lens",
@@ -516,14 +458,12 @@
 	"artist": {
 		"match_and_grind": [
 			["event: pie", 0.728],
-			"orange box: anniversary",
 			"addon: hands",
 			"red addon: rot",
 			"addon: grief",
 			"addon: bell",
-			"offer: ward",
+			"purple offer: ward",
 			"offer: bloody party",
-			"offer: mori",
 			["purple offer: oak", 0.758]
 		],
 		"match_and_skip": [
@@ -535,14 +475,13 @@
 	"onryo": {
 		"match_and_grind": [
 			["event: pie", 0.728],
-			"orange box: anniversary",
 			"red addon: remote control",
 			"addon: photo",
 			"addon: fingernails",
 			"addon: comb",
 			"addon: pinwheel",
 			["purple offer: oak", 0.758],
-			"offer: ward",
+			"purple offer: ward",
 			"offer: bloody party",
 			"offer: mori"
 		],
@@ -555,15 +494,13 @@
 	"dredge": {
 		"match_and_grind": [
 			["event: pie", 0.728],
-			"orange box: anniversary",
 			"addon: lavalier",
 			"addon: boat key",
 			"red addon: wooden",
 			"addon: doll",
 			"addon: skull",
-			"offer: ward",
+			"purple offer: ward",
 			"offer: bloody party",
-			"offer: mori",
 			["purple offer: oak", 0.758]
 		],
 		"match_and_skip": [
@@ -575,13 +512,11 @@
 	"mastermind": {
 		"match_and_grind": [
 			["event: pie", 0.728],
-			"orange box: anniversary",
 			"addon: gloves",
 			"addon: egg",
 			"red addon: photo",
-			"offer: ward",
+			"purple offer: ward",
 			"offer: bloody party",
-			"offer: mori",
 			["purple offer: oak", 0.758]
 		],
 		"match_and_skip": [
@@ -593,11 +528,9 @@
 	"knight": {
 		"match_and_grind": [
 			["event: pie", 0.728],
-			"orange box: anniversary",
 			"addon: banner",
 			"addon: contract",
-			"offer: ward",
-			"offer: mori",
+			"purple offer: ward",
 			["purple offer: oak", 0.758]
 		],
 		"match_and_skip": [
@@ -609,14 +542,12 @@
 	"skull_merchant": {
 		"match_and_grind": [
 			["event: pie", 0.728],
-			"orange box: anniversary",
 			"red addon: expired",
 			"red addon: manuscript",
 			"addon: readout",
 			"addon: lighting",
-			"offer: ward",
+			"purple offer: ward",
 			"offer: bloody party",
-			"offer: mori",
 			["purple offer: oak", 0.758]
 		],
 		"match_and_skip": [
@@ -628,16 +559,13 @@
 	"singularity": {
 		"match_and_grind": [
 			["event: pie", 0.728],
-			"orange box: anniversary",
-			"addon: soma",
 			"addon: construction",
+			"addon: hologram",
 			"red addon: *",
 			"addon: manifest",
-			"offer: ward",
+			"purple offer: ward",
 			"offer: bloody party",
-			"offer: mori",
-			["purple offer: oak", 0.758],
-			["map: rpd badge", 0.672]
+			["purple offer: oak", 0.758]
 		],
 		"match_and_skip": [
 			"brown offer: *",
@@ -648,10 +576,9 @@
 	"xenomorph": {
 		"match_and_grind": [
 			["event: pie", 0.728],
-			"orange box: anniversary",
 			"addon: bolt",
 			"red addon: *",
-			"offer: ward",
+			"purple offer: ward",
 			"offer: bloody party",
 			["purple offer: oak", 0.758]
 		],
@@ -664,11 +591,10 @@
 	"good_guy": {
 		"match_and_grind": [
 			["event: pie", 0.728],
-			"orange box: anniversary",
 			"addon: yardstick",
 			"addon: rat poison",
 			"red addon: *",
-			"offer: ward",
+			"purple offer: ward",
 			"offer: bloody party",
 			["purple offer: oak", 0.758]
 		],
@@ -681,10 +607,9 @@
 	"unknown": {
 		"match_and_grind": [
 			["event: pie", 0.728],
-			"orange box: anniversary",
 			"addon: article",
 			"addon: box",
-			"offer: ward",
+			"purple offer: ward",
 			"offer: bloody party",
 			["purple offer: oak", 0.758]
 		],
@@ -697,11 +622,10 @@
 	"lich": {
 		"match_and_grind": [
 			["event: pie", 0.728],
-			"orange box: anniversary",
 			"addon: pearl",
 			"green addon: spell",
 			"red addon: *",
-			"offer: ward",
+			"purple offer: ward",
 			"offer: bloody party",
 			["purple offer: oak", 0.758]
 		],
@@ -714,7 +638,6 @@
 	"dark_lord": {
 		"match_and_grind": [
 			["event: pie", 0.728],
-			"orange box: anniversary",
 			"purple addon: medusa",
 			"purple addon: lapis",
 			"blue addon: echo",
@@ -723,9 +646,8 @@
 			"red addon: *",
 			"green addon: ticket",
 			"green addon: boots",
-			"offer: ward",
+			"purple offer: ward",
 			"offer: bloody party",
-			"offer: mori",
 			["purple offer: oak", 0.758]
 		],
 		"match_and_skip": [
@@ -737,14 +659,12 @@
 	"houndmaster": {
 		"match_and_grind": [
 			["event: pie", 0.728],
-			"orange box: anniversary",
 			"addon: wheel",
 			"addon: marlin",
 			"addon: leather",
 			"addon: gunpowder",
-			"offer: ward",
+			"purple offer: ward",
 			"offer: bloody party",
-			"offer: mori",
 			["purple offer: oak", 0.758]
 		],
 		"match_and_skip": [
@@ -756,12 +676,11 @@
 	"ghoul": {
 		"match_and_grind": [
 			["event: pie", 0.728],
-			"orange box: anniversary",
 			"addon: centipede",
 			"addon: patch",
 			"addon: aogiri",
 			"offer: bloody party",
-			"offer: ward",
+			"purple offer: ward",
 			["purple offer: oak", 0.758]
 		],
 		"match_and_skip": [
@@ -773,14 +692,14 @@
 	"animatronic": {
 		"match_and_grind": [
 			["event: pie", 0.728],
-			"orange box: anniversary",
 			"red addon: *",
+			"addon: control panelc",
 			"addon: bag",
 			"addon: hook",
 			"addon: guitar",
 			"addon: drawing",
 			"offer: bloody party",
-			"offer: ward",
+			"purple offer: ward",
 			["purple offer: oak", 0.758]
 		],
 		"match_and_skip": [
