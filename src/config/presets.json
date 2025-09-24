@@ -31,7 +31,6 @@
 	},
 	"trapper": {
 		"match_and_grind": [
-			["event: pie", 0.728],
 			"red addon: bloody",
 			"red addon: stone",
 			"purple addon: stone",
@@ -49,7 +48,6 @@
 	},
 	"wraith": {
 		"match_and_grind": [
-			["event: pie", 0.728],
 			"purple addon: swift",
 			"purple addon: shadow",
 			"purple addon: windstorm",
@@ -67,7 +65,6 @@
 	},
 	"hillbilly": {
 		"match_and_grind": [
-			["event: pie", 0.728],
 			"purple addon: slippers",
 			"purple addon: chains",
 			"purple addon: boots",
@@ -84,7 +81,6 @@
 	},
 	"nurse": {
 		"match_and_grind": [
-			["event: pie", 0.728],
 			"addon: ataxic respiration",
 			"addon: catatonic boys treasure",
 			"purple offer: ward",
@@ -94,7 +90,6 @@
 	},
 	"shape": {
 		"match_and_grind": [
-			["event: pie", 0.728],
 			"red addon: tuft",
 			"red addon: tombstone",
 			"purple addon: scratched mirror",
@@ -115,7 +110,6 @@
 	},
 	"hag": {
 		"match_and_grind": [
-			["event: pie", 0.728],
 			"addon: rusty shackles",
 			["addon: scarred hand", 0.8],
 			"addon: mint rag",
@@ -134,7 +128,6 @@
 	},
 	"doctor": {
 		"match_and_grind": [
-			["event: pie", 0.728],
 			"purple addon: discipline",
 			["blue addon: discipline", 0.88],
 			"red addon: queen",
@@ -151,7 +144,6 @@
 	},
 	"cannibal": {
 		"match_and_grind": [
-			["event: pie", 0.728],
 			"purple addon: chilli",
 			"blue addon: begrimed",
 			"purple offer: ward",
@@ -166,7 +158,6 @@
 	},
 	"huntress": {
 		"match_and_grind": [
-			["event: pie", 0.728],
 			"purple addon: glowing",
 			"addon: wooden fox",
 			"blue addon: rose root",
@@ -184,7 +175,6 @@
 	},
 	"nightmare": {
 		"match_and_grind": [
-			["event: pie", 0.728],
 			"addon: bottle",
 			"addon: photo",
 			"addon: swing",
@@ -201,7 +191,6 @@
 	},
 	"pig": {
 		"match_and_grind": [
-			["event: pie", 0.728],
 			"red addon: amanda",
 			"purple addon: *",
 			"red addon: video",
@@ -222,7 +211,6 @@
 	},
 	"clown": {
 		"match_and_grind": [
-			["event: pie", 0.728],
 			"addon: cigar box",
 			"red addon: redhead",
 			"addon: flask of bleach",
@@ -239,7 +227,6 @@
 	},
 	"spirit": {
 		"match_and_grind": [
-			["event: pie", 0.728],
 			"addon: furin",
 			"red addon: *",
 			"purple offer: ward",
@@ -254,7 +241,6 @@
 	},
 	"legion": {
 		"match_and_grind": [
-			["event: pie", 0.728],
 			"addon: juli",
 			"addon: sunglasses",
 			"red addon: button",
@@ -270,7 +256,6 @@
 	},
 	"plague": {
 		"match_and_grind": [
-			["event: pie", 0.728],
 			"red addon: seal",
 			"red addon: incense",
 			"addon: devotee",
@@ -286,7 +271,6 @@
 	},
 	"ghost_face": {
 		"match_and_grind": [
-			["event: pie", 0.728],
 			"purple addon: driver",
 			"purple addon: sheath",
 			"blue addon: wallet",
@@ -303,7 +287,6 @@
 	},
 	"demogorgon": {
 		"match_and_grind": [
-			["event: pie", 0.728],
 			"red addon: leprose",
 			"red addon: moss",
 			"addon: whistle",
@@ -320,7 +303,6 @@
 	},
 	"oni": {
 		"match_and_grind": [
-			["event: pie", 0.728],
 			"red addon: family",
 			"purple addon: hull",
 			"red addon: glove",
@@ -337,7 +319,6 @@
 	},
 	"deathslinger": {
 		"match_and_grind": [
-			["event: pie", 0.728],
 			"addon: prison chain",
 			"addon: keys",
 			"purple offer: ward",
@@ -352,7 +333,6 @@
 	},
 	"executioner": {
 		"match_and_grind": [
-			["event: pie", 0.728],
 			"addon: burning",
 			"addon: foot",
 			"addon: goblet",
@@ -368,7 +348,6 @@
 	},
 	"blight": {
 		"match_and_grind": [
-			["event: pie", 0.728],
 			"purple addon: ring",
 			"addon: crow",
 			"blue addon: compound",
@@ -385,7 +364,6 @@
 	},
 	"twins": {
 		"match_and_grind": [
-			["event: pie", 0.728],
 			"red addon: cloth",
 			"addon: forest stew",
 			"red addon: pendant",
@@ -405,7 +383,6 @@
 	},
 	"trickster": {
 		"match_and_grind": [
-			["event: pie", 0.728],
 			"addon: trick blades",
 			"addon: edge of revival",
 			"addon: cut thru",
@@ -422,7 +399,6 @@
 	},
 	"nemesis": {
 		"match_and_grind": [
-			["event: pie", 0.728],
 			"addon: sample",
 			"addon: serotonin",
 			"addon: parasite",
@@ -440,7 +416,6 @@
 	},
 	"cenobite": {
 		"match_and_grind": [
-			["event: pie", 0.728],
 			"red addon: fang",
 			"red addon: lament",
 			"addon: lens",
@@ -457,7 +432,6 @@
 	},
 	"artist": {
 		"match_and_grind": [
-			["event: pie", 0.728],
 			"addon: hands",
 			"red addon: rot",
 			"addon: grief",
@@ -474,7 +448,6 @@
 	},
 	"onryo": {
 		"match_and_grind": [
-			["event: pie", 0.728],
 			"red addon: remote control",
 			"addon: photo",
 			"addon: fingernails",
@@ -493,7 +466,6 @@
 	},
 	"dredge": {
 		"match_and_grind": [
-			["event: pie", 0.728],
 			"addon: lavalier",
 			"addon: boat key",
 			"red addon: wooden",
@@ -511,7 +483,6 @@
 	},
 	"mastermind": {
 		"match_and_grind": [
-			["event: pie", 0.728],
 			"addon: gloves",
 			"addon: egg",
 			"red addon: photo",
@@ -527,7 +498,6 @@
 	},
 	"knight": {
 		"match_and_grind": [
-			["event: pie", 0.728],
 			"addon: banner",
 			"addon: contract",
 			"purple offer: ward",
@@ -541,7 +511,6 @@
 	},
 	"skull_merchant": {
 		"match_and_grind": [
-			["event: pie", 0.728],
 			"red addon: expired",
 			"red addon: manuscript",
 			"addon: readout",
@@ -558,7 +527,6 @@
 	},
 	"singularity": {
 		"match_and_grind": [
-			["event: pie", 0.728],
 			"addon: construction",
 			"addon: hologram",
 			"red addon: *",
@@ -575,7 +543,6 @@
 	},
 	"xenomorph": {
 		"match_and_grind": [
-			["event: pie", 0.728],
 			"addon: bolt",
 			"red addon: *",
 			"purple offer: ward",
@@ -590,7 +557,6 @@
 	},
 	"good_guy": {
 		"match_and_grind": [
-			["event: pie", 0.728],
 			"addon: yardstick",
 			"addon: rat poison",
 			"red addon: *",
@@ -606,7 +572,6 @@
 	},
 	"unknown": {
 		"match_and_grind": [
-			["event: pie", 0.728],
 			"addon: article",
 			"addon: box",
 			"purple offer: ward",
@@ -621,9 +586,8 @@
 	},
 	"lich": {
 		"match_and_grind": [
-			["event: pie", 0.728],
+			"addon: dragontooth",
 			"addon: pearl",
-			"green addon: spell",
 			"red addon: *",
 			"purple offer: ward",
 			"offer: bloody party",
@@ -637,7 +601,6 @@
 	},
 	"dark_lord": {
 		"match_and_grind": [
-			["event: pie", 0.728],
 			"purple addon: medusa",
 			"purple addon: lapis",
 			"blue addon: echo",
@@ -658,7 +621,6 @@
 	},
 	"houndmaster": {
 		"match_and_grind": [
-			["event: pie", 0.728],
 			"addon: wheel",
 			"addon: marlin",
 			"addon: leather",
@@ -675,7 +637,6 @@
 	},
 	"ghoul": {
 		"match_and_grind": [
-			["event: pie", 0.728],
 			"addon: centipede",
 			"addon: patch",
 			"addon: aogiri",
@@ -691,7 +652,6 @@
 	},
 	"animatronic": {
 		"match_and_grind": [
-			["event: pie", 0.728],
 			"red addon: *",
 			"addon: control panelc",
 			"addon: bag",

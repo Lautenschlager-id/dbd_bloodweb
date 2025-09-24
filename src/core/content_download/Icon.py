@@ -1,7 +1,9 @@
 import requests
 import os
+import random
 import re
 from sys import exit
+from time import sleep
 from urllib.parse import urljoin
 
 from utils.enums import FILE_EXTENSION, ICON_TYPE
@@ -64,19 +66,57 @@ class Icon:
 
 		return mapped_rarity
 
-	def get_image_binary(self):
-		try:
-			response = requests.get(self.source, stream=True)
-			response.raise_for_status()
-			return response
-		except Exception as exception:
-			logger.result(
-				'Could not get URL {}: {}'
-				, self.source
-				, exception
-				, log_level=2
-			)
-			exit()
+	def get_image_binary(self, max_retries=10, base_delay=3):
+		for attempt in range(max_retries):
+			try:
+				response = requests.get(self.source, stream=True)
+
+				# Handle rate limit explicitly
+				if response.status_code == 429:
+					delay = base_delay * (2 ** attempt) + random.uniform(0, 1)
+					logger.result(
+						'Rate limited for {}. Retrying in {:.1f}s (attempt {}/{})',
+						self.source,
+						delay,
+						attempt + 1,
+						max_retries,
+						log_level=3
+					)
+					sleep(delay)
+					continue
+
+				# Raise for other HTTP errors (4xx/5xx)
+				response.raise_for_status()
+				logger.detail(
+					'Downloaded file: {}',
+					self.source,
+					log_level=2
+				)
+				return response
+
+			except Exception as exception:
+				# If it's the last attempt, fail
+				if attempt == max_retries - 1:
+					logger.result(
+						'Could not get URL {}: {}',
+						self.source,
+						exception,
+						log_level=3
+					)
+					exit()
+
+				# Otherwise retry with backoff
+				delay = base_delay * (2 ** attempt) + random.uniform(0, 1)
+				logger.result(
+					'Error fetching {}: {}. Retrying in {:.1f}s (attempt {}/{})',
+					self.source,
+					exception,
+					delay,
+					attempt + 1,
+					max_retries,
+					log_level=3
+				)
+				sleep(delay)
 
 	def save_in_local_path(self, path):
 		try:
