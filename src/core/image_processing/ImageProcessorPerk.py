@@ -3,6 +3,7 @@ from sys import exit
 from .ImageProcessorBase import ImageProcessorBase
 from utils.enums import PERK_TYPE, RESOURCE_DIRECTORY
 from utils.logger import logger
+from utils.ResolutionAdapter import ResolutionAdapter
 
 class ImageProcessorPerk(ImageProcessorBase):
 	template_with_all_icon_resources = 'template_1'
@@ -25,7 +26,7 @@ class ImageProcessorPerk(ImageProcessorBase):
 
 	@property
 	def resource_icon_width(self):
-		return 70
+		return ResolutionAdapter.get_width(70)
 
 	@property
 	def path_side_icon_template_base(self):

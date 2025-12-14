@@ -4,6 +4,7 @@ from .ImageProcessorBase import ImageProcessorBase
 from utils.enums import ADDON_TYPE, RESOURCE_DIRECTORY
 from utils.functions import get_all_killer_names
 from utils.logger import logger
+from utils.ResolutionAdapter import ResolutionAdapter
 
 class ImageProcessorAddon(ImageProcessorBase):
 	default_side_icon_file = 'small.png'
@@ -30,7 +31,7 @@ class ImageProcessorAddon(ImageProcessorBase):
 
 	@property
 	def resource_icon_width(self):
-		return 58
+		return ResolutionAdapter.get_width(58)
 
 	@property
 	def path_side_icon_template_base(self):

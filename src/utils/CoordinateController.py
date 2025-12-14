@@ -2,6 +2,7 @@ import math
 
 from .functions import take_screenshot
 from .logger import logger
+from .ResolutionAdapter import ResolutionAdapter
 
 class CoordinateController:
 	def __init__(self, region_enum):
@@ -17,13 +18,13 @@ class CoordinateController:
 		self.center_y = None
 
 	def set_action_rectangle(self, x, y, width, height):
-		self.x = x
-		self.y = y
-		self.width = width
-		self.height = height
+		self.x = ResolutionAdapter.get_width(x)
+		self.y = ResolutionAdapter.get_width(y)
+		self.width = ResolutionAdapter.get_width(width)
+		self.height = ResolutionAdapter.get_width(height)
 
-		self.center_x = x + width / 2
-		self.center_y = y + height / 2
+		self.center_x = self.x + self.width / 2
+		self.center_y = self.y + self.height / 2
 
 	def get_rectangle_as_region(self):
 		return (

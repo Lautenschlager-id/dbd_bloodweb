@@ -1,6 +1,7 @@
 from .ImageProcessorBase import ImageProcessorBase
 from utils.enums import RESOURCE_DIRECTORY
 from utils.logger import logger
+from utils.ResolutionAdapter import ResolutionAdapter
 
 class ImageProcessorItem(ImageProcessorBase):
 	@property
@@ -20,7 +21,7 @@ class ImageProcessorItem(ImageProcessorBase):
 
 	@property
 	def resource_icon_width(self):
-		return 55
+		return ResolutionAdapter.get_width(55)
 
 	def __init__(self):
 		logger.init(

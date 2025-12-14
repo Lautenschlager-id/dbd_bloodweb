@@ -20,7 +20,9 @@ $ cd bloodweb
 $ pip install -r requirements.txt
 ```
 
-3. Install [Tesseract's latest version](https://github.com/UB-Mannheim/tesseract/releases)
+3. Install [Tesseract's latest version](https://github.com/UB-Mannheim/tesseract/releases) and add it to the environment variables
+
+4. Install [ImageMagick's latest version](https://imagemagick.org/script/download.php) and add it to the environment variables
 
 
 ## Configuration

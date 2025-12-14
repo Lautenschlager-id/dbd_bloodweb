@@ -11,6 +11,7 @@ from utils.CoordinateController import CoordinateController
 from utils.enums import GRIND_STRATEGY, REGION_BLOODWEB, REGION_LEVEL
 from utils.functions import create_directory
 from utils.logger import logger
+from utils.ResolutionAdapter import ResolutionAdapter
 
 class BloodwebHandler:
 	_initialized = False
@@ -52,7 +53,8 @@ class BloodwebHandler:
 		)
 		cls.strategy_lambda = cls.grind_strategy[SETTINGS.get('grind_strategy')]
 
-		cls.average_distance_between_two_nodes = math.sqrt( 2 * ((85 // 2) ** 2) )
+		AVERAGE_DISTANCE_WIDTH = ResolutionAdapter.get_width(85)
+		cls.average_distance_between_two_nodes = math.sqrt( 2 * ((AVERAGE_DISTANCE_WIDTH // 2) ** 2) )
 
 		if SETTINGS.get('use_bloodweb_level_controller') is False:
 			pass_fn = lambda *_: None

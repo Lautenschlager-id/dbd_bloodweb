@@ -2,21 +2,16 @@
 	"survivor": {
 		"match_and_grind": [
 			"offer: bloody party",
+			"item: will o wisp",
 			"purple item: flashlight",
 			"blue item: flashlight",
 			"green item: flashlight",
-			"addon: styptic",
 			"addon: sapphire lens",
-			"red addon: syringe",
+			"blue item: commodious toolbox",
+			"purple item: alexs toolbox",
 			["blue addon: battery", 0.762],
 			["green addon: battery", 0.762],
 			"offer: escape cake",
-			"purple item: engineers toolbox",
-			"blue item: mechanics toolbox",
-			"red addon: new part",
-			"addon: halogen",
-			"red addon: stamp",
-			"red addon: potent",
 			["brown addon: battery", 0.762],
 			"offer: oak"
 		],
@@ -90,16 +85,12 @@
 	},
 	"shape": {
 		"match_and_grind": [
-			"red addon: tuft",
-			"red addon: tombstone",
-			"purple addon: scratched mirror",
-			"purple addon: vanity mirror",
-			"purple addon: tombstone piece",
-			"blue addon: memorial",
-			"purple offer: reagent",
+			"addon: scratched mirror",
+			"addon: tombstone piece",
+			"addon: tuft of hair",
 			"offer: bloody party",
-			"blue addon: jewellery box",
 			"purple offer: ward",
+			"purple offer: reagent",
 			["purple offer: oak", 0.758]
 		],
 		"match_and_skip": [
@@ -572,6 +563,7 @@
 	},
 	"unknown": {
 		"match_and_grind": [
+			"red addon: *",
 			"addon: article",
 			"addon: box",
 			"purple offer: ward",
@@ -660,6 +652,20 @@
 			"addon: drawing",
 			"offer: bloody party",
 			"purple offer: ward",
+			["purple offer: oak", 0.758]
+		],
+		"match_and_skip": [
+			"brown offer: *",
+			"green offer: *",
+			"offer: cut coin"
+		]
+	},
+	"krasue": {
+		"match_and_grind": [
+			"red addon: *",
+			"addon: elixir",
+			"purple offer: ward",
+			"offer: bloody party",
 			["purple offer: oak", 0.758]
 		],
 		"match_and_skip": [

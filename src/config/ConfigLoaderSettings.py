@@ -58,7 +58,11 @@ class ConfigLoaderSettings(ConfigLoader):
 		        'log_skipped_matches': {
 		            'type': 'boolean',
 		            'default': False
-		        }
+		        },
+				'screen_width': {
+		            'type': 'number',
+		            'default': 1920
+		        },
 		    },
 		    'additionalProperties': False
 		}

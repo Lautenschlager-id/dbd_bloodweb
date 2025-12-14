@@ -13,5 +13,7 @@
 	"disable_perk_resources": true,
 	"disable_box_resources": false,
 
-	"log_skipped_matches": false
+	"log_skipped_matches": false,
+
+	"screen_width": 2560
 }
