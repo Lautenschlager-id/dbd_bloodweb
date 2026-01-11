@@ -8,7 +8,7 @@ from time import sleep
 from .ImageMatcher import ImageMatcher
 from config.ConfigLoaderSettings import SETTINGS
 from utils.CoordinateController import CoordinateController
-from utils.enums import GRIND_STRATEGY, REGION_BLOODWEB, REGION_LEVEL
+from utils.enums import GRIND_STRATEGY, REGION_BLOODWEB, REGION_LEVEL, REGION_BULK_SPEND, REGION_BULK_SPEND_ADD_LEVEL, REGION_BULK_SPEND_PAY
 from utils.functions import create_directory
 from utils.logger import logger
 from utils.ResolutionAdapter import ResolutionAdapter
@@ -22,6 +22,7 @@ class BloodwebHandler:
 	strategy_lambda = None
 
 	average_distance_between_two_nodes = None
+	bulk_spend_bloodweb_level_10 = None
 
 	maximum_prestiges = -1
 	maximum_levels = -1
@@ -61,6 +62,8 @@ class BloodwebHandler:
 			cls.get_bloodweb_level = pass_fn
 			cls._check_bloodweb_level_metadata = pass_fn
 			cls._set_bloodweb_level_metadata = pass_fn
+		else:
+			cls.bulk_spend_bloodweb_level_10 = SETTINGS.get('bulk_spend_bloodweb_level_10')
 
 	@classmethod
 	def set_maximum_prestiges(cls, maximum_prestiges):
@@ -104,12 +107,38 @@ class BloodwebHandler:
 			width=330,
 			height=30
 		)
+		
+		self.region_bulk_spend = CoordinateController(REGION_BULK_SPEND)
+		self.region_bulk_spend.set_action_rectangle(
+			x=1020,
+			y=160,
+			width=75,
+			height=75
+		)
+
+		self.region_bulk_spend_add_level = CoordinateController(REGION_BULK_SPEND_ADD_LEVEL)
+		self.region_bulk_spend_add_level.set_action_rectangle(
+			x=1125,
+			y=470,
+			width=45,
+			height=45
+		)
+
+		self.region_bulk_spend_pay = CoordinateController(REGION_BULK_SPEND_PAY)
+		self.region_bulk_spend_pay.set_action_rectangle(
+			x=1400,
+			y=820,
+			width=125,
+			height=35
+		)
 
 		self.captured_bloodweb_level = None
 		# Current level included; Used for levels [1,11]\{10}
 		self.skip_x_bloodweb_levels = 0
 		# Current level is not included; Used for level transitions 9>10, 10>11, 11>12, 49>50, 50>1
 		self.get_bloodweb_level_after_x_levels = 0
+		# Current level included; Used for levels [1,9]
+		self.bulk_spend_x_bloodweb_levels = 0
 
 	def grind_once(self, iteration):
 		logger.init(
@@ -123,9 +152,13 @@ class BloodwebHandler:
 			f'{iteration:03d}'
 		)
 
-		(screenshot_path, _) = self.region_bloodweb.take_screenshot(result_directory)
 		# helps identifying when the screenshot was taken
+		(screenshot_path, _) = self.region_bloodweb.take_screenshot(result_directory)
 		pyautogui.moveTo(self.region_bloodweb.x, self.region_bloodweb.height)
+
+		if self.bulk_spend_x_bloodweb_levels > 0:
+			self.use_bulk_spending()
+			return
 
 		matched_bloodweb_nodes = ImageMatcher(
 			image_source=screenshot_path,
@@ -220,7 +253,7 @@ class BloodwebHandler:
 		if level_up is False:
 			self._check_maximum_level()
 			# speed up animations
-			sleep(.3)
+			sleep(0.300)
 			self._click(center_x, center_y)
 
 		sleep(4)
@@ -252,6 +285,57 @@ class BloodwebHandler:
 		self.captured_bloodweb_level = captured_level
 		self._set_bloodweb_level_metadata()
 
+	def use_bulk_spending(self):
+		logger.action(
+			'Bulk spending bloodweb:'
+			, breakline=True
+		)
+
+		# Open UI
+		(center_x, center_y) = self.region_bulk_spend.get_center_as_region()
+		self._raw_click(center_x, center_y)
+
+		logger.action(
+			'Opened Bulk Spending UI'
+			, log_level=2
+		)
+
+		sleep(0.500)
+
+		# Add levels (starts in 1)
+		(center_x, center_y) = self.region_bulk_spend_add_level.get_center_as_region()
+		for _ in range(self.bulk_spend_x_bloodweb_levels):
+			self._raw_click(center_x, center_y)
+			sleep(0.250)
+
+		logger.action(
+			'Incremented \'{}\' levels to the bulk spending transaction'
+			, self.bulk_spend_x_bloodweb_levels
+			, log_level=2
+		)
+
+		self.bulk_spend_x_bloodweb_levels = 0
+
+		sleep(0.500)
+
+		# Spend
+		(center_x, center_y) = self.region_bulk_spend_pay.get_center_as_region()
+		self._raw_click(center_x, center_y)
+
+		logger.action(
+			'Paying bulk spending transaction'
+			, log_level=2
+		)
+
+		sleep(6.5)
+
+		# Close
+		self._click(center_x, center_y)
+
+		sleep(2)
+
+		self._check_bloodweb_level_metadata()
+
 	def _set_node_locations(self, nodes):
 		nodes.sort(key=lambda match:
 			BloodwebHandler.strategy_lambda(
@@ -261,6 +345,10 @@ class BloodwebHandler:
 		)
 		self.nodes = nodes
 
+	def _raw_click(self, x, y):
+		pyautogui.moveTo(x, y)
+		pyautogui.click()
+
 	def _click(self, x, y):
 		# sometimes the bloodweb doesn't handle the click, thus clicking thrice to guarantee
 		for _ in range(3):
@@ -269,8 +357,7 @@ class BloodwebHandler:
 			pyautogui.mouseUp()
 
 		# unselect anything that might be selected in the bloodweb (popups)
-		pyautogui.moveTo(self.region_bloodweb.x, self.region_bloodweb.y)
-		pyautogui.click()
+		self._raw_click(self.region_bloodweb.x, self.region_bloodweb.y)
 
 	def _check_bloodweb_level_metadata(self):
 		if self.get_bloodweb_level_after_x_levels <= 0:
@@ -284,6 +371,7 @@ class BloodwebHandler:
 
 		self.get_bloodweb_level_after_x_levels = 0
 		self.skip_x_bloodweb_levels = 0
+		self.bulk_spend_x_bloodweb_levels = 0
 
 		if captured_bloodweb_level >= 12:
 			# covers level transition: 49>50
@@ -301,20 +389,44 @@ class BloodwebHandler:
 			# checks that after grinding lvl 11, the next lvl is 12
 			self.get_bloodweb_level_after_x_levels = 0
 
-		elif captured_bloodweb_level <= 10:
-			# covers level grinding: 1, 2, 3, 4, 5, 6, 7, 8, 9
-			# covers level transitions: 1>2, 2>3, 3>4, 4>5, 5>6, 6>7, 7>8, 8>9, 9>10
+		else:
+			if self.bulk_spend_bloodweb_level_10:
+				if captured_bloodweb_level <= 10:
+					self.bulk_spend_x_bloodweb_levels = 11 - captured_bloodweb_level
+					# checks that after bulk spending up to lvl 12, the lvl is 12
+					self.get_bloodweb_level_after_x_levels = 0
+			else:
+				if captured_bloodweb_level <= 8:
+					self.bulk_spend_x_bloodweb_levels = 9 - captured_bloodweb_level
+					# checks that after bulk spending up to lvl 10, the lvl is 10
+					self.get_bloodweb_level_after_x_levels = 0
+				
+				elif captured_bloodweb_level == 10:
+					# covers level grinding: 10
+					# covers level transition: 10>11
 
-			# skips lvl 1, 2, 3, 4, 5, 6, 7, 8, 9 (no entity)
-			# zeroes out on lvl 10, so it grinds correctly
-			self.skip_x_bloodweb_levels = 10 - captured_bloodweb_level
-			# checks that after grinding lvl 9, the next lvl is 10
-			self.get_bloodweb_level_after_x_levels = self.skip_x_bloodweb_levels - 1 # (10-9)=1-1=0
+					# checks that after grinding lvl 10, the next lvl is 11
+					self.get_bloodweb_level_after_x_levels = 0
+
+		# elif captured_bloodweb_level <= 10:
+		# 	# covers level grinding: 1, 2, 3, 4, 5, 6, 7, 8, 9
+		# 	# covers level transitions: 1>2, 2>3, 3>4, 4>5, 5>6, 6>7, 7>8, 8>9, 9>10
+
+		# 	# skips lvl 1, 2, 3, 4, 5, 6, 7, 8, 9 (no entity)
+		# 	# zeroes out on lvl 10, so it grinds correctly
+		# 	self.skip_x_bloodweb_levels = 10 - captured_bloodweb_level
+		# 	# checks that after grinding lvl 9, the next lvl is 10
+		# 	self.get_bloodweb_level_after_x_levels = self.skip_x_bloodweb_levels - 1 # (10-9)=1-1=0
 
 		if self.skip_x_bloodweb_levels > 0:
 			logger.result(
 				'Skipping the next <{}> levels'
 				, self.skip_x_bloodweb_levels
+			)
+		elif self.bulk_spend_x_bloodweb_levels > 0:
+			logger.result(
+				'Bulk Spending the next <{}> levels'
+				, self.bulk_spend_x_bloodweb_levels + 1
 			)
 
 		logger.result(

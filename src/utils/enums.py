@@ -94,6 +94,18 @@ class REGION_LEVEL(CustomEnum):
 	NAME = 'Bloodweb Level'
 	FILENAME = None
 
+class REGION_BULK_SPEND(CustomEnum):
+	NAME = 'Bloodweb Bulk Spending'
+	FILENAME = None
+
+class REGION_BULK_SPEND_ADD_LEVEL(CustomEnum):
+	NAME = 'Bloodweb Bulk Spending - Button Add Level'
+	FILENAME = None
+
+class REGION_BULK_SPEND_PAY(CustomEnum):
+	NAME = 'Bloodweb Bulk Spending - Button Pay'
+	FILENAME = None
+
 class PAINT(CustomEnum):
 	GREEN = (0, 255, 0)
 	RED = (0, 0, 255)

@@ -6,6 +6,7 @@
 
 	"grind_strategy": "default",
 	"use_bloodweb_level_controller": true,
+	"bulk_spend_bloodweb_level_10": true,
 
 	"disable_addon_resources": false,
 	"disable_item_resources": false,
