@@ -63,6 +63,10 @@ class ConfigLoaderSettings(ConfigLoader):
 		            'type': 'number',
 		            'default': 1920
 		        },
+				'use_bulk_spend': {
+					'type': 'boolean',
+					'default': True,
+				},
 				'bulk_spend_bloodweb_level_10': {
 					'type': 'boolean',
 					'default': True

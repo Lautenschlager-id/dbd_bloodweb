@@ -22,6 +22,8 @@ class BloodwebHandler:
 	strategy_lambda = None
 
 	average_distance_between_two_nodes = None
+
+	use_bulk_spend = None
 	bulk_spend_bloodweb_level_10 = None
 
 	maximum_prestiges = -1
@@ -63,7 +65,9 @@ class BloodwebHandler:
 			cls._check_bloodweb_level_metadata = pass_fn
 			cls._set_bloodweb_level_metadata = pass_fn
 		else:
-			cls.bulk_spend_bloodweb_level_10 = SETTINGS.get('bulk_spend_bloodweb_level_10')
+			cls.use_bulk_spend = SETTINGS.get('use_bulk_spend')
+			if cls.use_bulk_spend:
+				cls.bulk_spend_bloodweb_level_10 = SETTINGS.get('bulk_spend_bloodweb_level_10')
 
 	@classmethod
 	def set_maximum_prestiges(cls, maximum_prestiges):
@@ -390,33 +394,34 @@ class BloodwebHandler:
 			self.get_bloodweb_level_after_x_levels = 0
 
 		else:
-			if self.bulk_spend_bloodweb_level_10:
-				if captured_bloodweb_level <= 10:
-					self.bulk_spend_x_bloodweb_levels = 11 - captured_bloodweb_level
-					# checks that after bulk spending up to lvl 12, the lvl is 12
-					self.get_bloodweb_level_after_x_levels = 0
+			if self.use_bulk_spend:
+				if self.bulk_spend_bloodweb_level_10:
+					if captured_bloodweb_level <= 10:
+						self.bulk_spend_x_bloodweb_levels = 11 - captured_bloodweb_level
+						# checks that after bulk spending up to lvl 12, the lvl is 12
+						self.get_bloodweb_level_after_x_levels = 0
+				else:
+					if captured_bloodweb_level <= 8:
+						self.bulk_spend_x_bloodweb_levels = 9 - captured_bloodweb_level
+						# checks that after bulk spending up to lvl 10, the lvl is 10
+						self.get_bloodweb_level_after_x_levels = 0
+					
+					elif captured_bloodweb_level == 10:
+						# covers level grinding: 10
+						# covers level transition: 10>11
+
+						# checks that after grinding lvl 10, the next lvl is 11
+						self.get_bloodweb_level_after_x_levels = 0
 			else:
-				if captured_bloodweb_level <= 8:
-					self.bulk_spend_x_bloodweb_levels = 9 - captured_bloodweb_level
-					# checks that after bulk spending up to lvl 10, the lvl is 10
-					self.get_bloodweb_level_after_x_levels = 0
-				
-				elif captured_bloodweb_level == 10:
-					# covers level grinding: 10
-					# covers level transition: 10>11
+				if captured_bloodweb_level <= 10:
+					# covers level grinding: 1, 2, 3, 4, 5, 6, 7, 8, 9
+					# covers level transitions: 1>2, 2>3, 3>4, 4>5, 5>6, 6>7, 7>8, 8>9, 9>10
 
-					# checks that after grinding lvl 10, the next lvl is 11
-					self.get_bloodweb_level_after_x_levels = 0
-
-		# elif captured_bloodweb_level <= 10:
-		# 	# covers level grinding: 1, 2, 3, 4, 5, 6, 7, 8, 9
-		# 	# covers level transitions: 1>2, 2>3, 3>4, 4>5, 5>6, 6>7, 7>8, 8>9, 9>10
-
-		# 	# skips lvl 1, 2, 3, 4, 5, 6, 7, 8, 9 (no entity)
-		# 	# zeroes out on lvl 10, so it grinds correctly
-		# 	self.skip_x_bloodweb_levels = 10 - captured_bloodweb_level
-		# 	# checks that after grinding lvl 9, the next lvl is 10
-		# 	self.get_bloodweb_level_after_x_levels = self.skip_x_bloodweb_levels - 1 # (10-9)=1-1=0
+					# skips lvl 1, 2, 3, 4, 5, 6, 7, 8, 9 (no entity)
+					# zeroes out on lvl 10, so it grinds correctly
+					self.skip_x_bloodweb_levels = 10 - captured_bloodweb_level
+					# checks that after grinding lvl 9, the next lvl is 10
+					self.get_bloodweb_level_after_x_levels = self.skip_x_bloodweb_levels - 1 # (10-9)=1-1=0
 
 		if self.skip_x_bloodweb_levels > 0:
 			logger.result(
