@@ -285,6 +285,42 @@ $ pip install -r requirements.txt
 				</ul>
 			</td>
 		</tr>
+		<tr>
+			<td>
+				<code>screen_width</code>
+			</td>
+			<td>
+				The client's screen width, to adjust internal dimensions.
+				<ul>
+					<li>Default: 1920px</li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<code>use_bulk_spend</code>
+			</td>
+			<td>
+				Whether bulk spending should be used for levels up to the 11th.
+				<ul>
+					<li>Default: true</li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<code>bulk_spend_bloodweb_level_10</code>
+			</td>
+			<td>
+				Whether bulk spending should be used for level 10.
+				<ul>
+					<li>Default: true</li>
+				</ul>
+				When this is <code>true</code>, all levels from 1 to 11 will use the bulk-spend, starting the process at the level 12.
+				<br/>
+				When this is <code>false</code>, all levels from 1 to 9 will use the bulk-spend, starting the process at the level 10 (grind) -> 11 (skip) -> 12 (default).
+			</td>
+		</tr>
 	</tbody>
 </table>
 
