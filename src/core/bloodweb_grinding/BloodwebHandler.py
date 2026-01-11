@@ -137,12 +137,13 @@ class BloodwebHandler:
 		)
 
 		self.captured_bloodweb_level = None
-		# Current level included; Used for levels [1,11]\{10}
+		# Current level included; Used for levels [1,11]\{10} or [11]*
 		self.skip_x_bloodweb_levels = 0
-		# Current level is not included; Used for level transitions 9>10, 10>11, 11>12, 49>50, 50>1
+		# Current level is not included; Used for level transitions 9>10*, 10>11*, 11>12*, 49>50, 50>1
 		self.get_bloodweb_level_after_x_levels = 0
-		# Current level included; Used for levels [1,9]
+		# Current level included; Used for levels [1,11] or [1,9]*
 		self.bulk_spend_x_bloodweb_levels = 0
+		# *depending on the settings
 
 	def grind_once(self, iteration):
 		logger.init(
