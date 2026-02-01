@@ -135,6 +135,7 @@
 	},
 	"cannibal": {
 		"match_and_grind": [
+			"red addon: *",
 			"purple addon: chilli",
 			"blue addon: begrimed",
 			"purple offer: ward",
@@ -492,6 +493,7 @@
 			"addon: banner",
 			"addon: contract",
 			"purple offer: ward",
+			"offer: bloody party",
 			["purple offer: oak", 0.758]
 		],
 		"match_and_skip": [
@@ -645,7 +647,7 @@
 	"animatronic": {
 		"match_and_grind": [
 			"red addon: *",
-			"addon: control panelc",
+			"addon: access panel",
 			"addon: bag",
 			"addon: hook",
 			"addon: guitar",
