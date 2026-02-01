@@ -675,5 +675,20 @@
 			"green offer: *",
 			"offer: cut coin"
 		]
+	},
+  "first": {
+		"match_and_grind": [
+			"red addon: chess piece",
+			"addon: collar",
+			"addon: spider",
+			"purple offer: ward",
+			"offer: bloody party",
+			["purple offer: oak", 0.758]
+		],
+		"match_and_skip": [
+			"brown offer: *",
+			"green offer: *",
+			"offer: cut coin"
+		]
 	}
 }
