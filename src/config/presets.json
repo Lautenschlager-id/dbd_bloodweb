@@ -8,12 +8,9 @@
 			"green item: flashlight",
 			"addon: sapphire lens",
 			"blue item: commodious toolbox",
-			"purple item: alexs toolbox",
 			["blue addon: battery", 0.762],
 			["green addon: battery", 0.762],
-			"offer: escape cake",
-			["brown addon: battery", 0.762],
-			"offer: oak"
+			["brown addon: battery", 0.762]
 		],
 		"match_and_skip": [
 			"brown item: worn out tools",
@@ -684,6 +681,20 @@
 			"purple offer: ward",
 			"offer: bloody party",
 			["purple offer: oak", 0.758]
+		],
+		"match_and_skip": [
+			"brown offer: *",
+			"green offer: *",
+			"offer: cut coin"
+		]
+	},
+  "slasher": {
+		"match_and_grind": [
+			"addon: badge",
+			"addon: goop",
+			["purple offer: oak", 0.758],
+			"purple offer: ward",
+			"offer: bloody party"
 		],
 		"match_and_skip": [
 			"brown offer: *",

@@ -1,3 +1,5 @@
+import multiprocessing
+
 from abc import ABC, abstractmethod
 import json
 from sys import exit
@@ -27,11 +29,14 @@ class ConfigLoader(ABC):
 		return cls._instances[cls]
 
 	def load(self):
-		logger.init(
-			'init'
-			, 'Loading config \'{}\''
-			, self.config_path
-		)
+		can_log = multiprocessing.current_process().name == 'MainProcess'
+
+		if (can_log):
+			logger.init(
+				'init'
+				, 'Loading config \'{}\''
+				, self.config_path
+			)
 
 		with open(self.config_path, 'r') as file:
 			data = json.load(file)
@@ -39,13 +44,15 @@ class ConfigLoader(ABC):
 			try:
 				jsonschema_with_default(self.data_schema).validate(data)
 			except Exception as exception:
-				logger.result(
-					'Invalid schema:\n{}'
-					, exception
-				)
+				if (can_log):
+					logger.result(
+						'Invalid schema:\n{}'
+						, exception.format_exc()
+					)
 				exit()
 			else:
-				logger.result('Config loaded successfully!')
+				if (can_log):
+					logger.result('Config loaded successfully!')
 				self._data = data
 
 		return self

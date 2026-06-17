@@ -100,7 +100,7 @@ class Icon:
 					logger.result(
 						'Could not get URL {}: {}',
 						self.source,
-						exception,
+						exception.format_exc(),
 						log_level=3
 					)
 					exit()
@@ -110,7 +110,7 @@ class Icon:
 				logger.result(
 					'Error fetching {}: {}. Retrying in {:.1f}s (attempt {}/{})',
 					self.source,
-					exception,
+					exception.format_exc(),
 					delay,
 					attempt + 1,
 					max_retries,
@@ -139,7 +139,7 @@ class Icon:
 			logger.result(
 				'Could not save file {}: {}'
 				, path
-				, exception
+				, exception.format_exc()
 				, log_level=2
 			)
 			exit()

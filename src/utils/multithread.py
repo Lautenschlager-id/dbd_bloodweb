@@ -17,7 +17,7 @@ def multithreaded_execute(callback, **kwargs):
 			except Exception as exception:
 				logger.result(
 					'Threaded task generated an exception: {}'
-					, exception
+					, exception.format_exc()
 				)
 				should_exit = True
 

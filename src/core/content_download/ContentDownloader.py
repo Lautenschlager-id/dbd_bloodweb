@@ -54,7 +54,7 @@ class ContentDownloader:
 			logger.result(
 				'Could not capture the expected 20 addons for the killer \'{}\': {}'
 				, self.content_name
-				, exception
+				, exception.format_exc()
 				, log_level=2
 			)
 			exit()
@@ -97,7 +97,7 @@ class ContentDownloader:
 			logger.result(
 				'Could not get URL {}: {}'
 				, url
-				, exception
+				, exception.format_exc()
 				, log_level=2
 			)
 			exit()
